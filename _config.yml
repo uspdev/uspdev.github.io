@@ -1,8 +1,8 @@
 title: USPdev
 #email: @usp.br
-description: Grupo de desenvolvedores da Universidade de São Paulo 
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "https://uspdev.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
+description: devs da Universidade de São Paulo 
+baseurl: "/" 
+url: "https://uspdev.github.io/"
 
 # Build settings
 markdown: kramdown
