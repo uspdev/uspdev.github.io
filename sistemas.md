@@ -10,4 +10,5 @@ Sistemas:
  - [USP terceira idade](#)
  - [SiGeTe - Sistema de Gestão de Chamados Técnicos ](#)
  - [sisar - sistema de empréstimo de armários](#)
- - [API para dados replicados USP](#)
+ - [replicado - API para dados replicados USP](#)
+ - [minbib - Mini Gestor de Biblioteca](#)
