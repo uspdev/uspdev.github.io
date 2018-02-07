@@ -22,16 +22,16 @@ Se preferir, assista um vídeo com os passos:
 
 ## Para contribuir com os slides dos treinamentos usando o [*prez*](https://github.com/byteclubfr/prez), sugerimos os seguinte *workflow*:
 
-	1. Garantir que o nodejs esteja instalado
-	2. Instalar o prez globalmente com: sudo npm install -g prez phantomjs 
-	3. Fazer um fork do repositório *slides* e escolher um dos [treinamentos](https://uspdev.github.io/treinamentos).
-	4. Verificar issues existentes, escolher ou criar uma
-  5. Clonar o fork 
-	6. Criar uma branch e acessar a pasta do treinamento que quer contribuir 
-	7. Criar os arquivos markdown. Lembrando que os nomes dos arquivos iniciam com sequência numérica (ex: 01-intro.md, 02-install.md, 03-database.md etc). Commitar mudanças.
-  8. Enviar um push para o fork remoto 
-  9. Criar um *pull request* no interface do github
-  10. (extra) Se trabalha na USP, solicite o ingresso na organization USPdev!
+ 1. Garantir que o nodejs esteja instalado
+ 2. Instalar o prez globalmente com: sudo npm install -g prez phantomjs 
+ 3. Fazer um fork do repositório *slides* e escolher um dos [treinamentos](https://uspdev.github.io/treinamentos).
+ 4. Verificar issues existentes, escolher ou criar uma
+ 5. Clonar o fork 
+ 6. Criar uma branch e acessar a pasta do treinamento que quer contribuir 
+ 7. Criar os arquivos markdown. Lembrando que os nomes dos arquivos iniciam com sequência numérica (ex: 01-intro.md, 02-install.md, 03-database.md etc). Commitar mudanças.
+ 8. Enviar um push para o fork remoto 
+ 9. Criar um *pull request* no interface do github
+ 10. (extra) Se trabalha na USP, solicite o ingresso na organization USPdev!
 
 Se preferir, assista um vídeo com os passos:
 
