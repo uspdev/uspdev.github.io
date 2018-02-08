@@ -23,13 +23,18 @@
     <section class="main-content">
       {{ content }}
 
-    <ul>
-        {% for post in site.posts %}
-            <li>
-                <a href="{{ post.url }}">{{ post.title }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+      {% if page.id == 'index' %}
+      <h1> Últimos Posts: </h1>
+          <ul>
+              {% for post in site.posts %}
+                  <li>
+                      <a href="{{ post.url }}">{{ post.title }}</a>
+                  </li>
+              {% endfor %}
+          </ul>
+
+      {% endif %}
+
 
       <footer class="site-footer">
         {% if site.github.is_project_page %}
