@@ -37,3 +37,24 @@ Se preferir, assista um vídeo com os passos:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/c5kOUpstLMY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+## Extra: Mantendo seu fork sincronizado :shipit:
+
+Existe uma documentação do próprio GitHub que você pode encontrar [aqui](https://help.github.com/articles/syncing-a-fork/)
+
+Versão curta:
+
+Espere seu `pull request` ser aceito. Depois disso, você deve integrar ao seu fork, as modificações que os mantenedores do projeto integraram na branch principal (geralmente é a `master`).
+
+```shell
+# Adicione um remoto apontando para o projeto principal:
+git remote add upstream <remote address>
+# Baixe sem merge:
+git fetch upstream
+# Mescle o master de upstream e integre com seu fork:
+git checkout master
+git merge upstream/master
+git push origin master
+
+```
+
+Depois disso, seu fork já deve estar sincronizado com o repositório principal :sunglasses:
