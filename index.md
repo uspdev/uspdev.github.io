@@ -20,15 +20,15 @@ essencialmente tornar o *codar* mais prazeroso.
 # Participantes:
 
  - Alessandro (ECA) [@alecostaweb](https://github.com/alecostaweb)
- - André Girol (DF-FFCLRP) [@Girol](https://github.com/orgs/uspdev/people/girol)
+ - André Girol (DF-FFCLRP) [@girol](https://github.com/orgs/uspdev/people/girol)
  - Augusto (FFLCH) [@acesarfs](https://github.com/orgs/uspdev/people/acesarfsl)
- - Fábio (FD-Ribeirão) [@fabiojm](https://github.com/orgs/uspdev/people/fabiojm)
+ - Fábio (FDRP) [@fabiojm](https://github.com/orgs/uspdev/people/fabiojm)
  - Leandro (ECA) [@leandroramos](https://github.com/orgs/uspdev/people/leandroramos)
  - Ricardo (FFLCH) [@ricardfo](https://github.com/orgs/uspdev/people/ricardfo)
- - Tadeu (FD-Ribeirão) [@tadeumesquita](https://github.com/orgs/uspdev/people/tadeumesquita)
+ - Tadeu (FDRP) [@tadeumesquita](https://github.com/orgs/uspdev/people/tadeumesquita)
  - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/orgs/uspdev/people/thiagogomesverissimo)
 
 
 # TODO:
 
- - ...
+Acesse nossas [issues](https://github.com/uspdev/uspdev.github.io/issues) :dizzy:
