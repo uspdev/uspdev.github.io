@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: index
 ---
 
 *USPdev* é formado por profissionais que trabalham direta ou indiretamente com desenvolvimento
