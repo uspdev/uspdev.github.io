@@ -29,6 +29,12 @@ essencialmente tornar o *codar* mais prazeroso.
  - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/orgs/uspdev/people/thiagogomesverissimo)
 
 
-# TODO:
+# Últimos Posts:
 
- - ...
+    <ul>
+        {% for post in site.posts %}
+            <li>
+                <a href="{{ post.url }}">{{ post.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
