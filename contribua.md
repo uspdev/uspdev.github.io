@@ -17,8 +17,7 @@ permalink: /contribua
 9. (extra) Se trabalha na USP, solicite o ingresso na organization USPdev!
 
 Se preferir, assista um vídeo com os passos:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FrAeVfnyQdM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8I-kY_LzJCg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Para contribuir com os slides dos treinamentos usando o [*prez*](https://github.com/byteclubfr/prez), sugerimos os seguinte *workflow*:
 
@@ -36,6 +35,12 @@ Se preferir, assista um vídeo com os passos:
 Se preferir, assista um vídeo com os passos:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/c5kOUpstLMY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+## Para editar esse site ou enviar novos posts:
+
+Como usamos o processamento do jekyll através do github, para alterar esse blog, basta cloná-lo e enviar um push (ém sempre bom usar as boas práticas: issues e PRs):
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kRgvskeaMa0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Extra: Mantendo seu fork sincronizado :shipit:
 

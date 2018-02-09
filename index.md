@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: index
 ---
 
 *USPdev* é formado por profissionais que trabalham direta ou indiretamente com desenvolvimento
@@ -29,6 +29,6 @@ essencialmente tornar o *codar* mais prazeroso.
  - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/orgs/uspdev/people/thiagogomesverissimo)
 
 
-# TODO:
+# Contribua
 
 Acesse nossas [issues](https://github.com/uspdev/uspdev.github.io/issues) :dizzy:
