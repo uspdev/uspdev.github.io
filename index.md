@@ -20,13 +20,15 @@ essencialmente tornar o *codar* mais prazeroso.
 # Participantes:
 
  - Alessandro (ECA) [@alecostaweb](https://github.com/alecostaweb)
- - André Girol (DF-FFCLRP) [@girol](https://github.com/orgs/uspdev/people/girol)
- - Augusto (FFLCH) [@acesarfs](https://github.com/orgs/uspdev/people/acesarfsl)
- - Fábio (FDRP) [@fabiojm](https://github.com/orgs/uspdev/people/fabiojm)
- - Leandro (ECA) [@leandroramos](https://github.com/orgs/uspdev/people/leandroramos)
- - Ricardo (FFLCH) [@ricardfo](https://github.com/orgs/uspdev/people/ricardfo)
- - Tadeu (FDRP) [@tadeumesquita](https://github.com/orgs/uspdev/people/tadeumesquita)
- - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/orgs/uspdev/people/thiagogomesverissimo)
+ - André Girol (DF-FFCLRP) [@girol](https://github.com/girol)
+ - Augusto (FFLCH) [@acesarfs](https://github.com/acesarfs)
+ - Fábio (FDRP) [@fabiojm](https://github.com/fabiojm)
+ - Leandro (ECA) [@leandroramos](https://github.com/leandroramos)
+ - Minton (IB) [@MiltonPlebeu](https://github.com/MiltonPlebeu)
+ - Ricardo (FFLCH) [@ricardfo](https://github.com/ricardfo)
+ - Tadeu (FDRP) [@tadeumesquita](https://github.com/tadeumesquita)
+ - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/thiagogomesverissimo)
+ - Tiago (DCM-FFCLRP) [@tcarrer](https://github.com/tcarrer)
 
 
 # Contribua
