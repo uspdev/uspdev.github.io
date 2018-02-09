@@ -37,6 +37,9 @@ Se preferir, assista um vídeo com os passos:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/c5kOUpstLMY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+## Para editar esse site ou enviar novos posts:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kRgvskeaMa0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 
