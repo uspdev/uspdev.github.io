@@ -19,11 +19,11 @@ permalink: /contribua
 Se preferir, assista um vídeo com os passos:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8I-kY_LzJCg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-## Para contribuir com os slides dos treinamentos usando o [*prez*](https://github.com/byteclubfr/prez), sugerimos os seguinte *workflow*:
+## Para contribuir com os [*slides*](https://github.com/uspdev/slides) dos treinamentos usando o [*prez*](https://github.com/byteclubfr/prez), sugerimos os seguinte *workflow*:
 
 1. Garantir que o nodejs esteja instalado
 2. Instalar o prez globalmente com: sudo npm install -g prez phantomjs 
-3. Fazer um fork do repositório *slides* e escolher um dos [treinamentos](https://uspdev.github.io/treinamentos).
+3. Fazer um fork do [*repositório slides*](https://github.com/uspdev/slides) e escolher um dos [treinamentos](https://uspdev.github.io/treinamentos).
 4. Verificar issues existentes, escolher ou criar uma
 5. Clonar o fork 
 6. Criar uma branch e acessar a pasta do treinamento que quer contribuir 
