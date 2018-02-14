@@ -6,11 +6,36 @@ permalink: /treinamentos
 
 Treinamentos em *pleno* desenvolvimento:
 
- - [Git Forever](#)
- - [Laravel Básico](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9)
- - [Pirando com Laravel](https://uspdev.github.io/slides/laravel)
- - [Symfony Básico](#)
- - [Codando seriamente com Symfony](https://uspdev.github.io/slides/symfony/)
+ - Git Forever
+
+  - [repositório](#)
+  - [slides](#)
+  - [vídeos](#) 
+ 
+ - Laravel Básico
+
+  - [repositório](https://github.com/leandroramos/laravel_basico)
+  - [slides](#)
+  - [vídeos](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
+ 
+ - Pirando com Laravel
+
+  - [repositório](#)
+  - [slides](https://uspdev.github.io/slides/laravel)
+  - [vídeos](#) 
+ 
+ - Symfony Básico
+
+  - [repositório](#)
+  - [slides](#)
+  - [vídeos](#) 
+ 
+ - Codando seriamente com Symfony
+
+  - [repositório](#)
+  - [slides](https://uspdev.github.io/slides/symfony/)
+  - [vídeos](#) 
+ 
 
 
 Ideias para futuros treinamentos:
