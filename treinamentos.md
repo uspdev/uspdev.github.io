@@ -14,7 +14,7 @@ permalink: /treinamentos
  
 ### Laravel Básico
 
- - [repositório](https://github.com/leandroramos/laravel_basico)
+ - [repositório](#)
  - [slides](https://uspdev.github.io/slides/laravel_basico/)
  - [vídeos](#) 
  
