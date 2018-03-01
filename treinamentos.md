@@ -6,38 +6,27 @@ permalink: /treinamentos
 
 ## Treinamentos em *pleno* desenvolvimento:
 
-### Git Forever
+### Git
 
  - [repositório](#)
- - [slides](#)
+ - [slides](https://uspdev.github.io/slides/git/)
  - [vídeos](#) 
  
 ### Laravel Básico
 
  - [repositório](https://github.com/leandroramos/laravel_basico)
- - [slides](#)
- - [vídeos](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
- 
-### Pirando com Laravel
-
- - [repositório](#)
- - [slides](https://uspdev.github.io/slides/laravel)
+ - [slides](https://uspdev.github.io/slides/laravel_basico/)
  - [vídeos](#) 
- 
-### Symfony Básico
-
-  - [repositório](#)
-  - [slides](#)
-  - [vídeos](#) 
- 
-### Codando seriamente com Symfony
-
-  - [repositório](#)
-  - [slides](https://uspdev.github.io/slides/symfony/)
-  - [vídeos](#) 
  
 ## Ideias para futuros treinamentos:
 
+ - [Pirando com Laravel](#)
+ - [Symfony Básico](#)
+ - [Codando seriamente com Symfony](#)
  - [O país das maravilhas: Symfony e Laravel no Docker](#)
  - [FTP Nevermore! Entregue o Drupal como serviço em sua unidade](https://uspdev.github.io/slides/drupal)
  - [O estranho mundo dos Frontends](#)
+
+## Materiais diversos criados pelo grupo
+
+ - [vídeos sobre laravel (Leandro Ramos)](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
