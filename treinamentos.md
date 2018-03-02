@@ -6,6 +6,8 @@ permalink: /treinamentos
 
 ## Treinamentos em *pleno* desenvolvimento:
 
+[Máquinas Virtuais para os Treinamento](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
+
 ### Git
 
  - [repositório](#)
