@@ -6,7 +6,18 @@ permalink: /treinamentos
 
 ## Treinamentos em *pleno* desenvolvimento:
 
-[Máquinas Virtuais para os Treinamento](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
+[Máquinas Virtuais para os Treinamentos](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
+Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***
+
+As máquinas possuem os requisitos de ambiente para o desenvolvimento dos projetos:
+- Git 2.7.4
+- PHP 7.2.2 e Composer 1.6.3
+- MySQL Server 5.7
+- NodeJS 8.9.4
+
+### Como usar as máquinas virtuais no treinamento
+- Baixar uma das imagens - 32 ou 64 bits
+- Abrir o Virtualbox e importar a appliance - "Arquivo -> Importar appliance"
 
 ### Git
 
