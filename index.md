@@ -25,14 +25,9 @@ essencialmente tornar o *codar* mais prazeroso.
  - Fábio (FDRP) [@fabiojm](https://github.com/fabiojm)
  - Leandro (ECA) [@leandroramos](https://github.com/leandroramos)
  - Minton (IB) [@MiltonPlebeu](https://github.com/MiltonPlebeu)
- - Renata (IF) [@](#)
+ - Renata (IF) [@rekavi](https://github.com/rekavi)
  - Ricardo (FFLCH) [@ricardfo](https://github.com/ricardfo)
  - Sybele (IF) [@sybgroff](https://github.com/sybgroff)
  - Tadeu (FDRP) [@tadeumesquita](https://github.com/tadeumesquita)
  - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/thiagogomesverissimo)
  - Tiago (DCM-FFCLRP) [@tcarrer](https://github.com/tcarrer)
-
-
-# Contribua
-
-Acesse nossas [issues](https://github.com/uspdev/uspdev.github.io/issues) :dizzy:
