@@ -24,7 +24,7 @@ essencialmente tornar o *codar* mais prazeroso.
  - Augusto (FFLCH) [@acesarfs](https://github.com/acesarfs)
  - Fábio (FDRP) [@fabiojm](https://github.com/fabiojm)
  - Leandro (ECA) [@leandroramos](https://github.com/leandroramos)
- - Lucas (FDRP) @lucasbrando
+ - Lucas (FDRP) [@lucasbrando](https://github.com/lucasbrando)
  - Minton (IB) [@MiltonPlebeu](https://github.com/MiltonPlebeu)
  - Renata (IF) [@rekavi](https://github.com/rekavi)
  - Ricardo (FFLCH) [@ricardfo](https://github.com/ricardfo)
