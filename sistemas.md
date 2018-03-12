@@ -57,6 +57,14 @@ de seu cadastro em uma base ldap/AD local, como a senha.
 
 Sistema que permite a realização da Contagem de Créditos da Graduação
 
+### (em desenvolvimento) [solicitaSite](https://github.com/uspdev/solicitaSite)
+
+Sistema que permite a solicitação de um site após o usuário ter se autenticado com senha única.
+O deploy do site deve ser feito pelo backend (ex: drupal, wp ...) a partir das solicitações 
+feitas. 
+
+
+
 
 
 
