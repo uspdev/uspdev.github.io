@@ -18,6 +18,10 @@ Biblioteca PHP que abstrai os métodos SOAP nas requisições do boleto USP.
 Classe PHP que atende a parametrização OAuth1 usada na USP. Ideal para
 ser usado no laravel.
 
+### [laravel-bootstrap-dashboard](https://github.com/uspdev/laravel-bootstrap-dashboard)
+
+Biblioteca do laravel que implementa o **dashboard example** do bootstrap.
+
 # Sistemas 
 
 ### (em desenvolvimento) [copaco](https://github.com/uspdev/copaco_laravel)
