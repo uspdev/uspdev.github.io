@@ -32,3 +32,10 @@ essencialmente tornar o *codar* mais prazeroso.
  - Tadeu (FDRP) [@tadeumesquita](https://github.com/tadeumesquita)
  - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/thiagogomesverissimo)
  - Tiago (DCM-FFCLRP) [@tcarrer](https://github.com/tcarrer)
+ 
+ # Participe: 
+ 
+Com seu e-mail USP, basta entrar no grupo através da URL [https://groups.google.com/a/usp.br/forum/#!forum/uspdev](https://groups.google.com/a/usp.br/forum/#!forum/uspdev)
+
+ 
+ 
