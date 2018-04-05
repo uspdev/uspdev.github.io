@@ -9,3 +9,4 @@ permalink: /glossario
  - **Pindura:** cerimômia no hangout
  - **Xurepinha:** amigo do git imaginário
  - **Deu Xuxa:** bugou, deu ruim, travou. Derivado de alguns membos que utilizam recursos como o PC da Xuxa
+ - **naiçe:** nice = legal 
