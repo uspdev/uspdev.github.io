@@ -42,4 +42,5 @@ As máquinas possuem os requisitos de ambiente para o desenvolvimento dos projet
 
 ## Materiais diversos criados pelo grupo
 
- - [vídeos sobre laravel (Leandro Ramos)](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
+ - [vídeos sobre laravel básico (Leandro Ramos da ECA)](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
+ - [vídeos com exemplos da documentação do symfony (Thiago Gomes Veríssimo da FFLCH)](https://www.youtube.com/watch?v=UEYgrHahyEc&list=PLtf_y4yGjhTmwzNrJcDMCBauG0MSwjDdL&index=1)
