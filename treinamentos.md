@@ -16,7 +16,7 @@ Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez)
  
 ## Ideias para futuros treinamentos:
 
- - [Laravel intermediário]((https://uspdev.github.io/slides/laravel)
+ - [Laravel intermediário](https://uspdev.github.io/slides/laravel)
  - [Symfony intermediário](https://uspdev.github.io/slides/symfony)
  - [Entregue o Drupal como serviço em sua unidade](https://uspdev.github.io/slides/drupal)
  - [Deloy PHP com docker](#)
