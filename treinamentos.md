@@ -4,41 +4,35 @@ title: Treinamentos
 permalink: /treinamentos
 ---
 
-## Treinamentos em *pleno* desenvolvimento:
+## Treinamentos:
 
-[Máquinas Virtuais para os Treinamentos](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
-Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***
-
-As máquinas possuem os requisitos de ambiente para o desenvolvimento dos projetos:
-- Git 2.7.4
-- PHP 7.2.2 e Composer 1.6.3
-- MySQL Server 5.7
-- NodeJS 8.9.4
-
-### Como usar as máquinas virtuais no treinamento
-- Baixar uma das imagens - 32 ou 64 bits
-- Abrir o Virtualbox e importar a appliance - "Arquivo -> Importar appliance"
+Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez) que nos permite versionar o conteúdo produzido e colaborar usando os recursos do github, issues e pull requests. Os slides de todos treinamentos estão em um mesmo repositório: https://github.com/uspdev/slides.
 
 ### Git
 
- - [repositório](#)
- - [slides](https://uspdev.github.io/slides/git/)
- - [vídeos](#) 
+ - [slides](https://uspdev.github.io/slides/git/) 
  
 ### Laravel Básico
 
- - [repositório](#)
  - [slides](https://uspdev.github.io/slides/laravel_basico/)
- - [vídeos](#) 
+ 
+### Symfony Básico
+
+ - [slides](https://uspdev.github.io/slides/symfony_basico)
  
 ## Ideias para futuros treinamentos:
 
- - [Pirando com Laravel](#)
- - [Symfony Básico](#)
- - [Codando seriamente com Symfony](#)
- - [O país das maravilhas: Symfony e Laravel no Docker](#)
- - [FTP Nevermore! Entregue o Drupal como serviço em sua unidade](https://uspdev.github.io/slides/drupal)
- - [O estranho mundo dos Frontends](#)
+ - [Laravel intermediário]((https://uspdev.github.io/slides/laravel)
+ - [Symfony intermediário](https://uspdev.github.io/slides/symfony)
+ - [Entregue o Drupal como serviço em sua unidade](https://uspdev.github.io/slides/drupal)
+ - [Deloy PHP com docker](#)
+ 
+## Máquinas Virtuais
+
+Preparamos VMs que possuem os requísitos mínimos para os treinamentos: git, PHP, Composer, mysql e nodejs.
+[baixe as Máquinas Virtuais aqui](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
+
+Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***. Abrir o Virtualbox e importar a appliance - "Arquivo -> Importar appliance"
 
 ## Materiais diversos criados pelo grupo
 
