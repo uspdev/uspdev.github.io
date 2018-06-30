@@ -4,21 +4,15 @@ title: Treinamentos
 permalink: /treinamentos
 ---
 
-## Treinamentos:
+## Sobre:
 
-Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez) que nos permite versionar o conteúdo produzido e colaborar usando os recursos do github, issues e pull requests. Os slides de todos treinamentos estão em um mesmo repositório: https://github.com/uspdev/slides.
+Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez) que nos permite versionar o conteúdo produzido e colaborar usando os recursos do github, issues e pull requests. Os slides de todos treinamentos estão em um mesmo repositório: [https://github.com/uspdev/slides](https://github.com/uspdev/slides).
 
-### Git
+### Slides dos cursos:
 
- - [slides](https://uspdev.github.io/slides/git/) 
- 
-### Laravel Básico
-
- - [slides](https://uspdev.github.io/slides/laravel_basico/)
- 
-### Symfony Básico
-
- - [slides](https://uspdev.github.io/slides/symfony_basico)
+ - [git](https://uspdev.github.io/slides/git/) 
+ - [Laravel Básico](https://uspdev.github.io/slides/laravel_basico/)
+ - [Symfony Básico](https://uspdev.github.io/slides/symfony_basico)
  
 ## Ideias para futuros treinamentos:
 
