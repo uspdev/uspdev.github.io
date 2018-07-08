@@ -6,7 +6,7 @@ permalink: /treinamentos
 
 ## Treinamentos em *pleno* desenvolvimento:
 
-[Máquinas Virtuais para os Treinamentos](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
+[Máquinas Virtuais para os Treinamentos](https://drive.google.com/drive/u/1/folders/1QdLAUp2svOjrjEv3KxWX3WPR8iAmtBbc)
 Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***
 
 As máquinas possuem os requisitos de ambiente para o desenvolvimento dos projetos:
