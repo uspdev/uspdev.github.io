@@ -1,6 +1,6 @@
 # Plano de cursos USPdev - Prévia
 
-A partir do dia 06/03
+A partir do dia 06/03/2018
 
 ## Objetivos
 
