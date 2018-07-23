@@ -24,7 +24,7 @@ Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez)
 ## Máquinas Virtuais
 
 Preparamos VMs que possuem os requísitos mínimos para os treinamentos: git, PHP, Composer, mysql e nodejs.
-[baixe as Máquinas Virtuais aqui](https://drive.google.com/drive/u/0/folders/1jBFEGSZfVBcEdFyvZ6r-l96iuPMMhKQ8)
+[baixe as máquinas virtuais aqui](https://goo.gl/pgVCZn)
 
 Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***. Abrir o Virtualbox e importar a appliance - "Arquivo -> Importar appliance"
 
