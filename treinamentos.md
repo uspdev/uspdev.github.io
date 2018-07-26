@@ -28,6 +28,7 @@ Baixe as máquinas virtuais pelo:
 
  - [google drive](https://goo.gl/pgVCZn)
  - [linorg](http://linorg.usp.br/cursos/git_lavarel/)
+ 
 Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***. Abrir o Virtualbox e importar a appliance - "Arquivo -> Importar appliance"
 
 ## Materiais diversos criados pelo grupo
