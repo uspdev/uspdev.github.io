@@ -35,3 +35,9 @@ Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***. Ab
 
 - [vídeos sobre laravel básico (Leandro Ramos da ECA)](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
 - [vídeos com exemplos da documentação do symfony (Thiago Gomes Veríssimo da FFLCH)](https://www.youtube.com/watch?v=UEYgrHahyEc&list=PLtf_y4yGjhTmwzNrJcDMCBauG0MSwjDdL&index=1)
+
+### Roteiro para preparação da infra dos cursos
+
+- [Laravel Básico](/roteiros/laravel_basico)
+
+
