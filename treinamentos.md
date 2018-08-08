@@ -14,7 +14,7 @@ Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez)
 - [Laravel Básico](https://uspdev.github.io/slides/laravel_basico/)
 - [Symfony Básico](https://uspdev.github.io/slides/symfony_basico)
 
-### Ideias para futuros treinamentos
+## Ideias para futuros treinamentos
 
 - [Laravel intermediário](https://uspdev.github.io/slides/laravel)
 - [Symfony intermediário](https://uspdev.github.io/slides/symfony)
@@ -36,7 +36,7 @@ Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***. Ab
 - [vídeos sobre laravel básico (Leandro Ramos da ECA)](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
 - [vídeos com exemplos da documentação do symfony (Thiago Gomes Veríssimo da FFLCH)](https://www.youtube.com/watch?v=UEYgrHahyEc&list=PLtf_y4yGjhTmwzNrJcDMCBauG0MSwjDdL&index=1)
 
-### Roteiro para preparação da infra dos cursos
+## Roteiros para preparação da infra dos cursos
 
 - [Laravel Básico](/roteiros/laravel_basico)
 
