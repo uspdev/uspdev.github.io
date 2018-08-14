@@ -33,7 +33,7 @@ exporte seu token para usar a API do github, como por exemplo:
         #!/bin/bash
         # run as: ./script2.sh lista.txt
 
-        export prefix="disciplina_"
+        export prefix="disciplinas_"
         export organization="uspdev-labs"
         export base_repo="https://github.com/thiagogomesverissimo/disciplinas_start.git"
         export dest='/tmp/base_repo'
