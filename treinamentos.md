@@ -12,6 +12,7 @@ Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez)
 
  - [vídeos com resoluções das issues](https://www.youtube.com/playlist?list=PLlJiqaCtsRWDOFg85nvRtOY33Y6-caOZr)
  - [slides](https://uspdev.github.io/slides/laravel_basico/)
+ - [cookbook](https://github.com/uspdev/treinamento-laravel-basico)
 
 ## Curso de git
 

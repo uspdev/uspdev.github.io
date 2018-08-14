@@ -18,14 +18,14 @@ exporte seu token para usar a API do github, como por exemplo:
 
 2. Script para criação repositórios zerados no github:
 
-    #!/bin/bash
-    # run as: ./script1.sh lista.txt
+        #!/bin/bash
+        # run as: ./script1.sh lista.txt
 
-        prefix="disciplina_"
-        organization="uspdev-labs"
+        export prefix="disciplinas_"
+        export organization="uspdev-labs"
 
         while IFS='' read -r line || [[ -n "$line" ]]; do
-            curl -H "Authorization: token $token" https://api.github.com/orgs/$organization/repos -d '{"name":"$prefix$line"}'
+            curl -H "Authorization: token $token" https://api.github.com/orgs/$organization/repos -d '{"name":"'$prefix$line'"}'
         done < "$1"
 
 2. Subir repositório base para o curso
@@ -33,43 +33,37 @@ exporte seu token para usar a API do github, como por exemplo:
         #!/bin/bash
         # run as: ./script2.sh lista.txt
 
-        prefix="disciplina_"
-        organization="uspdev-labs"
-        base_repo="https://github.com/thiagogomesverissimo/disciplinas_start"
-        dest='/tmp/base_repo'
+        export prefix="disciplina_"
+        export organization="uspdev-labs"
+        export base_repo="https://github.com/thiagogomesverissimo/disciplinas_start.git"
+        export dest='/tmp/base_repo'
 
-        git clone base_repo $dest
+        rm -rf $dest
+        git clone $base_repo $dest
         while IFS='' read -r line || [[ -n "$line" ]]; do
             cd $dest
             rm -rf .git
-            git init 
+            git init
             git add .
             git commit -m 'Initial Commit'
-            git remote add origin https://github.com/$organization/$prefix$line.git
+            git remote add origin git@github.com:$organization/$prefix$line.git
             git push origin master
-        done <
+        done < "$1"
 
 3. Criação issues
 
         #!/bin/bash
-        # run as: ./script3.sh
+        # run as: ./script3.sh lista.txt
 
-        prefix="disciplina_"
+        prefix="disciplinas_"
         organization="uspdev-labs"
         issues="https://raw.githubusercontent.com/thiagogomesverissimo/disciplinas_start/master/issues.txt"
-        curl -s $issues -o /tmp/issues.txt
 
+        curl -s $issues -o /tmp/issues.txt
         while IFS='' read -r line || [[ -n "$line" ]]; do
           while IFS='' read -r issue || [[ -n "$issue" ]]; do
-            curl -H "Authorization: token $token" https://api.github.com/repos/$organization/$prefix$line/issues -d '{"title": "$issue"}'
+            curl -H "Authorization: token $token" https://api.github.com/repos/$organization/$prefix$line/issues -d '{"title": "'"$issue"'"}'
           done < "/tmp/issues.txt"
         done < "$1"
-
-4. TODO:
-
- - mysql
- - apache
- - jenkins
- - api deploy github
 
 
