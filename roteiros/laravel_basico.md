@@ -9,6 +9,10 @@ exporte seu token para usar a API do github, como por exemplo:
 
     export token='hdekjhdkjehfkje'
 
+Dica para verificação dos limites de requests:
+
+    curl  -i https://api.github.com/users/thiagogomesverissimo | grep RateLimit
+
 1. Criar um arquivo com lista dos nomes dos repositórios que serão criados, exemplo:
 
         paulo
@@ -64,6 +68,24 @@ exporte seu token para usar a API do github, como por exemplo:
           while IFS='' read -r issue || [[ -n "$issue" ]]; do
             curl -H "Authorization: token $token" https://api.github.com/repos/$organization/$prefix$line/issues -d '{"title": "'"$issue"'"}'
           done < "/tmp/issues.txt"
+          sleep 900 # github limit
         done < "$1"
+
+4. Contar issues para conferência
+
+        #!/bin/bash
+        # run as: ./script3.sh lista.txt
+
+        prefix="disciplinas_"
+        organization="uspdev-labs"
+
+        echo "repo: qtde issues"
+        while IFS='' read -r line || [[ -n "$line" ]]; do
+            test=$(curl -s -H "Authorization: token $token" https://api.github.com/repos/$organization/$prefix$line/issues | grep html_url | grep issues | wc -l)
+            echo $prefix$line: $test
+        done < "$1"
+
+
+
 
 
