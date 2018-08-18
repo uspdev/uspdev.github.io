@@ -85,6 +85,22 @@ Dica para verificação dos limites de requests:
             echo $prefix$line: $test
         done < "$1"
 
+5. Criação dos webhooks para CI com jenkins:
+
+        #!/bin/bash
+        # run as: ./script5.sh lista.txt
+
+        prefix="disciplinas_"
+        organization="uspdev-labs"
+        jenkins='https://jenkins.uspdev.fflch.usp.br/github-webhook/'
+
+        while IFS='' read -r line || [[ -n "$line" ]]; do
+          curl -H "Authorization: token $token" https://api.github.com/repos/$organization/$prefix$line/hooks -d '{"name": "web", "config": { "url": "'$jenkins'", "content_type": "json"}}'
+        done < "$1"
+
+6. Adicionar uma task no playbook para criação de todos bancos de dados de lista.txt
+
+7. Adicionar uma task no playbook para criação dos jobs no jenkins
 
 
 
