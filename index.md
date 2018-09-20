@@ -14,7 +14,7 @@ no github: [https://github.com/uspdev/](https://github.com/uspdev/).
  - Reaproveitamento e otimização de código
  - Centralização do workflow de desenvolvimento de sistemas comuns
  - Publicação do código fonte como *open source*
- - Implementações de boas práticas (implinando em uso de frameworks)
+ - Implementações de boas práticas (implicando em uso de frameworks)
  - Versionamento com git
 
 # Participantes:
@@ -40,5 +40,21 @@ Com seu e-mail USP, basta entrar no nosso grupo no gsuite (uspdev@usp.br) atrav�
 [https://groups.google.com/a/usp.br/forum/#!forum/uspdev](https://groups.google.com/a/usp.br/forum/#!forum/uspdev)
 Também temos um grupo no Telegram, caso queira participar, depois de cadastrado no uspdev@usp.br, 
 mande uma mensagem solicitando acesso ao Telegram também. 
- 
- 
+
+# Sites relacionados
+
+[SIBiUSP](https://github.com/SIBiUSP) - Códigos relacionados com o Sistema Interado de Bibliotecas da USP
+
+[USPCodelab](https://github.com/uspcodelab) - Grupo de extensão universitária que tem como objetivo estimular a inovação tecnológica na USP
+
+[Hardware Livre USP](https://github.com/HardwareLivreUSP) - Visa promover estudos ligados à área de Hardware Livre
+
+
+https://github.com/redelinux-ime-usp
+
+https://github.com/LIAMF-USP
+
+https://github.com/LInE-IME-USP
+https://github.com/codigoteca-ime-usp
+
+https://github.com/simoesusp?tab=repositories
