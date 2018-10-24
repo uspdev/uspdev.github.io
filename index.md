@@ -17,22 +17,14 @@ no github: [https://github.com/uspdev/](https://github.com/uspdev/).
  - Implementações de boas práticas (implicando em uso de frameworks)
  - Versionamento com git
 
-# Participantes:
+# Dinâmica USPdev
 
- - Alessandro (ECA) [@alecostaweb](https://github.com/alecostaweb)
- - André Girol (DF-FFCLRP) [@girol](https://github.com/girol)
- - Augusto (FFLCH) [@acesarfs](https://github.com/acesarfs)
- - Fábio (FDRP) [@fabiojm](https://github.com/fabiojm)
- - Leandro (ECA) [@leandroramos](https://github.com/leandroramos)
- - Lucas (FDRP) [@lucasbrando](https://github.com/lucasbrando)
- - Masaki (São Carlos) [@masakik](https://github.com/masakik) 
- - Minton (IB) [@MiltonPlebeu](https://github.com/MiltonPlebeu)
- - Renata (IF) [@rekavi](https://github.com/rekavi)
- - Ricardo (FFLCH) [@ricardfo](https://github.com/ricardfo)
- - Sybele (IF) [@sybgroff](https://github.com/sybgroff)
- - Tadeu (FDRP) [@tadeumesquita](https://github.com/tadeumesquita)
- - Thiago (FFLCH) [@thiagogomesverissimo](https://github.com/thiagogomesverissimo)
- - Tiago (DCM-FFCLRP) [@tcarrer](https://github.com/tcarrer)
+ - [Participantes USPdev](https://github.com/orgs/uspdev/people)
+ - [Grupos de Trabalhos - usamos o conceito de projetos no github para organizarmos a divisão de trabalho por assuntos específicos](https://github.com/orgs/uspdev/projects)
+ 
+# Calendário de Eventos
+ 
+ <iframe src="https://calendar.google.com/calendar/embed?src=devs%40usp.br&ctz=America%2FSao_Paulo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
  
 # Participe: 
  
@@ -48,7 +40,6 @@ mande uma mensagem solicitando acesso ao Telegram também.
 [USPCodelab](https://github.com/uspcodelab) - Grupo de extensão universitária que tem como objetivo estimular a inovação tecnológica na USP
 
 [Hardware Livre USP](https://github.com/HardwareLivreUSP) - Visa promover estudos ligados à área de Hardware Livre
-
 
 https://github.com/redelinux-ime-usp
 
