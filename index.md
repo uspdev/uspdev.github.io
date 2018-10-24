@@ -21,8 +21,9 @@ no github: [https://github.com/uspdev/](https://github.com/uspdev/).
 
  - [Participantes USPdev](https://github.com/orgs/uspdev/people)
  - [Grupos de Trabalhos - usamos o conceito de projetos no github para organizarmos a divisão de trabalho por assuntos específicos](https://github.com/orgs/uspdev/projects)
+  - [Canal no youtube](https://www.youtube.com/channel/UCWw8gA55ykCu1bPgf5SV-rg)
  
-# Calendário de Eventos
+# Agenda USPdev
  
  <iframe src="https://calendar.google.com/calendar/embed?src=devs%40usp.br&ctz=America%2FSao_Paulo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
  
