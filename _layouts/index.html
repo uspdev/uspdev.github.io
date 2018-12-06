@@ -21,9 +21,9 @@
     </section>
 
     <section class="main-content">
-      {{ content }}
+    USPdev é formado por profissionais que trabalham direta ou indiretamente com desenvolvimento de código na Universidade de São Paulo e que perceberam uma necessidade de diálogo entre diferentes unidades e tem como intuito de otimizar procedimentos, usar tecnologias de ponta e essencialmente tornar o codar mais prazeroso. Consulte nossos projetos em nossa organização no github: https://github.com/uspdev/.
 
-          <h1> Últimos Posts: </h1>
+             <h1> Posts </h1>
               <ul>
                   {% for post in site.posts %}
                       <li>
@@ -32,11 +32,8 @@
                   {% endfor %}
               </ul>
 
-      <footer class="site-footer">
-        {% if site.github.is_project_page %}
-          <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
-        {% endif %}
-        
+      {{ content }}
+
       </footer>
     </section>
 

@@ -2,12 +2,6 @@
 layout: index
 ---
 
-*USPdev* é formado por profissionais que trabalham direta ou indiretamente com desenvolvimento
-de código na Universidade de São Paulo e que perceberam uma necessidade de diálogo entre 
-diferentes unidades e tem como intuito de otimizar procedimentos, usar tecnologias de ponta e 
-essencialmente tornar o *codar* mais prazeroso. Consulte nossos projetos em nossa organização
-no github: [https://github.com/uspdev/](https://github.com/uspdev/). 
-
 # Princípios:
 
  - Integração d@s devs USP
@@ -21,7 +15,7 @@ no github: [https://github.com/uspdev/](https://github.com/uspdev/).
 
  - [Participantes USPdev](https://github.com/orgs/uspdev/people)
  - [Grupos de Trabalhos - usamos o conceito de projetos no github para organizarmos a divisão de trabalho por assuntos específicos](https://github.com/orgs/uspdev/projects)
-  - [Canal no youtube](https://www.youtube.com/channel/UCWw8gA55ykCu1bPgf5SV-rg)
+ - [Canal no youtube](https://www.youtube.com/channel/UCWw8gA55ykCu1bPgf5SV-rg)
  
 # Agenda USPdev
  
