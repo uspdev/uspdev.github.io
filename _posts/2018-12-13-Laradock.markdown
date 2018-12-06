@@ -1,9 +1,9 @@
 ---
 layout: default
-title:  "Hangout 13/13/2018 às 14h30: Produtividade com Laravel e Docker: Laradock"
+title:  "Hangout 13/12/2018 às 14h30: Produtividade com Laravel e Docker: Laradock"
 permalink: /posts/laradock
 ---
-<h1>Hangout 13/13/2018 às 14h30: Produtividade com Laravel e Docker: Laradock </h1>
+<h1>Hangout 13/12/2018 às 14h30: Produtividade com Laravel e Docker: Laradock </h1>
 
 Laravel é o principal framework utilizado nos projetos USPdev e muitas
 dúvidas aparecem no grupo quando falamos de configuração rápida do nosso
