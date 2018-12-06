@@ -8,7 +8,7 @@ permalink: /posts/laradock
 Laravel é o principal framework utilizado nos projetos USPdev e muitas
 dúvidas aparecem no grupo quando falamos de configuração rápida do nosso
 ambiente de desenvolvimento, alguns instalam dependências na própria máquina,
-outros usam o virtualbox, vagrant e até docker. No próximo dia 13/13/2018 às 14h30 teremos 
+outros usam o virtualbox, vagrant e até docker. No próximo dia 13/12/2018 às 14h30 teremos 
 um hangout prático e com dicas de configuração de um ambiente de desenvolvimento
 com docker e laravel utilizando uma ferramenta que facilita essa integração, o
 [laradock](https://laradock.io/).
