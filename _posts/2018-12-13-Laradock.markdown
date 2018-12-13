@@ -20,4 +20,5 @@ estagiário da FFCLH que trabalha com laravel no projeto [cortec](https://github
 um app que permite análise científica de textos.
 
 Slides: [https://euak.github.io/slides/laradock/](https://euak.github.io/slides/laradock/)
+Hangout: [https://youtu.be/VM2uxEXjBG4](https://youtu.be/VM2uxEXjBG4)
 
