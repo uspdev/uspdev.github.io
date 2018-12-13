@@ -21,7 +21,7 @@ Também temos um grupo no Telegram, caso queira participar, depois de cadastrado
  - [Grupos de Trabalhos](https://github.com/orgs/uspdev/projects)
  - [Canal no youtube](https://www.youtube.com/channel/UCWw8gA55ykCu1bPgf5SV-rg)
 
-# Links que achamos na web o nos parece relacionados
+# Links interessantes
 
  - [SIBiUSP](https://github.com/SIBiUSP) - Códigos relacionados com o Sistema Interado de Bibliotecas da USP
  - https://github.com/iagsti
