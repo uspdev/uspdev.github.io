@@ -1,12 +1,12 @@
 ---
 layout: default
-title:  "Hangout 20/12/2018 às 14ho0: Introdução ao Scrum"
+title:  "Hangout 20/12/2018 às 14h00: Introdução ao Scrum"
 permalink: /posts/scrum
 tags: hangout
 author: thiagogomesverissimo
 ---
 
-<h2>Hangout 20/12/2018 às 14h00: Introdução ao Scrum com Priscila Alves </h2>
+<h2>Hangout 20/12/2018 às 14h00: Introdução ao Scrum </h2>
 
 Fluxo de desenvolvimento! Pois é, sempre *fugimos* do assunto e partimos
 para o código, ainda mais se aquele nosso framework preferido acabou de lançar
@@ -14,10 +14,12 @@ uma *feature* bacana e não vemos a hora de usá-la em um projeto novo.
 Em contrapartida, já sentimos aquela tristeza profunda depois de ficarmos
 2, 3 ou até 4 meses para desenvolver aquele recurso maneiro no sistema e no final
 das contas ele nunca foi usado pelo usuário final. Scrum é a metodologia do
-momento quando falamos de planejamento do processo de desenvolvimento e por isso
-é um assunto que nos chama a atenção nas equipes (ou equipe de um só) 
-de devs das unidades USP. Tudo fica mais complexo no setor
-público, com devs e demandas dispersas e desconectadas.
+momento quando o assunto é planejamento do processo de desenvolvimento e a primeira
+vista de suma importancia para nós que trabalhamos em menor ou maior 
+grau com produção de código nas nossas unidades. Tudo fica mais complexo no setor
+público, com devs e demandas dispersas e desconectadas. E juntar as peças do 
+quebra-cabeça, desde o metodologia de desenvolvimento até o deploy na produção é
+uma longa trilha de aprendizado.
 É por isso que no dia 20/12/2018 às 14h00 teremos um hangout seguido de uma 
 conversa com a [Priscila Alves](https://github.com/pcalvesUSP) sobre Scrum
 na qual vamos conhecer a metodologia e refletirmos sobre ela no nosso contexto
