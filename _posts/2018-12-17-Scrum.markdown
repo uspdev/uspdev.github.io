@@ -18,7 +18,7 @@ momento quando o assunto é planejamento do processo de desenvolvimento e a prim
 vista de suma importancia para nós que trabalhamos em menor ou maior 
 grau com produção de código nas nossas unidades. Tudo fica mais complexo no setor
 público, com devs e demandas dispersas e desconectadas. E juntar as peças do 
-quebra-cabeça, desde o metodologia de desenvolvimento até o deploy na produção é
+quebra-cabeça, desde a metodologia de desenvolvimento até o deploy na produção é
 uma longa trilha de aprendizado.
 É por isso que no dia 20/12/2018 às 14h00 teremos um hangout seguido de uma 
 conversa com a [Priscila Alves](https://github.com/pcalvesUSP) sobre Scrum
