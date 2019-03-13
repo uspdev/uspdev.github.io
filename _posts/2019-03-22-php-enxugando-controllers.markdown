@@ -1,7 +1,7 @@
 ---
 layout: default
 title:  "Hangout 22/03/2019 às 15h00: Enxugando controllers no Laravel"
-permalink: /posts/codereview
+permalink: /posts/php-enxugando-controllers
 tags: hangout
 author: thiagogomesverissimo
 ---
