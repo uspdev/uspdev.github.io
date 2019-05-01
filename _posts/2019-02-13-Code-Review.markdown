@@ -14,6 +14,8 @@ como usar o GitHub e como baixar o código do branch da Pull Request.
 O hangout será apresentado pelo [André Girol](https://github.com/girol)
 do Departamento de Física da FFCLRP - USP.
 
+Hangout gravado: [https://www.youtube.com/watch?v=UiU4xNsp8Dg](https://www.youtube.com/watch?v=UiU4xNsp8Dg)
+
 
 
 
