@@ -18,18 +18,7 @@ Para preparação dos slides usamos o [prez](https://github.com/byteclubfr/prez)
 
 - [slides](https://uspdev.github.io/slides/git/)
 
-## Curso de symfony básico
-
-- [slides](https://uspdev.github.io/slides/symfony_basico)
-
-## Ideias para futuros treinamentos
-
-- [Laravel intermediário](https://uspdev.github.io/slides/laravel)
-- [Symfony intermediário](https://uspdev.github.io/slides/symfony)
-- [Entregue o Drupal como serviço em sua unidade](https://uspdev.github.io/slides/drupal)
-- [Deploy PHP com docker](#)
-
-## Máquinas Virtuais usadas no curso
+## Máquinas Virtuais usadas nos cursos
 
 Preparamos VMs que possuem os requísitos mínimos para os treinamentos: git, PHP, Composer, mysql e nodejs.
 Baixe as máquinas virtuais pelo:
@@ -42,7 +31,6 @@ Senhas para o login do sistema e para o usuário root do MySQL: ***uspdev***. Ab
 ## Materiais diversos criados pelo grupo
 
 - [vídeos sobre laravel (Leandro Ramos da ECA)](https://www.youtube.com/playlist?list=PLIFOx3X8xDut2X2ydevlVvFKkqFxZ4SX9) 
-- [vídeos com exemplos da documentação do symfony (Thiago Gomes Veríssimo da FFLCH)](https://www.youtube.com/watch?v=UEYgrHahyEc&list=PLtf_y4yGjhTmwzNrJcDMCBauG0MSwjDdL&index=1)
 
 ## Roteiros para preparação da infraestrutura dos cursos
 
