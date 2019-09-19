@@ -10,7 +10,7 @@ author: thiagogomesverissimo
 Sistemas locais nas unidades dependem fortemente da integração dos dados
 disponíveis nos sistemas corporativos, evitando retrabalho dos usuários desses
 sistemas. Atualmente a via oficial de integração das aplicações locais com
-os sistemas corporativos é via banco de dados replicado (mysql ou sybase), onde
+os sistemas corporativos é via banco de dados replicado (mssql ou sybase), onde
 é mantida uma base sql local que de tempos em tempos é sincronizada com a base
 oficial.
 
