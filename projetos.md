@@ -39,7 +39,7 @@ com as categorias dos projetos:
 
 - [webform_boleto_usp](https://github.com/uspdev/webform_boleto_usp): Integração do webform Drupal com api de boletos USP
 
-## Treinamento, comunicação e documentação
+## Material de treinamentos, documentações entre outros
 
 - [uspdev.github.io](https://github.com/uspdev/uspdev.github.io): Repositório deste blog, desenvolvido em jekyll
 - [slides](https://github.com/uspdev/slides): Slides de treinamentos, palestras e eventos
