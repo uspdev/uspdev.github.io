@@ -6,7 +6,7 @@ permalink: /contribua
 
 # Para contribuir com os projetos do *USPdev* sugerimos que siga esse *workflow*
 
-1. Escolher um projeto/sistema da [lista](https://uspdev.github.io/sistemas)
+1. Escolher um projeto da [lista](/projetos)
 2. Escolher uma issue ou criar uma
 3. Fazer um fork do repositório do projeto que deseja contribuir
 4. Clonar seu fork
