@@ -24,7 +24,7 @@ com as categorias dos projetos:
 
 ## Bibliotecas em PHP
 
-- [senhaunica](https://github.com/uspdev/senhaunica): Biblioteca que integra seu sitema com a api de senha única USP (OAuth 1.0)
+- [senhaunica](https://github.com/uspdev/senhaunica): Biblioteca que integra seu sistema com a api de senha única USP (OAuth 1.0)
 
 ## Pacotes para Laravel
 
