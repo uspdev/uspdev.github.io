@@ -24,6 +24,8 @@ com as categorias dos projetos:
 
 ## Bibliotecas em PHP
 
+- [senhaunica](https://github.com/uspdev/senhaunica): Biblioteca que integra seu sitema com a api de senha única USP (OAuth 1.0)
+
 ## Pacotes para Laravel
 
 - [laravel-usp-theme](https://github.com/uspdev/laravel-usp-theme): Template laravel com alguns estilos básicos da USP
@@ -64,8 +66,7 @@ nfe-app
 senhaunica-hwi 
 wsfoto 
 pdfgen 
-cookbook-treinamento-laravel 
-senhaunica 
+cookbook-treinamento-laravel  
 senhaunica-rails 
 laravel-comet-theme 
 chaveiro 
