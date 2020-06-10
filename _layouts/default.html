@@ -27,8 +27,7 @@
     </section>
 
     <section class="main-content">
-      #### {{ page.url }} ####
-     {% if page.id == 'index' %}
+     {% if page.url == '/' %}
      <ul>
        {% for post in site.posts %}
          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
