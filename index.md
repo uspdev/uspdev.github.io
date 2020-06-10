@@ -1,6 +1,10 @@
 ---
 layout: default
 ---
+USPdev é formado por profissionais que trabalham direta ou indiretamente com desenvolvimento 
+de código na Universidade de São Paulo e que perceberam uma necessidade de diálogo entre diferentes 
+unidades e tem como intuito de otimizar procedimentos, usar tecnologias de ponta e essencialmente 
+tornar o processo de codar mais prazeroso. 
 
 # Princípios:
 
