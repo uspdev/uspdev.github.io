@@ -17,6 +17,6 @@ Principais passos para subir uma instância local de teste do site. Rodado no mi
 
 Faça um fork e um clone do repositório. Dentro da pasta clonada:
 
-    bundle update
+    bundle install
     bundle exec jekyll serve
 

@@ -27,20 +27,29 @@
     </section>
 
     <section class="main-content">
-     {% if page.url == '/' %}
-     <ul>
-       {% for post in site.posts %}
-         <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-       {% endfor %}
+
+    {{ content }}
+    {% if page.url == '/' %}
+    <h3>Posts</h3>
+    <ul>
+      {% for post in site.posts %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      {% endfor %}
     </ul>
     {% endif %}
-    {{ content }}
 
       <footer class="site-footer">
-        {% if site.github.is_project_page %}
-          <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
-        {% endif %}
-        
+        {% if page.url == '/' %}
+          <h3>Links de unidades, grupos ou setores da USP que produzem código aberto:</h3>
+          <ul>
+            <li><a href="https://github.com/iagsti">https://github.com/iagsti)</a></li>
+            <li><a href="https://github.com/fflch">https://github.com/fflch)</a></li>
+            <li><a href="https://github.com/SIBiUSP">https://github.com/SIBiUSP</a></li>
+            <li><a href="https://github.com/uspcodelab">https://github.com/uspcodelab)</a></li>
+            <li><a href="Hardware Livre USP">https://github.com/HardwareLivreUSP)</a></li>
+            <li><a href="https://github.com/redelinux-ime-usp">https://github.com/redelinux-ime-usp)</a></li>
+          </ul>
+        {% endif %}       
       </footer>
     </section>
 
