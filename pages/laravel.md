@@ -14,7 +14,43 @@ da comunidade, que são tratadas no contexto de oficinas.
 
 <ul id="toc"></ul>
 
+## 0. Preparação da infraestrutura de desenvolvimento
+[https://youtu.be/qImwzkP0nQE](https://youtu.be/qImwzkP0nQE)
+
+Instalação de componentes básicos para desenvolvermos para o Laravel
+usando Debian e derivados. Verifique o procedimento correspondente
+para seu sistema operacional.
+
+### 0.1 Configuração do git
+
+    sudo apt install git
+    git config --global user.name "Fulano da Silva"
+    git config --global user.email "fulano@usp.br"
+
+Criar conta no github e adicionar a chave pública gerada dessa forma:
+
+    ssh-keygen
+    cat ~/.ssh/id_rsa.pub
+
+### 0.2 Criando usuário admin para uso geral no mariadb
+
+    sudo apt install mariadb-server
+    sudo mariadb
+    GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%'  IDENTIFIED BY 'admin' WITH GRANT OPTION;
+    quit
+    exit
+
+### 0.3 Instalar dependências mínimas para laravel:
+
+     sudo apt install php curl php-xml php-intl php-mbstring php-mysql php-curl php-sybase
+
+### 0.4 Instalar o composer:
+
+    curl -s https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+
 ## 1. MVC - Model View Controller
+[https://youtu.be/Qn0llMAvMmU](https://youtu.be/Qn0llMAvMmU)
 
 ### 1.1 Request e Response ou Pergunta e Resposta
 
