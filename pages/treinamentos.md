@@ -4,7 +4,7 @@ title: Treinamentos
 permalink: /treinamentos
 ---
 
-## [Laravel no Contexto USP - 2020](/laravel) 
+## [Laravel no contexto da USP  - 2020](/laravel) 
 
 ## Material do Curso de Laravel de 2018
 

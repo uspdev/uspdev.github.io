@@ -4,6 +4,8 @@ title: Treinamentos
 permalink: /laravel
 ---
 
+# Laravel no contexto da USP 
+
 Está material está estruturado para utilização em 
 oficinas de introdução ao framework numa perspectiva mais genérica e com foco
 em sistemas da Universidade de São Paulo.
