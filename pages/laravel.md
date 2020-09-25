@@ -6,7 +6,7 @@ permalink: /laravel
 
 # Laravel no contexto da USP 
 
-Está material está estruturado para utilização em 
+Este material está estruturado para utilização em 
 oficinas de introdução ao framework numa perspectiva mais genérica e com foco
 em sistemas da Universidade de São Paulo.
 Assim, é possível encontrar certas omissões propositais ou práticas não comuns
