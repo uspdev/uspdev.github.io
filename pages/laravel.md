@@ -15,7 +15,6 @@ da comunidade, que são tratadas no contexto de oficinas.
 <ul id="toc"></ul>
 
 ## 0. Preparação da infraestrutura de desenvolvimento
-[https://youtu.be/qImwzkP0nQE](https://youtu.be/qImwzkP0nQE)
 
 Instalação de componentes básicos para desenvolvermos para o Laravel
 usando Debian e derivados. Verifique o procedimento correspondente
@@ -48,6 +47,11 @@ Criar conta no github e adicionar a chave pública gerada dessa forma:
 
     curl -s https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer
+
+Esse vídeo é usado na FFLCH quando novos estagiários(as) 
+entram na equipe e demonstra como preparar o ambiente com Debian 10
+virtualizado no virtualbox:
+[https://youtu.be/qImwzkP0nQE](https://youtu.be/qImwzkP0nQE)
 
 ## 1. MVC - Model View Controller
 [https://youtu.be/Qn0llMAvMmU](https://youtu.be/Qn0llMAvMmU)
@@ -357,6 +361,7 @@ Neste exercício você criará ou editará os seguintes arquivos:
     resources/views/livro_fulanos/partials/fields.blade.php
 
 ## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
+[https://youtu.be/T2DBFPMkHXc](https://youtu.be/T2DBFPMkHXc)
 
 ### 2.1 Limpando ambiente
 
@@ -564,6 +569,8 @@ carregar no `form.blade.php`:
 
 - Implementação de um CRUD completo para o model `LivroFulano`, onde `Fulano` é um identificador seu. 
 - Todas operações devem funcionar: criar, editar, ver, listar e apagar
+- Você só precisa implementar o crud, o repositório base já contém o laravel-usp-theme, assim, 
+depois de sincronizar seu repositório com upstream, rode `composer install`.
 
 Neste exercício você criará ou editará os seguintes arquivos:
 
