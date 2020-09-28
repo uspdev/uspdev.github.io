@@ -333,16 +333,28 @@ php artisan migrate:fresh --seed
 
 ### 1.6 Exercício MVC
 
-- Implementação de um model chamado `LivroFulano`, onde `Fulano` é um identificador
-seu. 
+- Implementação de um model chamado `LivroFulano`, onde `Fulano` é um identificador seu. 
 - Implementar a migration correspondente com os campos: titulo, autor e isbn.
 - Implementar seed com ao menos um livro de controle
 - Implementar o faker com ao menos 10 livros
 - Implementar controller com os métodos index e show com respectivos templates e rotas 
 - Implementar os templates (blades) correspondentes
 - Observações:
-  - O diretório dos templates deve ser: `resources/views/livros_fulano`
-  - As rotas devem ser prefixadas desse maneira: `livros_fulano/{livro}`
+  - O diretório dos templates deve ser: `resources/views/livro_fulanos`
+  - As rotas devem ser prefixadas desse maneira: `livro_fulanos/{livro}`
+
+Neste exercício você criará ou editará os seguintes arquivos:
+
+    routes/web.php
+    database/seeders/DatabaseSeeder.php
+    app/Models/LivroFulano.php
+    app/Http/Controllers/LivroFulanoController.php
+    database/seeders/LivroFulanoSeeder.php
+    database/factories/LivroFulanoFactory.php
+    database/migrations/202000000000_create_livro_fulanos_table.php
+    resources/views/livro_fulanos/index.blade.php
+    resources/views/livro_fulanos/show.blade.php
+    resources/views/livro_fulanos/partials/fields.blade.php
 
 ## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
 
@@ -544,14 +556,30 @@ carregar no `form.blade.php`:
 {% raw %}
 @section('javascripts_head')
 <script type="text/javascript" src="{ { asset('js/livro.js') } }"></script>
+@endsection
 {% endraw %}
 {% endhighlight %}
 
 ### 2.3 Exercício CRUD
 
-- Implementação de um CRUD completo para o model `LivroFulano`, onde `Fulano` é um identificador
-seu. 
+- Implementação de um CRUD completo para o model `LivroFulano`, onde `Fulano` é um identificador seu. 
 - Todas operações devem funcionar: criar, editar, ver, listar e apagar
+
+Neste exercício você criará ou editará os seguintes arquivos:
+
+    routes/web.php
+    database/seeders/DatabaseSeeder.php
+    app/Models/LivroFulano.php
+    app/Http/Controllers/LivroFulanoController.php
+    database/seeders/LivroFulanoSeeder.php
+    database/factories/LivroFulanoFactory.php
+    database/migrations/202000000000_create_livro_fulanos_table.php
+    resources/views/livro_fulanos/index.blade.php
+    resources/views/livro_fulanos/show.blade.php
+    resources/views/livro_fulanos/create.blade.php
+    resources/views/livro_fulanos/edit.blade.php
+    resources/views/livro_fulanos/partials/fields.blade.php
+    resources/views/livro_fulanos/partials/form.blade.php
 
 ## 3. Validação
 
