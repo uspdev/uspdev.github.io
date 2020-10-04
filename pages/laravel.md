@@ -466,7 +466,7 @@ touch index.blade.php create.blade.php edit.blade.php show.blade.php
 touch partials/form.blade.php partials/fields.blade.php
 {% endhighlight %}
 
-Um implementação básica de cada template:
+Uma implementação básica de cada template:
 {% highlight html %}
 {% raw %}
 
@@ -530,7 +530,7 @@ ISBN: <input type="text" name="isbn" value="{{ $livro->isbn }}">
 
 Conhecendo o sistema de herança do blade, podemos extender qualquer template,
 inclusive de biblioteca externas. Existem diversas implementações do AdminLTE na
-internet e você pode implementar uma para sua empresa, por exemplo. Aqui vamos
+internet e você pode implementar uma para sua unidade, por exemplo. Aqui vamos
 usar [https://github.com/uspdev/laravel-usp-theme](https://github.com/uspdev/laravel-usp-theme). 
 Consulte a documentação para informações de como instalá-la. No nosso 
 template principal `main.blade.php` vamos apagar o que tínhamos antes e
