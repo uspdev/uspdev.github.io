@@ -618,7 +618,7 @@ nosso arquivo principal do blade, façamos uma iteração nesse array:
 
 Além disso, podemos manualmente no nosso controller enviar uma mensagem `flash`
 para o sessão assim: `request()->session()->flash('alert-info','Livro cadastrado com sucesso')`.
-Como nosso template principal usa o boostrap, podemos estilizar nossas
+Como nosso template principal usa o bootstrap, podemos estilizar nossas
 mensagens flash com os valores danger, warning, success e info:
 
 {% highlight html %}
@@ -1240,7 +1240,7 @@ página. O melhor seria fazer a query em blocos, substituindo `all()` ou `get()`
 {% endraw %}
 {% endhighlight %}
 
-A partir do laravel 8 o boostrap não é mais padrão, mas podemos configurá-lo
+A partir do laravel 8 o bootstrap não é mais padrão, mas podemos configurá-lo
 como padrão em `AppServiceProvider.php`:
 
 {% highlight php %}
@@ -1255,7 +1255,7 @@ public function boot()
 
 Definimos níveis de permissões no laravel com um recurso chamado `Gate`.
 Na migration do `user`, vamos definir um campo boleano chamado admin, todo
-usuário que tiver esse campo como `true` sera admin do sistema.
+usuário que tiver esse campo como `true` será admin do sistema.
 
 Validação USP - permitidos
 use Illuminate\Validation\Rule;
