@@ -1084,7 +1084,7 @@ $table->string('tipo');
 Vamos trabalhar com apenas dois tipos: nacional e internacional.
 A lista de tipos poderia vir de qualquer fonte: outro model, api,
 csv etc. No nosso caso vamos fixar esse dois tipos em um array e
-usar em todos sistema. No model do livro vamos adicionar um método
+usar em todo o sistema. No model do livro vamos adicionar um método
 estático que retorna os tipos, pois assim, fica fácil mudar caso 
 a fonte seja alterada no futuro:
 
@@ -1153,7 +1153,7 @@ use Illuminate\Validation\Rule;
 
 ### 5.3 mutators
 Há situações em que queremos fazer um leve processamento antes de salvar
-um valor no banco de dados e logo após recuperarmos uma valor. Vamos 
+um valor no banco de dados e logo após recuperarmos um valor. Vamos 
 adicionar um campo para preço. Já sabemos como criar uma migration 
 de alteração para alterar a tabela livros:
 
