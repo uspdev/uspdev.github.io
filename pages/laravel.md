@@ -802,8 +802,8 @@ Por padrão, o model `User` criado automaticamente na instalação
 usa essa classe. A migration correspondente criada automaticamente na instalação
 possui alguns campos requeridos para lógica interna do login. Vamos acrescentar um
 campo na migration chamado `codpes`, que será o número USP de uma pessoa.
-Um pouco adiante vamos adicionar outro método de login, qua não por senha, com 
-OAuth,  então vamos deixar a opção o `password` como nula:
+Um pouco adiante vamos adicionar outro método de login, que não por senha, mas com 
+OAuth,  então vamos deixar a opção `password` como nula:
 Assim, em `2014_10_12_000000_create_users_table`:
 
 {% highlight php %}
@@ -827,7 +827,7 @@ return [
 ];
 {% endhighlight %}   
 
-No seed para User não vem por default, mas podemos criá-lo assim:
+O seed para User não vem por default, mas podemos criá-lo assim:
 {% highlight php %}
 php artisan make:seed UserSeeder
 {% endhighlight %}  
@@ -928,7 +928,7 @@ Agora falta implementar o formulário para login `auth/login.blade.php`:
 
 ### 4.2 logout
 
-No nosso controller de login para adicionarmos um método para logout:
+No nosso controller de login vamos adicionar um método para logout:
 {% highlight php %}
 public function logout()
 {
