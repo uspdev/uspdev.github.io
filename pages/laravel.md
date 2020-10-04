@@ -639,7 +639,7 @@ mensagens flash com os valores danger, warning, success e info:
 
 Quando estamos dentro de um método do controller, a forma mais rápida de validação é
 usando `$request->validate`, que validará os campos com as condições que 
-passaremos e caso falhe a validação, automaticamente o usuário é retornado 
+passarmos e caso falhe a validação, automaticamente o usuário é retornado 
 para página de origem com todos inputs que foram enviados na requisição, além da
 mensagens de erro:
 
@@ -652,7 +652,7 @@ $request->validade([
 {% endhighlight %}
 
 Podemos usar a função `old('titulo',$livro->titulo)` nos formulários, que 
-verifica que a inputs na sessão e em caso negativo usa o segundo parâmetro.
+verifica se há inputs na sessão e em caso negativo usa o segundo parâmetro.
 Assim, podemos deixar o partials/form.blade.php mais elegante:
 
 {% highlight html %}
