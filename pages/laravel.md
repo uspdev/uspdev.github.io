@@ -281,7 +281,7 @@ o chamaríamos como:
 
 Durante o processo de desenvolvimento precisamos manipular dados
 constantemente, então é uma boa ideia gerar alguns dados aleatórios (faker)
-e outros controlados (seed) para não termos que sempre criá-los manualmente: dqw
+e outros controlados (seed) para não termos que sempre criá-los manualmente:
 
 {% highlight bash %}
 php artisan make:factory LivroFactory --model='Livro'
@@ -317,7 +317,7 @@ Rode o seed e veja que os dados foram criados:
 php artisan db:seed --class=LivroSeeder
 {% endhighlight %}
 
-Depois de testado e funcionando insirá seu seed em 
+Depois de testado e funcionando insira seu seed em 
 `database/seeders/DatabaseSeeder` para ser chamado globalmente:
 
 {% highlight php %}
