@@ -6,7 +6,7 @@ permalink: /laravel
 
 # Laravel no contexto da USP 
 
-Está material está estruturado para utilização em 
+Este material está estruturado para utilização em 
 oficinas de introdução ao framework numa perspectiva mais genérica e com foco
 em sistemas da Universidade de São Paulo.
 Assim, é possível encontrar certas omissões propositais ou práticas não comuns
@@ -15,7 +15,6 @@ da comunidade, que são tratadas no contexto de oficinas.
 <ul id="toc"></ul>
 
 ## 0. Preparação da infraestrutura de desenvolvimento
-[https://youtu.be/qImwzkP0nQE](https://youtu.be/qImwzkP0nQE)
 
 Instalação de componentes básicos para desenvolvermos para o Laravel
 usando Debian e derivados. Verifique o procedimento correspondente
@@ -48,6 +47,11 @@ Criar conta no github e adicionar a chave pública gerada dessa forma:
 
     curl -s https://getcomposer.org/installer | php
     sudo mv composer.phar /usr/local/bin/composer
+
+Esse vídeo é usado na FFLCH quando novos estagiários(as) 
+entram na equipe e demonstra como preparar o ambiente com Debian 10
+virtualizado no virtualbox:
+[https://youtu.be/qImwzkP0nQE](https://youtu.be/qImwzkP0nQE)
 
 ## 1. MVC - Model View Controller
 [https://youtu.be/Qn0llMAvMmU](https://youtu.be/Qn0llMAvMmU)
@@ -277,7 +281,7 @@ o chamaríamos como:
 
 Durante o processo de desenvolvimento precisamos manipular dados
 constantemente, então é uma boa ideia gerar alguns dados aleatórios (faker)
-e outros controlados (seed) para não termos que sempre criá-los manualmente: dqw
+e outros controlados (seed) para não termos que sempre criá-los manualmente:
 
 {% highlight bash %}
 php artisan make:factory LivroFactory --model='Livro'
@@ -313,7 +317,7 @@ Rode o seed e veja que os dados foram criados:
 php artisan db:seed --class=LivroSeeder
 {% endhighlight %}
 
-Depois de testado e funcionando insirá seu seed em 
+Depois de testado e funcionando insira seu seed em 
 `database/seeders/DatabaseSeeder` para ser chamado globalmente:
 
 {% highlight php %}
@@ -333,18 +337,31 @@ php artisan migrate:fresh --seed
 
 ### 1.6 Exercício MVC
 
-- Implementação de um model chamado `LivroFulano`, onde `Fulano` é um identificador
-seu. 
+- Implementação de um model chamado `LivroFulano`, onde `Fulano` é um identificador seu. 
 - Implementar a migration correspondente com os campos: titulo, autor e isbn.
 - Implementar seed com ao menos um livro de controle
 - Implementar o faker com ao menos 10 livros
 - Implementar controller com os métodos index e show com respectivos templates e rotas 
 - Implementar os templates (blades) correspondentes
 - Observações:
-  - O diretório dos templates deve ser: `resources/views/livros_fulano`
-  - As rotas devem ser prefixadas desse maneira: `livros_fulano/{livro}`
+  - O diretório dos templates deve ser: `resources/views/livro_fulanos`
+  - As rotas devem ser prefixadas desse maneira: `livro_fulanos/{livro}`
+
+Neste exercício você criará ou editará os seguintes arquivos:
+
+    routes/web.php
+    database/seeders/DatabaseSeeder.php
+    app/Models/LivroFulano.php
+    app/Http/Controllers/LivroFulanoController.php
+    database/seeders/LivroFulanoSeeder.php
+    database/factories/LivroFulanoFactory.php
+    database/migrations/202000000000_create_livro_fulanos_table.php
+    resources/views/livro_fulanos/index.blade.php
+    resources/views/livro_fulanos/show.blade.php
+    resources/views/livro_fulanos/partials/fields.blade.php
 
 ## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
+[https://youtu.be/T2DBFPMkHXc](https://youtu.be/T2DBFPMkHXc)
 
 ### 2.1 Limpando ambiente
 
@@ -449,7 +466,7 @@ touch index.blade.php create.blade.php edit.blade.php show.blade.php
 touch partials/form.blade.php partials/fields.blade.php
 {% endhighlight %}
 
-Um implementação básica de cada template:
+Uma implementação básica de cada template:
 {% highlight html %}
 {% raw %}
 
@@ -513,7 +530,7 @@ ISBN: <input type="text" name="isbn" value="{{ $livro->isbn }}">
 
 Conhecendo o sistema de herança do blade, podemos extender qualquer template,
 inclusive de biblioteca externas. Existem diversas implementações do AdminLTE na
-internet e você pode implementar uma para sua empresa, por exemplo. Aqui vamos
+internet e você pode implementar uma para sua unidade, por exemplo. Aqui vamos
 usar [https://github.com/uspdev/laravel-usp-theme](https://github.com/uspdev/laravel-usp-theme). 
 Consulte a documentação para informações de como instalá-la. No nosso 
 template principal `main.blade.php` vamos apagar o que tínhamos antes e
@@ -544,14 +561,32 @@ carregar no `form.blade.php`:
 {% raw %}
 @section('javascripts_head')
 <script type="text/javascript" src="{ { asset('js/livro.js') } }"></script>
+@endsection
 {% endraw %}
 {% endhighlight %}
 
 ### 2.3 Exercício CRUD
 
-- Implementação de um CRUD completo para o model `LivroFulano`, onde `Fulano` é um identificador
-seu. 
+- Implementação de um CRUD completo para o model `LivroFulano`, onde `Fulano` é um identificador seu. 
 - Todas operações devem funcionar: criar, editar, ver, listar e apagar
+- Você só precisa implementar o crud, o repositório base já contém o laravel-usp-theme, assim, 
+depois de sincronizar seu repositório com upstream, rode `composer install`.
+
+Neste exercício você criará ou editará os seguintes arquivos:
+
+    routes/web.php
+    database/seeders/DatabaseSeeder.php
+    app/Models/LivroFulano.php
+    app/Http/Controllers/LivroFulanoController.php
+    database/seeders/LivroFulanoSeeder.php
+    database/factories/LivroFulanoFactory.php
+    database/migrations/202000000000_create_livro_fulanos_table.php
+    resources/views/livro_fulanos/index.blade.php
+    resources/views/livro_fulanos/show.blade.php
+    resources/views/livro_fulanos/create.blade.php
+    resources/views/livro_fulanos/edit.blade.php
+    resources/views/livro_fulanos/partials/fields.blade.php
+    resources/views/livro_fulanos/partials/form.blade.php
 
 ## 3. Validação
 
@@ -583,7 +618,7 @@ nosso arquivo principal do blade, façamos uma iteração nesse array:
 
 Além disso, podemos manualmente no nosso controller enviar uma mensagem `flash`
 para o sessão assim: `request()->session()->flash('alert-info','Livro cadastrado com sucesso')`.
-Como nosso template principal usa o boostrap, podemos estilizar nossas
+Como nosso template principal usa o bootstrap, podemos estilizar nossas
 mensagens flash com os valores danger, warning, success e info:
 
 {% highlight html %}
@@ -604,7 +639,7 @@ mensagens flash com os valores danger, warning, success e info:
 
 Quando estamos dentro de um método do controller, a forma mais rápida de validação é
 usando `$request->validate`, que validará os campos com as condições que 
-passaremos e caso falhe a validação, automaticamente o usuário é retornado 
+passarmos e caso falhe a validação, automaticamente o usuário é retornado 
 para página de origem com todos inputs que foram enviados na requisição, além da
 mensagens de erro:
 
@@ -617,7 +652,7 @@ $request->validade([
 {% endhighlight %}
 
 Podemos usar a função `old('titulo',$livro->titulo)` nos formulários, que 
-verifica que a inputs na sessão e em caso negativo usa o segundo parâmetro.
+verifica se há inputs na sessão e em caso negativo usa o segundo parâmetro.
 Assim, podemos deixar o partials/form.blade.php mais elegante:
 
 {% highlight html %}
@@ -767,8 +802,8 @@ Por padrão, o model `User` criado automaticamente na instalação
 usa essa classe. A migration correspondente criada automaticamente na instalação
 possui alguns campos requeridos para lógica interna do login. Vamos acrescentar um
 campo na migration chamado `codpes`, que será o número USP de uma pessoa.
-Um pouco adiante vamos adicionar outro método de login, qua não por senha, com 
-OAuth,  então vamos deixar a opção o `password` como nula:
+Um pouco adiante vamos adicionar outro método de login, que não por senha, mas com 
+OAuth,  então vamos deixar a opção `password` como nula:
 Assim, em `2014_10_12_000000_create_users_table`:
 
 {% highlight php %}
@@ -792,7 +827,7 @@ return [
 ];
 {% endhighlight %}   
 
-No seed para User não vem por default, mas podemos criá-lo assim:
+O seed para User não vem por default, mas podemos criá-lo assim:
 {% highlight php %}
 php artisan make:seed UserSeeder
 {% endhighlight %}  
@@ -893,7 +928,7 @@ Agora falta implementar o formulário para login `auth/login.blade.php`:
 
 ### 4.2 logout
 
-No nosso controller de login para adicionarmos um método para logout:
+No nosso controller de login vamos adicionar um método para logout:
 {% highlight php %}
 public function logout()
 {
@@ -1049,7 +1084,7 @@ $table->string('tipo');
 Vamos trabalhar com apenas dois tipos: nacional e internacional.
 A lista de tipos poderia vir de qualquer fonte: outro model, api,
 csv etc. No nosso caso vamos fixar esse dois tipos em um array e
-usar em todos sistema. No model do livro vamos adicionar um método
+usar em todo o sistema. No model do livro vamos adicionar um método
 estático que retorna os tipos, pois assim, fica fácil mudar caso 
 a fonte seja alterada no futuro:
 
@@ -1118,7 +1153,7 @@ use Illuminate\Validation\Rule;
 
 ### 5.3 mutators
 Há situações em que queremos fazer um leve processamento antes de salvar
-um valor no banco de dados e logo após recuperarmos uma valor. Vamos 
+um valor no banco de dados e logo após recuperarmos um valor. Vamos 
 adicionar um campo para preço. Já sabemos como criar uma migration 
 de alteração para alterar a tabela livros:
 
@@ -1206,7 +1241,7 @@ navegação em blocos:
 {% endraw %}
 {% endhighlight %}
 
-A partir do laravel 8 o boostrap não é mais padrão, mas podemos configurá-lo
+A partir do laravel 8 o bootstrap não é mais padrão, mas podemos configurá-lo
 como padrão em `AppServiceProvider.php`:
 
 {% highlight php %}
@@ -1222,7 +1257,7 @@ public function boot()
 
 Definimos níveis de permissões no laravel com um recurso chamado `Gate`.
 Na migration do `user`, vamos definir um campo boleano chamado admin, todo
-usuário que tiver esse campo como `true` sera admin do sistema.
+usuário que tiver esse campo como `true` será admin do sistema.
 
 Validação USP - permitidos
 use Illuminate\Validation\Rule;
