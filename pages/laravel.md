@@ -961,15 +961,17 @@ basta configurarmos algumas opções em `config/laravel-usp-theme.php` e no
 
 ### 4.3 Login externo
 
-O mundo não é perfeito e são raras as vezes que eu mesmo uso o login local,
+O mundo não é perfeito e são raras as vezes que usamos o login local,
 pois o mais comum é o sistema fazer parte de um ecossistema onde as pessoas
 que vão operá-lo possuem suas senhas em algum outro servidor centralizado, 
-como ldap, por exemplo. 
-Vamos usar a biblioteca `socialite` que nos permite trabalhar com 
-o protocolo `OAuth` e com a biblioteca
+como ldap ou oauth.
+Na USP, uma das formas de autenticar nosso usuário é por OAuth.
+E no laravel, a biblioteca `socialite` nos permite trabalhar com 
+o protocolo `OAuth`. Desenvolvermos uma biblioteca
 [https://github.com/uspdev/senhaunica-socialite](https://github.com/uspdev/senhaunica-socialite)
 que possui a parametrização necessária para o OAuth da USP. Faça a
-configuração conforme a documentação.
+configuração conforme a documentação. Caso não tenha acesso ao `OAuth`
+pode subir um sistema que simula o Oauth da USP [https://github.com/uspdev/senhaunica-faker](https://github.com/uspdev/senhaunica-faker).
 
 Na nossa implementação só permitiremos login dos usuários que existem na
 tabela user:
@@ -1252,12 +1254,14 @@ public function boot()
 }
 {% endhighlight %}
 
-<!---
 ### 6.3 Autorização
 
 Definimos níveis de permissões no laravel com um recurso chamado `Gate`.
 Na migration do `user`, vamos definir um campo boleano chamado admin, todo
 usuário que tiver esse campo como `true` será admin do sistema.
+
+<!---
+
 
 Validação USP - permitidos
 use Illuminate\Validation\Rule;
