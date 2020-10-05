@@ -1354,7 +1354,7 @@ Todas as chamadas subsequentes vão quebrar. Vamos validar esse número?
 
 Com auxílio da biblioteca  
 [https://github.com/uspdev/laravel-usp-validators](https://github.com/uspdev/laravel-usp-validators)
-{% highlight php %} podemos fazer isso tranquilamente.
+podemos fazer isso tranquilamente.
 
 {% highlight php %}
 $request->validate([
@@ -1456,6 +1456,7 @@ Implementar uma classe que recebe um array multidimensional com os dados, linha 
 E outro array com os títulos;
 {% highlight php %}
 {% raw %}
+
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -1513,5 +1514,5 @@ public function export($format){
 - Global e Local Scopes: https://laravel.com/docs/8.x/eloquent#local-scopes
 - laravel-form-builder ou LaravelCollective/html
 
- -->
+-->
 
