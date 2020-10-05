@@ -1181,7 +1181,7 @@ de busca no `index.blade.php`:
 {% endhighlight %}
 
 No LivroController, basta verificarmos se foi enviado algum valor para o campo
-`search` , se sim, fazemos uma busca, e em caso negativo, retornamos todos livros.
+`search`, se sim, fazemos uma busca, e em caso negativo, retornamos todos livros.
 
 {% highlight php %}
 public function index(Request $request){
@@ -1197,7 +1197,8 @@ if(isset($request->search)) {
 
 Quando o sistema tem muitos registros, pode ser oneroso mostrar tudo numa única
 página. O melhor seria fazer a query em blocos, substituindo `all()` ou `get()` por 
-`paginate(15)` e no blade usamos a seguinte estrutura para navegação em blocos:
+`paginate(15)`. Neste caso, no blade usamos a seguinte estrutura para 
+navegação em blocos:
 
 {% highlight html %}
 {% raw %}
@@ -1216,6 +1217,7 @@ public function boot()
 }
 {% endhighlight %}
 
+<!---
 ### 6.3 Autorização
 
 Definimos níveis de permissões no laravel com um recurso chamado `Gate`.
@@ -1228,7 +1230,7 @@ use Illuminate\Validation\Rule;
 
  composer require uspdev/laravel-usp-validators
 
-## 7. Emails e upload de arquivos e filas
+## 7. Emails, uploads de arquivos e filas
 
 Campo para upload do arquivo no formulário html:
 {% highlight html %}
@@ -1351,10 +1353,11 @@ public function export($format){
 {% endhighlight %}
 
 
-## Próximo tutoriais
+## Próximo tutoriais na seção úteis
 
 - Filas: https://laravel.com/docs/8.x/queues
 - Global e Local Scopes: https://laravel.com/docs/8.x/eloquent#local-scopes
 - laravel-form-builder ou LaravelCollective/html
 
+ -->
 
