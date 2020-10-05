@@ -644,7 +644,7 @@ para página de origem com todos inputs que foram enviados na requisição, alé
 mensagens de erro:
 
 {% highlight php %}
-$request->validade([
+$request->validate([
   'titulo' => 'required',
   'autor' => 'required',
   'isbn' => 'required|integer',
@@ -1193,8 +1193,6 @@ public function getPrecoAttribute($value){
 - o campo título só deve aceitar: Nacional ou Internacional
 - o campo preço deve prever valores com vírgula na entrada, mas deve ser float no banco. Deve aparecer no blade com vírgula.
 
-<!---
-
 ## 6. Buscas, paginação e autorização
 
 ### 6.1 Busca
@@ -1259,29 +1257,132 @@ public function boot()
 ### 6.3 Autorização
 
 Definimos níveis de permissões no laravel com um recurso chamado `Gate`.
-No geral, a uma lógica para identificar os níveis de permissões de cada usuário
-é intrínseca ao sistema. No nosso exemplo, vamos criar um campo boleano chamado
-admin no model `User` que será `true` para quem for admin do sistema.
-Para definição 
+No geral, a lógica para identificar os níveis de permissões de cada usuário
+é intrínseca ao sistema e o laravel nos permite de forma muito flexível
+implementar essa lógica, seja ela qual for. No nosso exemplo, vamos criar
+um campo boleano chamado `is_admin` no model `User` que será `TRUE` para quem 
+for admin do sistema e `FALSE` para quem for um usuário comum:
 
+{% highlight bash %}
+php artisan make:migration add_is_admin_to_users_table --table=users
+{% endhighlight %}
 
+O campo `is_admin` na migration criada ficará assim:
+{% highlight php %}
+$table->boolean('is_admin')->default(FALSE);
+{% endhighlight %}
 
+E por fim alteramos nosso usuário de controle para ser admin:
+{% highlight php %}
+public function run()
+{
+    $user = [
+        'codpes'   => "5385361",
+        'email'    => "thiago.verissimo@usp.br",
+        'name'     => "Thiago Gomes Verissimo",
+        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+        'is_admin' => TRUE
+    ];
+}
+{% endhighlight %}  
 
-Essa lógica será implementada como
-uma `policy`, dentro do laravel. Uma `policy` pode ou não estar associada
-a um model.
+Poderíamos implementar um CRUD completo para usuários do sistema, mas já
+sabemos fazer isso. Vamos apenas criar uma entrada chamada *inserir administrador*
+que recebe o número USP e coloca `TRUE` na tabela `users`. Um formulário básico 
+para essa operação `resources/views/users/novoadmin.blade.php`:
 
+{% highlight html %}
+{% raw %}
+@extends('main')
+@section('content')
+<form method="POST" action="/novoadmin">
+    @csrf
+    <div class="form-group row">
+        <label for="codpes" class="col-sm-4 col-form-label text-md-right">número usp</label>
+        <div class="col-md-6">
+            <input type="text" name="codpes" value="{{ old('codpes') }}" required>
+        </div>
+    </div>
+    <div class="form-group row mb-0">
+        <div class="col-md-8 offset-md-4">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
+    </div>
+</form>
+@endsection
+{% endraw %}
+{% endhighlight %}
 
-Na migration do `user`, vamos definir 
+Um controler mínimo para nosso exemplo:
+{% highlight bash %}
+php artisan make:controller UserController
+{% endhighlight %}
+
+Rotas para mostrar formulário e enviar a requisição para o
+controller:
+
+{% highlight php %}
+use App\Http\Controllers\UserController;
+Route::get('/novoadmin', [UserController::class, 'form']);
+Route::post('/novoadmin', [UserController::class, 'register']);
+{% endhighlight %}
+
+No controler criamos os métodos correspondentes:
+
+{% highlight php %}
+public function form()
+{
+    return view('users.novoadmin');
+}
+
+public function register(Request $request)
+{   
+    $user = User::where('codpes',$request->codpes)->first();
+    if(!$user) $user = new User;
+
+    $user->codpes = $request->codpes;
+    $user->email  = \Uspdev\Replicado\Pessoa::email($request->codpes);
+    $user->name   = \Uspdev\Replicado\Pessoa::nomeCompleto($request->codpes);
+    $user->is_admin = TRUE;
+    $user->save();
+    return redirect("/novoadmin/");
+}
+{% endhighlight %}
+
+Mas temos um problema. E se o número USP informado não existir?
+Todas as chamadas subsequentes vão quebrar. Vamos validar esse número?
+
+Com auxílio da biblioteca  
+[https://github.com/uspdev/laravel-usp-validators](https://github.com/uspdev/laravel-usp-validators)
+{% highlight php %} podemos fazer isso tranquilamente.
+
+{% highlight php %}
+$request->validate([
+    'codpes' => 'required|integer|codpes',
+]);
+{% endhighlight %}
+
+Agora que temos um campo que nos indica que o usuário é um admin
+podemos criar um `Gate` que faz essa verificação, em 
+`app/Providers/AuthServiceProvider.php`:
+
+{% highlight php %}
+Gate::define('admin', function ($user) {
+    return $user->is_admin;
+});
+{% endhighlight %}
+
+Para cada método do nosso controller podemos restringir o acesso
+para o gate admin usando `$this->authorize('admin');`. Já no blade
+podemos fazer `@can('admin') ... @endcan`
+
+### 6.4 Exercício de buscas, paginação e autorização
+
+- Criar um sistema de busca no método `index` do `LivroFulanoController`
+- Implementar paginação
+- Escolha alguns métodos de `LivroFulanoController` para só serem acessíveis pelos admins. 
 
 <!---
-
-
-Validação USP - permitidos
-use Illuminate\Validation\Rule;
-['required', Rule::in($item::tipo_aquisicao)],
-
- composer require uspdev/laravel-usp-validators
 
 ## 7. Emails, uploads de arquivos e filas
 
