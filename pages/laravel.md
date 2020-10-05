@@ -1193,6 +1193,8 @@ public function getPrecoAttribute($value){
 - o campo título só deve aceitar: Nacional ou Internacional
 - o campo preço deve prever valores com vírgula na entrada, mas deve ser float no banco. Deve aparecer no blade com vírgula.
 
+<!---
+
 ## 6. Buscas, paginação e autorização
 
 ### 6.1 Busca
@@ -1257,8 +1259,20 @@ public function boot()
 ### 6.3 Autorização
 
 Definimos níveis de permissões no laravel com um recurso chamado `Gate`.
-Na migration do `user`, vamos definir um campo boleano chamado admin, todo
-usuário que tiver esse campo como `true` será admin do sistema.
+No geral, a uma lógica para identificar os níveis de permissões de cada usuário
+é intrínseca ao sistema. No nosso exemplo, vamos criar um campo boleano chamado
+admin no model `User` que será `true` para quem for admin do sistema.
+Para definição 
+
+
+
+
+Essa lógica será implementada como
+uma `policy`, dentro do laravel. Uma `policy` pode ou não estar associada
+a um model.
+
+
+Na migration do `user`, vamos definir 
 
 <!---
 
