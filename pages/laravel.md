@@ -830,14 +830,14 @@ O seed para User não vem por default, mas podemos criá-lo assim:
 php artisan make:seed UserSeeder
 {% endhighlight %}  
 
-Vou me colocar como usuário de controle:
+Vou colocar um usuário de controle:
 {% highlight php %}
 public function run()
 {
     $user = [
-        'codpes'   => "5385361",
-        'email'    => "thiago.verissimo@usp.br",
-        'name'     => "Thiago Gomes Verissimo",
+        'codpes'   => "123456",
+        'email'    => "qualquer@usp.br",
+        'name'     => "Fulano da Silva",
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
     ];
     \App\Models\User::create($user);
@@ -1275,9 +1275,9 @@ E por fim alteramos nosso usuário de controle para ser admin:
 public function run()
 {
     $user = [
-        'codpes'   => "5385361",
-        'email'    => "thiago.verissimo@usp.br",
-        'name'     => "Thiago Gomes Verissimo",
+        'codpes'   => "123456",
+        'email'    => "qulaquer@usp.br",
+        'name'     => "Fulano da Silva",
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
         'is_admin' => TRUE
     ];
