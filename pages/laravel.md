@@ -54,7 +54,6 @@ virtualizado no virtualbox:
 [https://youtu.be/qImwzkP0nQE](https://youtu.be/qImwzkP0nQE)
 
 ## 1. MVC - Model View Controller
-https://youtu.be/W9mogh4nczA 
 
 ### 1.1 Request e Response ou Pergunta e Resposta
 
@@ -361,7 +360,6 @@ Neste exercício você criará ou editará os seguintes arquivos:
     resources/views/livro_fulanos/partials/fields.blade.php
 
 ## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
-https://youtu.be/W9mogh4nczA 
 
 ### 2.1 Limpando ambiente
 
@@ -589,7 +587,6 @@ Neste exercício você criará ou editará os seguintes arquivos:
     resources/views/livro_fulanos/partials/form.blade.php
 
 ## 3. Validação
-https://youtu.be/W9mogh4nczA 
 
 ### 3.1 Mensagens flash
 
@@ -793,7 +790,6 @@ seu.
 - Alterar `LivroFulanoController` para usar `LivroFulanoRequest` nos métodos store e update.
 
 ## 4. Autenticação e Relationships
-https://youtu.be/W9mogh4nczA 
 
 ### 4.1 Login tradicional
 
