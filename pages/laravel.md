@@ -1380,34 +1380,100 @@ podemos fazer `@can('admin') ... @endcan`
 - Implementar paginação
 - Escolha alguns métodos de `LivroFulanoController` para só serem acessíveis pelos admins. 
 
-<!---
+## 7. Material Extra
 
-## 7. Emails, uploads de arquivos e filas
+### 7.1 Upload de arquivos
 
-Campo para upload do arquivo no formulário html:
+Vamos criar uma opção de upload de imagens. A princípio é possível
+deixar um campo de upload no mesmo formulário de cadastro/edição
+do livro. Mas neste exemplo vamos guardar a relação de imagens
+em um model a parte, assim teremos mais controle em termos de acesso
+e permissão sobre os arquivos, pois não vamos deixar esses
+arquivos em um diretório público na web.
+
+{% highlight php %}
+php artisan make:model File --all
+{% endhighlight %}
+
+{% highlight php %}
+$table->string('original_name');
+$table->string('path');
+$table->unsignedBigInteger('livro_id')->nullable();
+$table->foreign('livro_id')->references('id')->on('livros')->onDelete('set null');
+{% endhighlight %}
+
+{% highlight bash %}
+php artisan migrate
+{% endhighlight %}
+
+Rotas: 
+{% highlight php %}
+Route::resource('files', FileController::class);
+{% endhighlight %}
+
+Em `resources/views/files/partials/form.blade.php` vamos criar um formulário
+de upload de arquivos para imagens do livro e não vamos estender ninguém:
+
 {% highlight html %}
 {% raw %}
-<form method="POST" enctype="multipart/form-data">
-  <input type="file" name="certificado">
+Enviar Imagens:
+<form method="post" enctype="multipart/form-data" action="/files">
+  @csrf
+  <input type="hidden" name="livro_id" value="{{ $livro->id }}">
+  <input type="file" name="file">
+  <button type="submit" class="btn btn-success"> Enviar </button>
 </form>
 {% endraw %}
 {% endhighlight %}
 
-A validação de arquivos deve ser feita assim:
-{% highlight php %}
-if($request->hasFile('certificado')){
+Em `resources/views/livros/show.blade.php` vamos incluí-lo:
+{% highlight html %}
+{% raw %}
+@include('files.partials.form')
+{% endraw %}
+{% endhighlight %}
 
+No método store implementamos:
+{% highlight php %}
+$request->validate([
+    'file'     => 'required|file|image|mimes:jpeg,png|max:2048',
+    'livro_id' => 'required|integer|exists:livros,id'
+]);
+$file = new File;
+$file->livro_id = $request->livro_id;
+$file->original_name = $request->file('file')->getClientOriginalName();
+$file->path = $request->file('file')->store('.');
+$file->save();
+return back();
+{% endhighlight %}
+
+Método show:
+{% highlight php %}
+use Illuminate\Support\Facades\Storage;
+public function show(File $file)
+{
+    return Storage::download($file->path, $file->original_name);
 }
 {% endhighlight %}
 
-Devolvendo um response com um arquivo para o browser:
+No model do Livro:
 {% highlight php %}
-Route::get('pdf',function(){
-    return response()->file('/tmp/teste.pdf');
-});
+public function files()
+{
+    return $this->hasMany('App\Models\File');
+}
 {% endhighlight %}
 
-## 8. Bibliotecas Úteis
+Por fim mostramos as imagens assim:
+{% highlight html %}
+{% raw %}
+@foreach($livro->files as $file)
+  <img src="/files/{{$file->id}}">
+@endforeach
+{% endraw %}
+{% endhighlight %}
+
+<!---
 
 ### PDF
 
