@@ -1473,6 +1473,11 @@ Por fim mostramos as imagens assim:
 {% endraw %}
 {% endhighlight %}
 
+Muito útil para verificar o mimeType:
+{% highlight php %}
+$request->file('file')->getClientMimeType()
+{% endhighlight %}
+
 <!---
 
 ### PDF
