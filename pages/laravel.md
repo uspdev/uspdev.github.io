@@ -1387,7 +1387,6 @@ podemos fazer `@can('admin') ... @endcan`
 ## 7. Material Extra
 
 ### 7.1 Upload de arquivos
-https://youtu.be/W9mogh4nczA 
 
 Vamos criar uma opção de upload de imagens. A princípio é possível
 deixar um campo de upload no mesmo formulário de cadastro/edição
