@@ -1011,11 +1011,23 @@ No faker do Livro podemos invocar o faker do user:
 {% endhighlight %}
 
 No model Livro podemos criar um método que carregará o objeto
-`user` automaticamente:
+`user` automaticamente ou no model `User` podemos carregar todos
+livros do usuário:
 
 {% highlight php %}
-public function user(){
-    return $this->belongsTo(\App\Models\User::class);
+class Livro extends Model
+{
+    public function user(){
+        return $this->belongsTo(\App\Models\User::class);
+    }
+}
+
+class User extends Model
+{
+    public function livros()
+    {
+        return $this->hasMany(App\Models\Livro::class);
+    }
 }
 {% endhighlight %}
 
@@ -1459,9 +1471,19 @@ public function show(File $file)
 
 No model do Livro:
 {% highlight php %}
-public function files()
+class Livro extends Model
 {
-    return $this->hasMany('App\Models\File');
+    public function files()
+    {
+        return $this->hasMany(App\Models\File::class);
+    }
+}
+
+class File extends Model
+{
+    public function livro(){
+        return $this->belongsTo(\App\Models\Livro::class);
+    }
 }
 {% endhighlight %}
 
@@ -1478,6 +1500,84 @@ Muito útil para verificar o mimeType:
 {% highlight php %}
 $request->file('file')->getClientMimeType()
 {% endhighlight %}
+
+<!--
+### 7.2 Tabela pivot (Many To Many)
+https://laravel.com/docs/8.x/eloquent-relationships#many-to-many
+
+Diferente da relação que vimos `hasMany` quando dois models
+possuem uma relação do tipo `Many To Many` necessitamos de uma tabela
+intermediária para guardar essa relação. No nosso exemplo, iremos criar
+uma tabela de empréstimo, que guardará o id do livro emprestado, 
+o id do usuário que pegará o livro, a data do empréstimo, que usaremos `created_at`
+e um campo extra: data de devolução.
+
+{% highlight bash %}
+php artisan make:migration create_emprestimos_table --create='emprestimos'
+{% endhighlight %}
+
+{% highlight php %}
+$table->unsignedBigInteger('livro_id');
+$table->unsignedBigInteger('user_id');
+$table->foreign('livro_id')->references('id')->on('livros')->onDelete('cascade');
+$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+$table->date('data_devolucao')->nullable();
+{% endhighlight %}
+
+Vamos possibilitar a busca dos empréstimo por ambos models:
+{% highlight php %}
+class Livro extends Model
+{
+    public function emprestimos()
+    {
+        return $this->belongsToMany(
+            App\Models\User::class, 'emprestimos', 'user_id', 'livro_id')
+            ->withPivot('data_devolucao')
+            ->withTimestamps();
+    }
+}
+
+class User extends Model
+{
+    public function emprestimos()
+    {
+        return $this->belongsToMany(
+            App\Models\User::class, 'emprestimos', 'user_id', 'livro_id')
+            ->withPivot('data_devolucao')
+            ->withTimestamps();
+    }
+}
+{% endhighlight %}
+
+'created_by'
+
+{% highlight php %}
+$profissional = $livro->emprestimos()->create
+([
+    'nome' => 'José da Silva'
+]);
+{% endhighlight %}
+
+
+{% highlight php %}
+{% endhighlight %}
+
+
+{% highlight php %}
+{% endhighlight %}
+
+
+{% highlight php %}
+{% endhighlight %}
+
+
+{% highlight php %}
+{% endhighlight %}
+
+
+{% highlight php %}
+{% endhighlight %}
+
 
 <!---
 
