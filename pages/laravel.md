@@ -1496,26 +1496,27 @@ Por fim mostramos as imagens assim:
 {% endraw %}
 {% endhighlight %}
 
-Muito útil para verificar o mimeType:
+Muito útil para verificar o mimeType, pois normalmente você
+dará tratamento diferentes para pdf ou imagens:
 {% highlight php %}
 $request->file('file')->getClientMimeType()
 {% endhighlight %}
 
 <!--
 ### 7.2 Tabela pivot (Many To Many)
-https://laravel.com/docs/8.x/eloquent-relationships#many-to-many
 
 Diferente da relação que vimos `hasMany` quando dois models
 possuem uma relação do tipo `Many To Many` necessitamos de uma tabela
 intermediária para guardar essa relação. No nosso exemplo, iremos criar
 uma tabela de empréstimo, que guardará o id do livro emprestado, 
 o id do usuário que pegará o livro, a data do empréstimo, que usaremos `created_at`
-e um campo extra: data de devolução.
+e um campo extra: data de devolução:
 
 {% highlight bash %}
 php artisan make:migration create_emprestimos_table --create='emprestimos'
 {% endhighlight %}
 
+Campos:
 {% highlight php %}
 $table->unsignedBigInteger('livro_id');
 $table->unsignedBigInteger('user_id');
@@ -1524,58 +1525,64 @@ $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 $table->date('data_devolucao')->nullable();
 {% endhighlight %}
 
+Apesar de não ser obrigatório, vamos implementar um model
+para manipular essa tabela pivot de empréstimos:
+
+{% highlight php %}
+namespace App\Models;
+use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Emprestimo extends Pivot
+{
+    public $incrementing = true;
+    use HasFactory;
+}
+{% endhighlight %}
+
 Vamos possibilitar a busca dos empréstimo por ambos models:
 {% highlight php %}
 class Livro extends Model
 {
     public function emprestimos()
     {
-        return $this->belongsToMany(
-            App\Models\User::class, 'emprestimos', 'user_id', 'livro_id')
-            ->withPivot('data_devolucao')
-            ->withTimestamps();
+        return $this->belongsToMany(App\Models\User::class)
+                ->using('App\Models\Emprestimo')
+                ->withTimestamps()
+                ->withPivot([
+                    'data_devolucao',
+                    'created_by'
+                ]);
     }
 }
-
+...
 class User extends Model
 {
     public function emprestimos()
     {
-        return $this->belongsToMany(
-            App\Models\User::class, 'emprestimos', 'user_id', 'livro_id')
-            ->withPivot('data_devolucao')
-            ->withTimestamps();
+        return $this->belongsToMany(App\Models\Livro::class)
+                    ->using('App\Models\Emprestimo')
+                    ->withTimestamps()
+                    ->withPivot([
+                      'data_devolucao',
+                      'created_by'
+                    ]);
     }
 }
 {% endhighlight %}
 
-'created_by'
-
-{% highlight php %}
-$profissional = $livro->emprestimos()->create
-([
-    'nome' => 'José da Silva'
-]);
-{% endhighlight %}
+Falta:
+Registrar um empréstimo
+Registrar uma devolução
+Listar Empréstimos de um livro
+Listar Empréstimos de um usuário
+Livros atrasados
 
 
 {% highlight php %}
-{% endhighlight %}
-
-
-{% highlight php %}
-{% endhighlight %}
-
-
-{% highlight php %}
-{% endhighlight %}
-
-
-{% highlight php %}
-{% endhighlight %}
-
-
-{% highlight php %}
+foreach ($livros->user as $user) {
+    echo $user->pivot->created_at;
+}
 {% endhighlight %}
 
 
