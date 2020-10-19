@@ -753,7 +753,7 @@ protected function prepareForValidation()
 public function messages()
 {
     return [
-        'cnpj.unique' => 'Este isbn está cadastrado para outro livro',
+        'isbn.unique' => 'Este isbn está cadastrado para outro livro',
     ];
 }
 {% endhighlight %}
