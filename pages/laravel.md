@@ -1197,6 +1197,14 @@ public function getPrecoAttribute($value){
 }
 {% endhighlight %}
 
+Ou caso você use `created_at` no seu sistema, é útil fazer:
+{% highlight php %}
+public function getCreatedAtAttribute($value)
+{
+    return \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y H:i');
+}
+{% endhighlight %}
+
 ### 5.4 Exercício de migration de alteração, campos do tipo select e mutators
 
 - No model `LivroFulano` adicione as colunas: tipo e preço
@@ -1395,7 +1403,7 @@ podemos fazer `@can('admin') ... @endcan`
 ## 7. Material Extra
 
 ### 7.1 Upload de arquivos
-https://youtu.be/5Xx52e4LOG8 
+[https://youtu.be/5Xx52e4LOG8](https://youtu.be/5Xx52e4LOG8)
 
 Vamos criar uma opção de upload de imagens. A princípio é possível
 deixar um campo de upload no mesmo formulário de cadastro/edição
@@ -1502,7 +1510,6 @@ dará tratamento diferentes para pdf ou imagens:
 $request->file('file')->getClientMimeType()
 {% endhighlight %}
 
-<!--
 ### 7.2 Tabela pivot (Many To Many)
 
 Diferente da relação que vimos `hasMany` quando dois models
@@ -1535,8 +1542,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Emprestimo extends Pivot
 {
-    public $incrementing = true;
     use HasFactory;
+    public $incrementing = true;
 }
 {% endhighlight %}
 
@@ -1546,12 +1553,12 @@ class Livro extends Model
 {
     public function emprestimos()
     {
-        return $this->belongsToMany(App\Models\User::class)
-                ->using('App\Models\Emprestimo')
+        return $this->belongsToMany(User::class,'emprestimos')
+                ->using(Emprestimo::class)
                 ->withTimestamps()
                 ->withPivot([
                     'data_devolucao',
-                    'created_by'
+                    'created_at'
                 ]);
     }
 }
@@ -1560,70 +1567,119 @@ class User extends Model
 {
     public function emprestimos()
     {
-        return $this->belongsToMany(App\Models\Livro::class)
-                    ->using('App\Models\Emprestimo')
+        return $this->belongsToMany(Livro::class,'emprestimos')
+                    ->using(Emprestimo::class)
                     ->withTimestamps()
                     ->withPivot([
                       'data_devolucao',
-                      'created_by'
+                      'created_at'
                     ]);
     }
 }
 {% endhighlight %}
 
-Falta:
-Registrar um empréstimo
-Registrar uma devolução
-Listar Empréstimos de um livro
-Listar Empréstimos de um usuário
-Livros atrasados
-
+Em `LivroControler` vamos criar um método para registrar o livro e outro para
+devolvê-lo com as rotas correspondentes:
 
 {% highlight php %}
-foreach ($livros->user as $user) {
-    echo $user->pivot->created_at;
+Route::post('/emprestar/{livro}', [LivroController::class,'emprestar']);
+Route::post('/devolver/{livro}', [LivroController::class,'devolver']);
+{% endhighlight %}
+
+Controller:
+{% highlight php %}
+public function emprestar(Request $request, Livro $livro){
+    $user = User::find($request->user_id);
+    $livro->emprestimos()->attach($user);
+    return redirect('/livros/' . $livro->id);
+}
+
+public function devolver(Request $request, Livro $livro){
+    # não quero fazer detach...
+    $livro->emprestimos()->wherePivot('data_devolucao', null)->updateExistingPivot($request->user_id, [
+        'data_devolucao' => \Carbon\Carbon::now()->toDateTimeString()
+    ]);
+    return redirect('/livros/' . $livro->id);
 }
 {% endhighlight %}
 
+Na `show.blade.php` dos livros vamos inserir um botão de empréstimo: 
 
-<!---
+{% highlight php %}
+{% raw %}
+<form method="POST" action="/emprestar/{{$livro->id}}">
+@csrf
+id usuário: <input type="text" name="user_id">
+<button type="submit" class="btn-info">Emprestar</button>
+</form>
+<br><br><br>
 
-### PDF
+@foreach($livro->emprestimos->sortBy('emprestimos.created_at')->reverse() as $emprestimo)
 
+{{ $emprestimo->pivot->created_at }} - {{ $emprestimo->name }} - {{ $emprestimo->pivot->name }}
+@if(!$emprestimo->pivot->data_devolucao)
+    <form class="form-inline" method="POST" action="/devolver/{{$livro->id}}">
+    @csrf
+        <input type="hidden" name="user_id" value="{{ $emprestimo->id }}">
+    <button type="submit" class="btn btn-primary mb-2">Devolver</button>
+    </form>
+@endif
+<br>
+@endforeach
+{% endraw %}
+{% endhighlight %}
+
+### 7.3 Trabalhando com pdf
+
+Instale a biblioteca:
 {% highlight bash %}
 composer require barryvdh/laravel-dompdf
 php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"
+{% endhighlight %}
+
+Crie uma estrutura para os templates e lembre-se de usar o poder
+da herança, ou seja, você pode criar uma template base e estendê-lo.
+{% highlight bash %}
 mkdir resources/views/pdfs/
 touch resources/views/pdfs/exemplo.blade.php
 {% endhighlight %}
 
-No controller:
+Escreva algo em `exemplo.blade.php` usando blade, no
+controller:
 
 {% highlight bash %}
 use PDF;
 public function convenio(Convenio $convenio){
-    $exemplo = 'Um pdf banaca';
-    $pdf = PDF::loadView('pdfs.exemplo', compact('exemplo'));
+    $pdf = PDF::loadView('pdfs.exemplo', [
+        'exemplo' => 'Um pdf bacana';
+    ]);
     return $pdf->download('exemplo.pdf');
 }
 {% endhighlight %}
 
-Por fim, agora pode escrever sua estrutura do pdf, mas usando blade
-exemplo.blade.php:
+Se ao invés de um controller, você estiver enviando uma email,
+você faria assim:
 
-{% highlight php %}
-{% raw %}
-{{ $exemplo }}
-{% endraw %}
+{% highlight bash %}
+...
+class ExemploMail extends Mailable
+{
+    ...
+    public function build()
+    {
+        $pdf = PDF::loadView('pdfs.exemplo', ['exemplo'=>'exemplo bacana']);      
+        return $this->view('emails.exemplo')
+                    ->to('fulano@gmail.com')
+                    ->subject('exemplo')
+                    ->attachData($pdf->output(), 'exemplo.pdf')
+        }
+}
 {% endhighlight %}
 
+### 7.4 Excel
+[https://youtu.be/Ik9siHfVUkk](https://youtu.be/Ik9siHfVUkk)
 
-Como mandar um pdf gerado por  por email?
-
-### Excel
-https://youtu.be/Ik9siHfVUkk
-
-Instalação
+Instalação  
 {% highlight bash %}
 composer require maatwebsite/excel
 mkdir app/Exports
@@ -1634,7 +1690,6 @@ Implementar uma classe que recebe um array multidimensional com os dados, linha 
 E outro array com os títulos;
 {% highlight php %}
 {% raw %}
-
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -1685,12 +1740,15 @@ public function export($format){
 {% endraw %}
 {% endhighlight %}
 
+### 7.5 Enviando Emails
 
-## Próximo tutoriais na seção úteis
+### 7.6 Scopes
+https://laravel.com/docs/8.x/eloquent#local-scopes
 
-- Filas: https://laravel.com/docs/8.x/queues
-- Global e Local Scopes: https://laravel.com/docs/8.x/eloquent#local-scopes
-- laravel-form-builder ou LaravelCollective/html
+### 7.7 Filas
+Filas: https://laravel.com/docs/8.x/queues
 
--->
+### 7.8 Gerando html automaticamente
+laravel-form-builder ou LaravelCollective/html
+
 
