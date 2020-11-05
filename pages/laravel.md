@@ -1208,7 +1208,7 @@ public function getCreatedAtAttribute($value)
 ### 5.4 Exercício de migration de alteração, campos do tipo select e mutators
 
 - No model `LivroFulano` adicione as colunas: tipo e preço
-- o campo título só deve aceitar: Nacional ou Internacional
+- o campo tipo só deve aceitar: Nacional ou Internacional
 - o campo preço deve prever valores com vírgula na entrada, mas deve ser float no banco. Deve aparecer no blade com vírgula.
 
 ## 6. Buscas, paginação e autorização
@@ -1689,7 +1689,6 @@ touch app/Exports/ExcelExport.php
 Implementar uma classe que recebe um array multidimensional com os dados, linha a linha.
 E outro array com os títulos;
 {% highlight php %}
-{% raw %}
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromArray;
@@ -1714,12 +1713,11 @@ class ExcelExport implements FromArray, WithHeadings
         return $this->headings;
     }
 }
-{% endraw %}
+
 {% endhighlight %}
 
 Usando no controller:
 {% highlight php %}
-{% raw %}
 use Maatwebsite\Excel\Excel;
 use App\Exports\ExcelExport;
 
@@ -1734,21 +1732,141 @@ public function exemplo(Excel $excel){
     $export = new ExcelExport($data,$headings);
     return $excel->download($export, 'exemplo.xlsx');
 }
+{% endhighlight %}
 
-public function export($format){
-}
+### 7.5 Modal e Ajax
+
+Vamos alterar o cadastro e edição dos livros usando um modal do bootstrap 
+
+Nos métodos `store` e `update` do LivroController vamos devolver o
+objeto livro :
+{% highlight php %}
+return response()->json($livro);
+{% endhighlight %}
+
+Quando a validação não passa o laravel automaticamente devolve um json
+`responseJSON.errors`.
+
+Vamos modificar `form.blade.php` para ficar assim:
+
+{% highlight html %}
+{% raw %}
+<form name="livros" id="livroForm">
+    @csrf
+    @if(isset($livro->id)) @method('patch') @endif
+    ...
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+</form>
 {% endraw %}
 {% endhighlight %}
 
-### 7.5 Enviando Emails
+Neste exemplo vou usar `create.blade.php` e `edit.blade.php` não são mais necessários.
+No lugar vou criar o `partials/modal.blade.php`:
 
-### 7.6 Scopes
+{% highlight html %}
+{% raw %}
+<div class="modal fade" id="livroModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="">Livro</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="errors" class="alert alert-block alert-danger"></div>
+        @include('livros.partials.form')
+      </div>
+    </div>
+  </div>
+</div>
+{% endraw %}
+{% endhighlight %}
+
+No `index.blade.php` vamos colocar um botão para criação de um novo livro e
+no `show.blade.php` um botão para editar: 
+{% highlight html %}
+{% raw %}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#livroModal">
+  Novo / Editar
+</button>
+...
+@include('livros.partials.modal')
+@include('livros.partials.ajax')
+{% endraw %}
+{% endhighlight %}
+
+O index agora necessita de um objeto Livro:
+
+{% highlight php %}
+    public function index()
+    {
+        $livros =  Livro::all();
+        return view('livros.index',[
+            'livros' => $livros,
+            'livro'  => new Livro
+        ]);
+    }
+{% endhighlight %}
+
+Vamos criar um arquivo para colocar o ajax `partials/ajax.blade.php`:
+
+{% highlight javascript %}
+{% raw %}
+@section('javascripts_bottom')
+<script>
+  $("#errors").hide();
+
+  $(function(){
+    $('form[name="livros"]').submit(function(event){
+      event.preventDefault();
+      $.ajax({
+        @if(isset($livro->id)) 
+            url: "/livros/{{ $livro->id }}",
+        @else
+            url: "/livros",
+        @endif
+        type: "post",
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response){
+          jQuery('#livroForm').trigger("reset");
+          jQuery('#livroForm').modal('hide');
+          @if(isset($livro->id)) 
+            window.location.href = "/livros/{{ $livro->id }}";
+          @else
+            window.location.href = "/livros/";
+          @endif
+        },
+        error: function (response) {
+          $("#errors").show();
+          $('#errors').html('');
+          $.each(response.responseJSON.errors, function (key, value) {
+              $('#errors').append(key+": "+value+"<br>");
+          });
+        }
+      });
+    });
+
+  });
+</script>
+@endsection
+{% endraw %}
+{% endhighlight %}
+
+### 7.6 Enviando Emails
+
+### 7.7 Scopes
 https://laravel.com/docs/8.x/eloquent#local-scopes
 
-### 7.7 Filas
+### 7.8 Filas
 Filas: https://laravel.com/docs/8.x/queues
 
-### 7.8 Gerando html automaticamente
+### 7.9 Gerando html automaticamente
 laravel-form-builder ou LaravelCollective/html
 
 
