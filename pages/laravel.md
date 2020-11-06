@@ -1735,6 +1735,7 @@ public function exemplo(Excel $excel){
 {% endhighlight %}
 
 ### 7.5 Modal e Ajax
+[https://youtu.be/4abyiioyhJQ](https://youtu.be/4abyiioyhJQ)
 
 Vamos alterar o cadastro e edição dos livros usando um modal do bootstrap 
 
