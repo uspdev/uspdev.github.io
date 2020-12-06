@@ -1,0 +1,32 @@
+image: jekyll/jekyll
+
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - bundle config set path 'vendor'
+
+test:
+  stage: test
+  script:
+    - bundle install
+    - bundle exec jekyll build -d public/
+  except:
+    - master
+
+pages:
+  stage: deploy
+  script:
+    - bundle install
+    - bundle exec jekyll build -d public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+
+stages:
+    - test
+    - build
+    - deploy
