@@ -1,5 +1,9 @@
 image: ruby:latest
 
+stages:
+  - test
+  - deploy
+
 variables:
   JEKYLL_ENV: production
   LC_ALL: C.UTF-8
@@ -17,6 +21,8 @@ test:
     - test
   except:
   - master
+  tags:
+  - debian
 
 pages:
   stage: deploy
@@ -27,3 +33,5 @@ pages:
     - public
   only:
   - master
+  tags:
+  - debian
