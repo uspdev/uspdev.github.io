@@ -6,7 +6,7 @@ Este site usa jekyll - https://jekyllrb.com/
 
 Principais passos para subir uma instância local de teste do site. Rodado no mint 19 (ubuntu 18.04)
 
-## Instalação das bibliotecas
+## Instalação das bibliotecas em debian
 
     apt install ruby-full
     apt install build-essential 
