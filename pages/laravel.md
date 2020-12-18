@@ -57,6 +57,8 @@ virtualizado no virtualbox:
 
 ### 1.1 Request e Response ou Pergunta e Resposta
 
+[https://youtu.be/TO1yt4zyUJw](https://youtu.be/TO1yt4zyUJw)
+
 Criando uma rota para recebimento das requisições.
 {% highlight php %}
 Route::get('/livros', function () {
@@ -361,6 +363,8 @@ Neste exercício você criará ou editará os seguintes arquivos:
 
 ## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
 
+[https://youtu.be/YCroaZQtbEI](https://youtu.be/YCroaZQtbEI)
+
 ### 2.1 Limpando ambiente
 
 Neste ponto conhecemos um pouco do jargão e da estrutura usada pelo laravel para 
@@ -588,6 +592,8 @@ Neste exercício você criará ou editará os seguintes arquivos:
 
 ## 3. Validação
 
+[https://youtu.be/GxDUZIolQOw](https://youtu.be/GxDUZIolQOw)
+
 ### 3.1 Mensagens flash
 
 Da maneira como implementamos o CRUD até então, qualquer valor que o usuário
@@ -791,6 +797,10 @@ seu.
 
 ## 4. Autenticação e Relationships
 
+[https://youtu.be/U1nfdAq29dE](https://youtu.be/U1nfdAq29dE)
+
+[Vídeo mostrando como subir um replicado sybase em um container docker](https://youtu.be/p5dFJOrMN30)
+
 ### 4.1 Login tradicional
 
 A forma mais fácil de fazer login no laravel é usando 
@@ -823,7 +833,7 @@ return [
     'email'  => \Uspdev\Replicado\Pessoa::email($codpes),
     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 ];
-{% endhighlight %}   
+{% endhighlight %} 
 
 O seed para User não vem por default, mas podemos criá-lo assim:
 {% highlight php %}
@@ -1055,6 +1065,8 @@ seu.
 
 ## 5. Migration de alteração, campos do tipo select e mutators
 
+[https://youtu.be/wsVrCZ8O7c4](https://youtu.be/wsVrCZ8O7c4)
+
 ### 5.1 Migration de alteração
 
 Quando o sistema está produção, você nunca deve alterar uma migration que já foi
@@ -1212,6 +1224,8 @@ public function getCreatedAtAttribute($value)
 - o campo preço deve prever valores com vírgula na entrada, mas deve ser float no banco. Deve aparecer no blade com vírgula.
 
 ## 6. Buscas, paginação e autorização
+
+[https://youtu.be/13507G6at0w](https://youtu.be/13507G6at0w)
 
 ### 6.1 Busca
 
