@@ -1748,6 +1748,26 @@ public function exemplo(Excel $excel){
 }
 {% endhighlight %}
 
+#### 7.4.1 Outra biblioteca para excel Excel
+
+Uma outra opção é usar `fast-excel` uma biblioteca mais integrada com
+o laravel:  
+{% highlight bash %}
+composer require rap2hpoutre/fast-excel
+{% endhighlight %}
+
+O controller ficaria:
+{% highlight php %}
+use Rap2hpoutre\FastExcel\FastExcel;
+
+public function exemplo(){
+  
+    $export = new FastExcel(Livro::all());
+    return $export->download('arquivo.xlsx');
+}
+{% endhighlight %}
+
+
 ### 7.5 Modal e Ajax
 [https://youtu.be/4abyiioyhJQ](https://youtu.be/4abyiioyhJQ)
 
