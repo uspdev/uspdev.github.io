@@ -5,6 +5,7 @@ permalink: /treinamentos
 ---
 
 ## [Laravel no contexto da USP  - 2020](/laravel) 
+## [Laravel at USP: A Crash Course  - 2021](/laravel-en) 
 
 ## Material do Curso de Laravel de 2018
 

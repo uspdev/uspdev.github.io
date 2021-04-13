@@ -5,6 +5,7 @@ permalink: /laravel
 ---
 
 # Laravel no contexto da USP 
+for an English version of this article, go to [Laravel Crash Course](/laravel-en)
 
 Este material está estruturado para utilização em 
 oficinas de introdução ao framework numa perspectiva mais genérica e com foco
