@@ -6,7 +6,7 @@ permalink: /laravel-en
 
 # Laravel at USP: A Crash Course
 
-Disclaimer: this material was developed within the context of Laravel workshops for web developtment at USP. Therefore, Laravel commonly accepted or normalized good practices may be intentionally ommited, as well as you may encounter adaptations of these.
+Disclaimer: this material was developed within the context of Laravel workshops for web development at USP. Therefore, Laravel commonly accepted or normalized good practices may be intentionally ommited, as well as you may encounter adaptations of these.
 
 
 <ul id="toc"></ul>
@@ -17,7 +17,7 @@ Installation of basic components for web development with Laravel on Debian or o
 
 ### 0.1 Enable virtualization on your BIOS
 
-In order to run a virtual machine on your computer, verify how to enable virtualization on your BIOS. In newer computer models, this module is likely to be enabled.
+In order to run a virtual machine on your computer, verify how to enable virtualization on your BIOS. In newer computer models, this module is likely to be already enabled.
 
 ### 0.2 Install VirtualBox
 
@@ -56,7 +56,7 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Git), Git is
 
 >  a software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development.
 
-This is the main tool that we use for web develpment, as it offers an efficient workflow for a collaboratory project. Hence, it is recommended to learn the basic commands and the workflow. To install, run:
+This is the main tool that we use for web development, as it offers an efficient workflow for a collaborative project. Hence, it is recommended to learn the basic commands and the workflow. To install, run:
 
     sudo apt install git
     git config --global user.name "Fulano da Silva"
@@ -94,7 +94,7 @@ Paste the public key at Settings > SSH and GPG keys > New SSH key.
 
 <h3 id="final-obs">0.11 Final observations</h3>
 
-It is also recommended to install a code editor like Vscode, Vscodium, Atom... There are a lot of options, and you can choose the one that you like.
+It is also recommended to install a code editor like VSCode, VSCodium, Atom... There are a lot of options, and you can choose the one that you like.
 
 Finally, to guide you through the entire process of preparing your development environment, you can watch the video tutorial that we prepared:
 
