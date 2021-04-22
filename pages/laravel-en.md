@@ -100,5 +100,539 @@ Finally, to guide you through the entire process of preparing your development e
 
 - Sorry, still WIP!
 
+## 1. MVC - Model View Controller
 
+The MVC design is a way where we can organize different intertwined functions of web systems.
+As Laravel works with the MVC architecture, we need to create the three main components of it: the Model, Views and Controller. 
 
+### 1.1 Request and Response
+
+In order to communicate with other servers on Internet, we send requests and receive responses. This is the most basic abstraction of how Internet works. Hence, we need to set routes, which are where we receive requests. 
+Here it is an example of a route, at `/routes/web.app`:
+
+{% highlight php %}
+Route::get('/books', function () {
+    echo "There isn't any register of books in this system.";
+});
+{% endhighlight %}
+
+### 1.2 Controller
+
+We can organize our routes with the Controller, our component that
+> Accepts input and converts it to commands for the model or view. [(Wikipedia)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+
+To create a Controller, run on console:
+{% highlight bash %}
+php artisan make:controller BookController
+{% endhighlight %}
+The created file is at `app/Http/Controllers/BookController.php`.
+
+Now, let's create an `index()` method in our new controller:
+{% highlight php %}
+public function index(){
+    return "There isn't any register of books in this system.";
+}
+{% endhighlight %}
+
+The next step is to point the new `index()` method of `BookController` on our route.
+
+{% highlight php %}
+use App\Http\Controllers\BookController;
+Route::get('/books', [BookController::class,'index']);
+{% endhighlight %}
+
+Why? Because the Controller is the instance that manages inputs, which are the requests.
+
+Another situation is when we want to view the information of one object. To view one instance, we can pass parameters to the request address. For example, we have a book registered as "Quincas Borba", that has an ISBN of "9780195106817". Therefore, we want to set a route that passes the ISBN as a parameter and shows a page with the requested object: `/books/9780195106817`.
+
+To set this route, we will create a new method called `show($isbn)`, that receives the ISBN of a Book instance. It is on Controller that we can elaborate the identification logic for each instance:
+
+{% highlight php %}
+public function show($isbn){
+    if($isbn == '9780195106817') {
+        return "Quincas Borba";
+    } else {
+        return "I couldn't identify this book!";
+    }
+}
+{% endhighlight %}
+
+Finally, we have to add the route at `/routes/web.app` that receives the ISBN as a parameter:
+{% highlight php %}
+
+# set the address and specifies the Controller method
+Route::get('/books/{isbn}', [BookController::class, 'show']);
+{% endhighlight %}
+
+### 1.3 View: Blade
+
+You can see that routes return pages with a minimalistic (almost blank) template. We can improve this templates on the View layer. Templates are created and set on files with `.blade.php` extension. Among its caracteristics, the most relevant is inheritance. This means that one template can be extended in another, hence the latter will have the same proprieties of the first.
+
+Let's start by creating a main template on `resources/view/main.blade.php`.
+
+{% highlight html %}
+{% raw %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@section('title') Example @show</title>
+    </head>
+    <body>
+        @yield('content')
+    </body>
+</html>
+{% endraw %}
+{% endhighlight %}
+
+Secondly, we will create a template for index route at `resources/views/Books/index.blade.php`:
+
+{% highlight html %}
+{% raw %}
+# inheritance
+@extends('main')
+@section('content')
+  There isn't any register of books in this system.
+@endsection
+{% endraw %}
+{% endhighlight %}
+
+Then, we need to return this template when we access the index route:
+{% highlight php %}
+public function index(){
+    return view(books.index);
+}
+{% endhighlight %}
+
+Another relevant feature of Laravel template is that `blade` is a programming language. Thus, it is possible to develop the logical aspects of our system directly on the template. For example, we can pass the object as a `$book` variable to the template on Controller:
+
+{% highlight php %}
+public function show($isbn){
+    if($isbn == '9780195106817') {
+        $book = "Quincas Borba";
+    } else {
+        $book = "I couldn't identify this book!";
+    }
+    return view('books.show', [
+        # pass Book object as $book to template
+        'book' => $book
+    ]);
+}
+{% endhighlight %}
+
+The final code of `resources/views/Books/show.blade.php` will be:
+
+{% highlight html %}
+{% raw %}
+@extends('main')
+@section('content')
+  {{ $book }}
+@endsection
+{% endraw %}
+{% endhighlight %}
+
+### 1.4 Model
+
+The following step is to manage Book objects on the database.
+Para tal, vamos criar uma tabela chamada `Books` no banco dados 
+por intermédio de uma migration e um model `Book` para operarmos nessa tabela.
+
+{% highlight bash %}
+php artisan make:migration create_Books_table --create='Books'
+php artisan make:model Book
+{% endhighlight %}
+
+Na migration criada vamos inserir os campos: titulo, autor e isbn,
+deixando o autor como opcional.
+
+{% highlight php %}
+$table->string('titulo');
+$table->string('autor')->nullable();
+$table->string('isbn');
+{% endhighlight %}
+
+Usando uma espécie de `shell` do laravel, o tinker, vamos inserir
+o registro do Book do Quincas Borba:
+
+{% highlight bash %}
+php artisan tinker
+$Book = new App\Models\Book;
+$Book->titulo = "Quincas Borba";
+$Book->autor = "Machado de Assis";
+$Book->isbn = "9780195106817";
+$Book->save();
+quit
+{% endhighlight %}
+
+Insira mais Books!
+Veja que o model `Book` salvou os dados na tabela `Books`. Estranho não?
+Essa é uma da inúmeras convenções que vamos nos deparar ao usar um framework.
+
+Vamos modificar o controller para operar com os Books do banco de dados?
+No método index vamos buscar todos Books no banco de dados e enviar para
+o template:
+{% highlight php %}
+public function index(){
+    $Books = App\Models\Book:all();
+    return view('Books.index',[
+        'Books' => $Books
+    ]);
+}
+{% endhighlight %}
+
+No template podemos iterar sobre todos Books recebidos do controller:
+{% highlight php %}
+{% raw %}
+@forelse ($Books as $Book)
+    <li>{{ $Book->titulo }}</li>
+    <li>{{ $Book->autor }}</li>
+    <li>{{ $Book->isbn }}</li>
+@empty
+    Não há Books cadastrados
+@endforelse
+{% endraw %}
+{% endhighlight %}
+
+No método `show` vamos buscar o Book com o isbn recebido e entregá-lo
+para o template:
+
+{% highlight php %}
+public function show($isbn){
+    $Book = App\Moldes\Book::where('isbn',$isbn)->first();
+        return view('Books.show',[
+            'Book' => $Book
+        ]);
+}
+{% endhighlight %}
+
+No template vamos somente mostrar o Book:
+{% highlight php %}
+{% raw %}
+<li>{{ $Book->titulo }}</li>
+<li>{{ $Book->autor }}</li>
+<li>{{ $Book->isbn }}</li>
+{% endraw %}
+{% endhighlight %}
+
+Perceba que parte do código está repetida no index e no show do blade.
+Para melhor organização é comum criar um diretório `resources/views/Books/partials`
+para colocar pedaços de templates. Neste caso poderia ser 
+`resources/views/Books/partials/fields.blade.php` e nos templates index e show
+o chamaríamos como:
+
+{% highlight php %}
+{% raw %}
+@include('Books.partials.fields')
+{% endraw %}
+{% endhighlight %}
+
+### 1.5 Fakers
+
+Durante o processo de desenvolvimento precisamos manipular dados
+constantemente, então é uma boa ideia gerar alguns dados aleatórios (faker)
+e outros controlados (seed) para não termos que sempre criá-los manualmente:
+
+{% highlight bash %}
+php artisan make:factory BookFactory --model='Book'
+php artisan make:seed BookSeeder
+{% endhighlight %}
+
+Inicialmente, vamos definir um padrão para geração de
+dados aleatório `database/factories/BookFactory.php`:
+
+{% highlight php %}
+return [
+    'titulo' => $this->faker->sentence(3),
+    'isbn'   => $this->faker->ean13(),
+    'autor'  => $this->faker->name
+];
+{% endhighlight %}
+
+Em `database/seeders/BookSeeder.php` vamos criar ao menos um registro
+de controle e chamar o factory para criação de 15 registros aleatórios.
+
+{% highlight php %}
+$Book = [
+    'titulo' => "Quincas Borba",
+    'autor'  => "Machado de Assis",
+    'isbn'       => "9780195106817"
+];
+\App\Models\Book::create($Book);
+\App\Models\Book::factory(15)->create();
+{% endhighlight %}
+
+Rode o seed e veja que os dados foram criados:
+{% highlight bash %}
+php artisan db:seed --class=BookSeeder
+{% endhighlight %}
+
+Depois de testado e funcionando insira seu seed em 
+`database/seeders/DatabaseSeeder` para ser chamado globalmente:
+
+{% highlight php %}
+public function run()
+{
+    $this->call([
+        UserSeeder::class,
+        BookSeeder::class
+    ]);
+}
+{% endhighlight %}
+
+Se precisar zerar o banco e subir todos os seeds na sequência:
+{% highlight bash %}
+php artisan migrate:fresh --seed
+{% endhighlight %}
+
+### 1.6 Exercício MVC
+
+- Implementação de um model chamado `BookFulano`, onde `Fulano` é um identificador seu. 
+- Implementar a migration correspondente com os campos: titulo, autor e isbn.
+- Implementar seed com ao menos um Book de controle
+- Implementar o faker com ao menos 10 Books
+- Implementar controller com os métodos index e show com respectivos templates e rotas 
+- Implementar os templates (blades) correspondentes
+- Observações:
+  - O diretório dos templates deve ser: `resources/views/Book_fulanos`
+  - As rotas devem ser prefixadas desse maneira: `Book_fulanos/{Book}`
+
+Neste exercício você criará ou editará os seguintes arquivos:
+
+    routes/web.php
+    database/seeders/DatabaseSeeder.php
+    app/Models/BookFulano.php
+    app/Http/Controllers/BookFulanoController.php
+    database/seeders/BookFulanoSeeder.php
+    database/factories/BookFulanoFactory.php
+    database/migrations/202000000000_create_Book_fulanos_table.php
+    resources/views/Book_fulanos/index.blade.php
+    resources/views/Book_fulanos/show.blade.php
+    resources/views/Book_fulanos/partials/fields.blade.php
+
+## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
+
+[https://youtu.be/YCroaZQtbEI](https://youtu.be/YCroaZQtbEI)
+
+### 2.1 Limpando ambiente
+
+Neste ponto conhecemos um pouco do jargão e da estrutura usada pelo laravel para 
+implementar a arquitetura MVC.
+Frameworks como o laravel são flexíveis o suficiente para serem customizados ao seu gosto.
+Porém, sou partidário da ideia de seguir convenções quando possível. Por isso começaremos
+criando a estrutura básica para implementar um CRUD clássico na forma mais simples.
+Esse CRUD será modificado ao longo do texto.
+
+Apague (faça backup se quiser) o model, controller, seed, factory e migration,
+mas não delete os arquivos blades, pois eles serão reutilizados:
+
+{% highlight bash %}
+rm app/Models/Book.php
+rm app/Http/Controllers/BookController.php
+rm database/seeders/BookSeeder.php
+rm database/factories/BookFactory.php
+rm database/migrations/202000000000_create_Books_table.php
+{% endhighlight %}
+
+### 2.1 Criando model, migration, controller, faker e seed para implementação do CRUD
+
+Vamos recriar tudo novamente usando o comando:
+{% highlight bash %}
+php artisan make:model Book --all
+{% endhighlight %}
+
+Perceba que a migration, o faker, o seed e o controller estão automaticamente
+conectados ao model Book. E mais, o controller contém todos métodos
+necessários para as operações do CRUD, chamado do laravel de `resource`.
+Ao invés de especificarmos uma a uma a rota para cada operação, podemos
+simplesmente seguir a convenção e substituir a definição anterior por:
+
+{% highlight php %}
+Route::resource('Books', BookController::class);
+{% endhighlight %}
+
+Segue uma implementação simples de cada operação:
+{% highlight php %}
+public function index()
+{
+    $Books =  Book::all();
+    return view('Books.index',[
+        'Books' => $Books
+    ]);
+}
+
+public function create()
+{
+    return view('Books.create',[
+        'Book' => new Book,
+    ]);
+}
+
+public function store(Request $request)
+{
+    $Book = new Book;
+    $Book->titulo = $request->titulo;
+    $Book->autor = $request->autor;
+    $Book->isbn = $request->isbn;
+    $Book->save();
+    return redirect("/Books/{$Book->id}");
+}
+
+public function show(Book $Book)
+{
+    return view('Books.show',[
+        'Book' => $Book
+    ]);
+}
+
+public function edit(Book $Book)
+{
+    return view('Books.edit',[
+        'Book' => $Book
+    ]);
+}
+
+public function update(Request $request, Book $Book)
+{
+    $Book->titulo = $request->titulo;
+    $Book->autor = $request->autor;
+    $Book->isbn = $request->isbn;
+    $Book->save();
+    return redirect("/Books/{$Book->id}");
+}
+
+public function destroy(Book $Book)
+{
+    $Book->delete();
+    return redirect('/Books');
+}
+{% endhighlight %}
+
+Criando os arquivos blades:
+
+{% highlight bash %}
+mkdir -p resources/views/Books/partials
+cd resources/views/Books
+touch index.blade.php create.blade.php edit.blade.php show.blade.php 
+touch partials/form.blade.php partials/fields.blade.php
+{% endhighlight %}
+
+Uma implementação básica de cada template:
+{% highlight html %}
+{% raw %}
+
+<!-- ###### partials/fields.blade.php ###### -->
+<ul>
+  <li><a href="/Books/{{$Book->id}}">{{ $Book->titulo }}</a></li>
+  <li>{{ $Book->autor }}</li>
+  <li>{{ $Book->isbn }}</li>
+  <li>
+    <form action="/Books/{{ $Book->id }} " method="post">
+      @csrf
+      @method('delete')
+      <button type="submit" onclick="return confirm('Tem certeza?');">Apagar</button> 
+    </form>
+  </li> 
+</ul>
+
+<!-- ###### index.blade.php ###### -->
+@extends('main')
+@section('content')
+  @forelse ($Books as $Book)
+    @include('Books.partials.fields')
+  @empty
+    Não há Books cadastrados
+  @endforelse
+@endsection
+
+<!-- ###### show.blade.php ###### -->
+@extends('main')
+@section('content')
+  @include('Books.partials.fields')
+@endsection  
+
+<!-- ###### partials/form.blade.php ###### -->
+Título: <input type="text" name="titulo" value="{{ $Book->titulo }}">
+Autor: <input type="text" name="autor" value="{{ $Book->autor }}">
+ISBN: <input type="text" name="isbn" value="{{ $Book->isbn }}">
+<button type="submit">Enviar</button>
+
+<!-- ###### create.blade.php ###### -->
+@extends('main')
+@section('content')
+  <form method="POST" action="/Books">
+    @csrf
+    @include('Books.partials.form')
+  </form>
+@endsection
+
+<!-- ###### edit.blade.php ###### -->
+@extends('main')
+@section('content')
+  <form method="POST" action="/Books/{{ $Book->id }}">
+    @csrf
+    @method('patch')
+    @include('Books.partials.form')
+  </form>
+@endsection
+
+{% endraw %}
+{% endhighlight %}
+
+Conhecendo o sistema de herança do blade, podemos extender qualquer template,
+inclusive de biblioteca externas. Existem diversas implementações do AdminLTE na
+internet e você pode implementar uma para sua unidade, por exemplo. Aqui vamos
+usar [https://github.com/uspdev/laravel-usp-theme](https://github.com/uspdev/laravel-usp-theme). 
+Consulte a documentação para informações de como instalá-la. No nosso 
+template principal `main.blade.php` vamos apagar o que tínhamos antes e
+apenas extender essa biblioteca:
+
+{% highlight html %}
+{% raw %}
+@extends('laravel-usp-theme::master')
+{% endraw %}
+{% endhighlight %}
+
+Dentre outras vantagens, ganhamos automaticamente o carregamento de frameworks
+como o bootstrap, fontawesome e jquery.mask, dentre outros.
+
+Se quisermos carregar um arquivo js ou css, os colocamos na pasta public.
+Por exemplo, `public/js/Book.js`:
+
+{% highlight javascript %}
+jQuery(function ($) {
+    //978-85-333-0398-0
+    $(".isbn").mask('000-00-000-0000-0');
+});
+{% endhighlight %}
+
+E no blade do laravel-usp-theme há uma seção chamada `javascripts_head` que podemos
+carregar no `form.blade.php`:
+{% highlight html %}
+{% raw %}
+@section('javascripts_head')
+<script type="text/javascript" src="{ { asset('js/Book.js') } }"></script>
+@endsection
+{% endraw %}
+{% endhighlight %}
+
+### 2.3 Exercício CRUD
+
+- Implementação de um CRUD completo para o model `BookFulano`, onde `Fulano` é um identificador seu. 
+- Todas operações devem funcionar: criar, editar, ver, listar e apagar
+- Você só precisa implementar o crud, o repositório base já contém o laravel-usp-theme, assim, 
+depois de sincronizar seu repositório com upstream, rode `composer install`.
+
+Neste exercício você criará ou editará os seguintes arquivos:
+
+    routes/web.php
+    database/seeders/DatabaseSeeder.php
+    app/Models/BookFulano.php
+    app/Http/Controllers/BookFulanoController.php
+    database/seeders/BookFulanoSeeder.php
+    database/factories/BookFulanoFactory.php
+    database/migrations/202000000000_create_Book_fulanos_table.php
+    resources/views/Book_fulanos/index.blade.php
+    resources/views/Book_fulanos/show.blade.php
+    resources/views/Book_fulanos/create.blade.php
+    resources/views/Book_fulanos/edit.blade.php
+    resources/views/Book_fulanos/partials/fields.blade.php
+    resources/views/Book_fulanos/partials/form.blade.php
