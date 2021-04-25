@@ -112,7 +112,7 @@ Here it is an example of a route, at `/routes/web.app`:
 
 {% highlight php %}
 Route::get('/books', function () {
-    echo "There isn't any register of books in this system.";
+    echo "There isn't any record of books in this system.";
 });
 {% endhighlight %}
 
@@ -130,7 +130,7 @@ The created file is at `app/Http/Controllers/BookController.php`.
 Now, let's create an `index()` method in our new controller:
 {% highlight php %}
 public function index(){
-    return "There isn't any register of books in this system.";
+    return "There isn't any record of books in this system.";
 }
 {% endhighlight %}
 
@@ -143,7 +143,7 @@ Route::get('/books', [BookController::class,'index']);
 
 Why? Because the Controller is the instance that manages inputs, which are the requests.
 
-Another situation is when we want to view the information of one object. To view one instance, we can pass parameters to the request address. For example, we have a book registered as "Quincas Borba", that has an ISBN of "9780195106817". Therefore, we want to set a route that passes the ISBN as a parameter and shows a page with the requested object: `/books/9780195106817`.
+Another situation is when we want to view the information of one object. To view one instance, we can pass parameters to the request address. For example, we have a book recorded as "Quincas Borba", that has an ISBN of "9780195106817". Therefore, we want to set a route that passes the ISBN as a parameter and shows a page with the requested object: `/books/9780195106817`.
 
 To set this route, we will create a new method called `show($isbn)`, that receives the ISBN of a Book instance. It is on Controller that we can elaborate the identification logic for each instance:
 
@@ -166,7 +166,7 @@ Route::get('/books/{isbn}', [BookController::class, 'show']);
 
 ### 1.3 View: Blade
 
-You can see that routes return pages with a minimalistic (almost blank) template. We can improve this templates on the View layer. Templates are created and set on files with `.blade.php` extension. Among its caracteristics, the most relevant is inheritance. This means that one template can be extended in another, hence the latter will have the same proprieties of the first.
+You can see that routes return pages with a minimalistic (almost blank) template. We can improve this templates on the View layer. Templates are created and set on files with `.blade.php` extension. Among its caracteristics, the most relevant is inheritance. This means that one template can be extended in another, hence the latter will have the same proprieties of the first - somehow similar to CSS.
 
 Let's start by creating a main template on `resources/view/main.blade.php`.
 
@@ -184,14 +184,14 @@ Let's start by creating a main template on `resources/view/main.blade.php`.
 {% endraw %}
 {% endhighlight %}
 
-Secondly, we will create a template for index route at `resources/views/Books/index.blade.php`:
+Secondly, we will create a template for index route at `resources/views/books/index.blade.php`:
 
 {% highlight html %}
 {% raw %}
 # inheritance
 @extends('main')
 @section('content')
-  There isn't any register of books in this system.
+  There isn't any record of books in this system.
 @endsection
 {% endraw %}
 {% endhighlight %}
@@ -233,140 +233,141 @@ The final code of `resources/views/Books/show.blade.php` will be:
 ### 1.4 Model
 
 The following step is to manage Book objects on the database.
-Para tal, vamos criar uma tabela chamada `Books` no banco dados 
-por intermédio de uma migration e um model `Book` para operarmos nessa tabela.
+First, we will create a `Books` table on the database. But, we won't access the database via command-line. The creation and management of a database will be done directly on Laravel, with the features Migration and Model.
 
 {% highlight bash %}
-php artisan make:migration create_Books_table --create='Books'
+# create a migration
+php artisan make:migration create_books_table --create='books'
+# create a Model "Book"
 php artisan make:model Book
 {% endhighlight %}
 
-Na migration criada vamos inserir os campos: titulo, autor e isbn,
-deixando o autor como opcional.
+Once we have created the migration and Model files, we will define the table fields on the migration. Let's insert these following fields: title, author and ISBN.
 
 {% highlight php %}
-$table->string('titulo');
-$table->string('autor')->nullable();
+$table->string('title');
+$table->string('author')->nullable(); # this field is optional
 $table->string('isbn');
 {% endhighlight %}
 
-Usando uma espécie de `shell` do laravel, o tinker, vamos inserir
-o registro do Book do Quincas Borba:
+Then, with the table created, we can insert a book instance to the database. As this is the first time, let's insert an instance manually through the Laravel "shell", called Tinker.
 
 {% highlight bash %}
 php artisan tinker
-$Book = new App\Models\Book;
-$Book->titulo = "Quincas Borba";
-$Book->autor = "Machado de Assis";
-$Book->isbn = "9780195106817";
-$Book->save();
+
+# manually filling the fields
+$book = new App\Models\Book;
+$book->titulo = "Quincas Borba";
+$book->autor = "Machado de Assis";
+$book->isbn = "9780195106817";
+$book->save();
 quit
 {% endhighlight %}
 
-Insira mais Books!
-Veja que o model `Book` salvou os dados na tabela `Books`. Estranho não?
-Essa é uma da inúmeras convenções que vamos nos deparar ao usar um framework.
+Now take a look at the database. Through Laravel, we created a table, defined its fields and created an object of the table. By the MVC architecture, we are operating at the Model layer. 
 
-Vamos modificar o controller para operar com os Books do banco de dados?
-No método index vamos buscar todos Books no banco de dados e enviar para
-o template:
+Once we have done that, we can access the data on the database and manipulate it with Controller. For instance, let's create an `index()` function that looks into the table and return all its instances:
+
 {% highlight php %}
 public function index(){
-    $Books = App\Models\Book:all();
-    return view('Books.index',[
-        'Books' => $Books
+    $books = App\Models\Book:all();
+    return view('books.index',[
+        'books' => $books
     ]);
 }
 {% endhighlight %}
 
-No template podemos iterar sobre todos Books recebidos do controller:
+On the template we can iterate through all the Books and show the fields of each one:
+
 {% highlight php %}
 {% raw %}
-@forelse ($Books as $Book)
-    <li>{{ $Book->titulo }}</li>
-    <li>{{ $Book->autor }}</li>
-    <li>{{ $Book->isbn }}</li>
+@forelse ($books as $book)
+    <li>{{ $book->title }}</li>
+    <li>{{ $book->author }}</li>
+    <li>{{ $book->isbn }}</li>
 @empty
-    Não há Books cadastrados
+    There is no record of books.
 @endforelse
 {% endraw %}
 {% endhighlight %}
 
-No método `show` vamos buscar o Book com o isbn recebido e entregá-lo
-para o template:
+At `show` method, we will receive the ISBN of a Book and show just this instance.
 
 {% highlight php %}
 public function show($isbn){
-    $Book = App\Moldes\Book::where('isbn',$isbn)->first();
-        return view('Books.show',[
-            'Book' => $Book
+    $book = App\Models\Book::where('isbn',$isbn)->first();
+        return view('books.show',[
+            'book' => $book
         ]);
 }
 {% endhighlight %}
 
-No template vamos somente mostrar o Book:
+On the template, we need to show the instance's fields:
 {% highlight php %}
 {% raw %}
-<li>{{ $Book->titulo }}</li>
-<li>{{ $Book->autor }}</li>
-<li>{{ $Book->isbn }}</li>
+<li>{{ $book->title }}</li>
+<li>{{ $book->author }}</li>
+<li>{{ $book->isbn }}</li>
 {% endraw %}
 {% endhighlight %}
 
-Perceba que parte do código está repetida no index e no show do blade.
-Para melhor organização é comum criar um diretório `resources/views/Books/partials`
-para colocar pedaços de templates. Neste caso poderia ser 
-`resources/views/Books/partials/fields.blade.php` e nos templates index e show
-o chamaríamos como:
+Have you noticed that the same code is repeated on `index` and `show` blades? We can better organize our code by creating a directory `resources/views/books/partials`, which will store template parts that can be reutilized.
+
+In this case, let's create a `resources/views/books/partials/fields.blade.php`:
 
 {% highlight php %}
 {% raw %}
-@include('Books.partials.fields')
+<li>{{ $book->title }}</li>
+<li>{{ $book->author }}</li>
+<li>{{ $book->isbn }}</li>
 {% endraw %}
 {% endhighlight %}
 
-### 1.5 Fakers
+On `index` and `show`, we can simply call `partials/fields.blade.php` by replacing the same code to:
 
-Durante o processo de desenvolvimento precisamos manipular dados
-constantemente, então é uma boa ideia gerar alguns dados aleatórios (faker)
-e outros controlados (seed) para não termos que sempre criá-los manualmente:
+{% highlight php %}
+{% raw %}
+@include('books.partials.fields')
+{% endraw %}
+{% endhighlight %}
+
+### 1.5 Fakers and Seeders
+
+When we develop a system, we need to run tests, hence, simulate a real environment. In order to do this, it's a good ideia to populate the database with random data (fakes) along with controlled data (seed). We can automate this process by configuring Faker and Seeders.
 
 {% highlight bash %}
 php artisan make:factory BookFactory --model='Book'
 php artisan make:seed BookSeeder
 {% endhighlight %}
 
-Inicialmente, vamos definir um padrão para geração de
-dados aleatório `database/factories/BookFactory.php`:
+At `database/factories/BookFactory.php`, we will set a random data generator pattern:
 
 {% highlight php %}
 return [
-    'titulo' => $this->faker->sentence(3),
+    'title' => $this->faker->sentence(3),
     'isbn'   => $this->faker->ean13(),
-    'autor'  => $this->faker->name
+    'author'  => $this->faker->name
 ];
 {% endhighlight %}
 
-Em `database/seeders/BookSeeder.php` vamos criar ao menos um registro
-de controle e chamar o factory para criação de 15 registros aleatórios.
+At `database/seeders/BookSeeder.php` we will create one controlled instance and call Factory to create 15 random instances:
 
 {% highlight php %}
-$Book = [
-    'titulo' => "Quincas Borba",
-    'autor'  => "Machado de Assis",
+$book = [
+    'title' => "Quincas Borba",
+    'author'  => "Machado de Assis",
     'isbn'       => "9780195106817"
 ];
-\App\Models\Book::create($Book);
+\App\Models\Book::create($book);
 \App\Models\Book::factory(15)->create();
 {% endhighlight %}
 
-Rode o seed e veja que os dados foram criados:
+Run the seeder and then check the database:
 {% highlight bash %}
 php artisan db:seed --class=BookSeeder
 {% endhighlight %}
 
-Depois de testado e funcionando insira seu seed em 
-`database/seeders/DatabaseSeeder` para ser chamado globalmente:
+If the seeder is working we can declare it on `database/seeders/DatabaseSeeder`, so that it can be called globally.
 
 {% highlight php %}
 public function run()
@@ -378,35 +379,33 @@ public function run()
 }
 {% endhighlight %}
 
-Se precisar zerar o banco e subir todos os seeds na sequência:
+For testing purposes, you can reset and reseed the table by running: 
+
 {% highlight bash %}
 php artisan migrate:fresh --seed
 {% endhighlight %}
 
-### 1.6 Exercício MVC
+### 1.6 MVC exercise
 
-- Implementação de um model chamado `BookFulano`, onde `Fulano` é um identificador seu. 
-- Implementar a migration correspondente com os campos: titulo, autor e isbn.
-- Implementar seed com ao menos um Book de controle
-- Implementar o faker com ao menos 10 Books
-- Implementar controller com os métodos index e show com respectivos templates e rotas 
-- Implementar os templates (blades) correspondentes
-- Observações:
-  - O diretório dos templates deve ser: `resources/views/Book_fulanos`
-  - As rotas devem ser prefixadas desse maneira: `Book_fulanos/{Book}`
+Create: 
+- `Book` Model;
+- Migration with the respective fields: title, author and isbn;
+- Seeder and set at least one control record;
+- Factory with random data generation that creates at least 10 instances;
+- Controller with `index` and `show` methods with its respectives routes and templates;
 
-Neste exercício você criará ou editará os seguintes arquivos:
+In this exercices you will create or edit this files:
 
     routes/web.php
     database/seeders/DatabaseSeeder.php
-    app/Models/BookFulano.php
-    app/Http/Controllers/BookFulanoController.php
-    database/seeders/BookFulanoSeeder.php
-    database/factories/BookFulanoFactory.php
-    database/migrations/202000000000_create_Book_fulanos_table.php
-    resources/views/Book_fulanos/index.blade.php
-    resources/views/Book_fulanos/show.blade.php
-    resources/views/Book_fulanos/partials/fields.blade.php
+    app/Models/Book.php
+    app/Http/Controllers/BookController.php
+    database/seeders/BookSeeder.php
+    database/factories/BookFactory.php
+    database/migrations/202000000000_create_books_table.php
+    resources/views/book/index.blade.php
+    resources/views/book/show.blade.php
+    resources/views/book/partials/fields.blade.php
 
 ## 2. CRUD: Create (Criação), Read (Consulta), Update (Atualização) e Delete (Destruição)
 
