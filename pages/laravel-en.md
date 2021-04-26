@@ -59,7 +59,7 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Git), Git is
 This is the main tool that we use for web development, as it offers an efficient workflow for a collaborative project. Hence, it is recommended to learn the basic commands and the workflow. To install, run:
 
     sudo apt install git
-    git config --global user.name " da Silva"
+    git config --global user.name "Fulano da Silva"
     git config --global user.email "fulano@usp.br"
 
 Next, you should create a [GitHub](github.com/) account and add a public key to your profile. A public key is necessary to your local machine communicate with GitHub servers via [ssh](https://en.wikipedia.org/wiki/Secure_Shell_Protocol). To generate a public key, run and copy the output of the following:
