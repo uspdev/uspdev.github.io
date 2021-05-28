@@ -1897,29 +1897,31 @@ Vamos criar um arquivo para colocar o ajax `partials/ajax.blade.php`:
 ### 7.6 Dicas de pacotes
 
 
-|         Nome                  |   Função                                                          |   
-|-------------------------------|-------------------------------------------------------------------|   
-| rap2hpoutre/fast-excel        | Gera arquivo excel a partir do resultado de uma query             |    
-| axn/laravel-stepper           | Gerar arquivo blade e css para exibição do status de um model     |   
-| owen-it/laravel-auditing      | Auditoria de model, guarda todas mudanças feitas no model         |   
-| barryvdh/laravel-debugbar     | No ambiente dev cria uma barra com informações para debug         |   
-| barryvdh/laravel-dompdf       |                                   |   
-| spatie/laravel-medialibrary                              |                                   |  
-| spatie/laravel-model-status||
-| rap2hpoutre/laravel-log-viewer||
+|         Nome                            |   Função                                                          |   
+|-----------------------------------------|-------------------------------------------------------------------|   
+| rap2hpoutre/fast-excel                  | Gera arquivo excel a partir do resultado de uma query             |    
+| axn/laravel-stepper                     | Gerar arquivo blade e css para exibição do status de um model     |   
+| owen-it/laravel-auditing                | Auditoria de model, guarda todas mudanças feitas no model         |   
+| barryvdh/laravel-debugbar               | No ambiente dev cria uma barra com informações para debug         |   
+| barryvdh/laravel-dompdf                 | Trabalhando com PDFs                                              |
+| beyondcode/laravel-er-diagram-generator | Gera um diagrama do modelo relacional muio útil                   |
+| spatie/laravel-model-status             | Adicionando status no model                                       |
 
 
 
 Avaliar ainda:
 
 - https://spatie.be/docs/laravel-permission/v4/introduction
- - digitaldreams/laracrud
- - milon/barcode
-spatie/eloquent-sortable
-https://github.com/chiraggude/awesome-laravel#packages
- https://packalyst.com/packages?page=2
- https://github.com/AXN-Informatique/laravel-stepper
-
+- milon/barcode
+- https://github.com/blade-ui-kit/blade-icons
+- spatie/eloquent-sortable
+- https://spatie.be/docs/laravel-dashboard/v2/introduction
+- https://packalyst.com/packages/package/spatie/laravel-settings
+- https://github.com/spatie/laravel-query-builder
+- https://github.com/spatie/laravel-searchable
+- https://github.com/spatie/laravel-failed-job-monitor
+- rap2hpoutre/laravel-log-viewer
+- spatie/laravel-medialibrary 
 
 ### 7.7 Scopes
 https://laravel.com/docs/8.x/eloquent#local-scopes
