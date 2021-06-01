@@ -1894,40 +1894,75 @@ Vamos criar um arquivo para colocar o ajax `partials/ajax.blade.php`:
 {% endraw %}
 {% endhighlight %}
 
-### 7.6 Dicas de pacotes
+### 7.6 Vídeos
 
+|         Nome                                  |  Vídeo                            |   
+|-----------------------------------------------|-----------------------------------|   
+| 0. Ambiente de desenvolvimento no Debian      |  https://youtu.be/qImwzkP0nQE     |
+| 1. MVC - Model View Controller                |  https://youtu.be/TO1yt4zyUJw     |
+| 2. CRUD                                       |  https://youtu.be/YCroaZQtbEI     |
+| 3. Validação                                  |  https://youtu.be/GxDUZIolQOw     |
+| 4. Autenticação e Relationships               |  https://youtu.be/U1nfdAq29dE     |
+| 5. Migration de alteração, select e mutators  |  https://youtu.be/wsVrCZ8O7c4     |
+| 6. Buscas, paginação e autorização            |  https://youtu.be/13507G6at0w     |
+| Upload de arquivos                            |  https://youtu.be/5Xx52e4LOG8     |
+| Exportando para Excel                         |  https://youtu.be/Ik9siHfVUkk     |
+| Modal e Ajax                                  |  https://youtu.be/4abyiioyhJQ     |
+| Status nos models                             |  https://youtu.be/gL9uoyW97FA     |
+| Configurações globais                         |  https://youtu.be/70Iq2mBRjAs     |
+| Login com senha única                         |  https://youtu.be/t6Zf3nK-oIo     |
+
+### 7.7 Dicas de pacotes
+
+Pacotes legais para o desenvolvimento, ou seja, aqueles que vocês deve instalar com a flag *--dev*, como por exemplo `composer require barryvdh/laravel-debugbar --dev`:
 
 |         Nome                            |   Função                                                          |   
 |-----------------------------------------|-------------------------------------------------------------------|   
-| rap2hpoutre/fast-excel                  | Gera arquivo excel a partir do resultado de uma query             |    
-| axn/laravel-stepper                     | Gerar arquivo blade e css para exibição do status de um model     |   
-| owen-it/laravel-auditing                | Auditoria de model, guarda todas mudanças feitas no model         |   
 | barryvdh/laravel-debugbar               | No ambiente dev cria uma barra com informações para debug         |   
-| barryvdh/laravel-dompdf                 | Trabalhando com PDFs                                              |
 | beyondcode/laravel-er-diagram-generator | Gera um diagrama do modelo relacional muio útil                   |
-| spatie/laravel-model-status             | Adicionando status no model                                       |
+
+Pacotes legais para o produção, que nos ajudam a escrever pouco código e seguir boas práticas:
+
+|         Nome                        |   Função                                                          |
+|-------------------------------------|-------------------------------------------------------------------|
+| spatie/laravel-model-status         | Status nos models (https://youtu.be/gL9uoyW97FA)                  | 
+| axn/laravel-stepper                 | Exibição dos status complementando spatie/laravel-model-status    |   
+| rap2hpoutre/fast-excel              | Cria arquivo excel a partir do resultado de uma query builder     |    
+| owen-it/laravel-auditing            | Auditoria de model, guarda todas mudanças feitas no model         |     
+| barryvdh/laravel-dompdf             | Trabalhando com PDFs                                              |
+| blade-ui-kit/blade-icons            | Biblioteca de ícones                                              |
+| rap2hpoutre/laravel-log-viewer      | Permite ver os logs direto na aplicação (lembre de criar um Gate) |
+| spatie/laravel-settings             | Configurações globais (https://youtu.be/70Iq2mBRjAs)              |
 
 
+Pacotes laravel do uspdev:
 
-Avaliar ainda:
+|         Nome                        |   Função                                               |
+|-------------------------------------|--------------------------------------------------------|
+| uspdev/senhaunica-socialite         | Login com senha única                                  | 
+| uspdev/laravel-usp-faker            | Greando faker com dados do replicado                   |
+| uspdev/laravel-usp-validators       | Validações para objetos USP                            |
+| uspdev/laravel-usp-theme            | Template multi unidade                                 |
+| uspdev/the_force                    | Simplesmente instale                                   |
 
-- https://spatie.be/docs/laravel-permission/v4/introduction
-- milon/barcode
-- https://github.com/blade-ui-kit/blade-icons
-- spatie/eloquent-sortable
-- https://spatie.be/docs/laravel-dashboard/v2/introduction
-- https://packalyst.com/packages/package/spatie/laravel-settings
-- https://github.com/spatie/laravel-query-builder
-- https://github.com/spatie/laravel-searchable
-- https://github.com/spatie/laravel-failed-job-monitor
-- rap2hpoutre/laravel-log-viewer
-- spatie/laravel-medialibrary 
+Pacotes php do uspdev:
 
-### 7.7 Scopes
-https://laravel.com/docs/8.x/eloquent#local-scopes
+|         Nome             |   Função                                  |
+|--------------------------|-------------------------------------------|
+| uspdev/replicado         | Interface para replicado                  | 
+| uspdev/utils             | Falta descrever                           |
+| uspdev/cache             | Falta descrever                           | 
+| uspdev/wsfoto            | Falta descrever                           | 
+| uspdev/boleto            | Falta descrever                           | 
+| uspdev/patrimonio        | Falta descrever                           | 
 
-### 7.8 Filas
-Filas: https://laravel.com/docs/8.x/queues
+Pacotes laravel da FFLCH, que podem servir de inspiração para criação de pacotes para sua unidade:
+
+|         Nome                        |   Função                           |
+|-------------------------------------|------------------------------------|
+| fflch/laravel-fflch-pdf             | dompdf template para FFLCH         | 
+| laravel-fflch-stepper               | Estilo de status FFLCH             |
+| fflch/laravel-comet-theme           | Template para projetos de pesquisa |
 
 
 
