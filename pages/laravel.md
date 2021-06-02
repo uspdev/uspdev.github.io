@@ -1911,6 +1911,7 @@ Vamos criar um arquivo para colocar o ajax `partials/ajax.blade.php`:
 | Status nos models                             |  https://youtu.be/gL9uoyW97FA     |
 | Configurações globais                         |  https://youtu.be/70Iq2mBRjAs     |
 | Login com senha única                         |  https://youtu.be/t6Zf3nK-oIo     |
+| Laravel Observer: caso user_id                |  https://youtu.be/CnuP-vBYtC0     |
 
 ### 7.7 Dicas de pacotes
 
