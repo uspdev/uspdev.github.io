@@ -558,11 +558,12 @@ jQuery(function ($) {
 });
 {% endhighlight %}
 
-E no blade do laravel-usp-theme há uma seção chamada `javascripts_head` que podemos
+E no blade do laravel-usp-theme há uma seção chamada `javascripts_bottom` que podemos
 carregar no `form.blade.php`:
 {% highlight html %}
 {% raw %}
-@section('javascripts_head')
+@section('javascripts_bottom')
+@parent
 <script type="text/javascript" src="{ { asset('js/livro.js') } }"></script>
 @endsection
 {% endraw %}
