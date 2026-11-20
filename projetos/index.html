@@ -1,0 +1,1149 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repositórios uspdev</title>
+<style>
+:root {
+  --azul: #064169; --azul-claro: #1094AB; --teal: #1593ab; --teal-claro: #64c4d2; --amarelo: #f5b021;
+  --laranja: #f26b21; --oliva: #7f7f00;
+  --bg: #ffffff; --card: #ffffff; --txt: #222; --muted: #6b7785; --borda: #dcdcdc;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: var(--bg); color: var(--txt); font-size: 14px; }
+a { color: var(--azul-claro); text-decoration: none; } a:hover { text-decoration: underline; }
+.wrap { max-width: 1500px; margin: 0 auto; padding: 0 16px; }
+header { background: #fff; }
+header .wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; padding-top: 4px; padding-bottom: 6px; }
+header .logo img { display: block; height: 76px; width: auto; }
+header .marca { color: var(--teal); line-height: 1.15; }
+header .marca b { display: block; font-size: 28px; }
+header .marca span { font-size: 20px; font-weight: 600; }
+header .info { margin-left: auto; color: var(--oliva); font-weight: 700; font-size: 15px; text-align: right; }
+.faixa { height: 38px; background: linear-gradient(to bottom, var(--amarelo) 0 8px, var(--teal-claro) 8px 16px, var(--teal) 16px); }
+.titulo { margin: 10px auto 0; }
+.titulo h1 { color: var(--laranja); font-size: 22px; margin: 0; padding-bottom: 6px; border-bottom: 1px solid #999; }
+main { margin: 16px auto 40px; }
+table { width: 100%; border-collapse: collapse; background: var(--card); }
+.tbl-wrap { overflow-x: auto; }
+th { background: #fff; color: var(--laranja); text-align: left; padding: 10px; font-weight: 700; font-size: 15px; border-bottom: 1px solid var(--borda); position: sticky; top: 0; user-select: none; white-space: nowrap; }
+th[data-col] { cursor: pointer; } th[data-col]:hover { color: var(--teal); }
+th.sorted::after { content: " ▾"; color: var(--teal); } th.sorted.asc::after { content: " ▴"; }
+td { padding: 10px; border-bottom: 1px solid var(--borda); vertical-align: top; }
+tbody tr:hover { background: #f3fafb; }
+td.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.pos { color: var(--muted); font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; width: 36px; }
+td small { color: var(--muted); }
+.idade { font-size: 12px; }
+.repo { font-weight: 700; color: var(--teal); font-size: 15px; }
+.desc { max-width: 420px; line-height: 1.4; }
+.tags { margin-top: 4px; display: flex; flex-wrap: wrap; gap: 4px; }
+.tag { font-size: 11px; background: #e8f4f7; color: #0b6a7c; padding: 1px 7px; border-radius: 10px; }
+.tag.fork { background: #eee; color: #555; }
+.cat { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 12px; background: color-mix(in srgb, var(--c) 15%, white); color: color-mix(in srgb, var(--c) 80%, black); border: 1px solid color-mix(in srgb, var(--c) 45%, white); white-space: nowrap; }
+.lang { display: inline-flex; align-items: center; gap: 4px; margin: 0 6px 2px 0; white-space: nowrap; }
+.lang i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.top { margin: 0; padding-left: 18px; min-width: 230px; }
+.top li { margin-bottom: 4px; } .top a { font-size: 12px; }
+.top .cnt { font-size: 11px; background: var(--amarelo); color: #222; border-radius: 8px; padding: 0 6px; font-weight: 700; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.toolbar input[type=search] { flex: 1 1 260px; padding: 7px 10px; border: 1px solid #aaa; border-radius: 3px; font-size: 14px; }
+.toolbar input[type=search]:focus { outline: 2px solid var(--teal); border-color: transparent; }
+.chip { border: 1px solid color-mix(in srgb, var(--c) 50%, white); background: #fff; color: var(--txt); border-radius: 16px; padding: 5px 11px; cursor: pointer; font-size: 12px; }
+.chip.on { background: var(--c); color: #fff; border-color: var(--c); }
+.chip b { opacity: .7; }
+#contagem { margin-left: auto; color: var(--txt); font-size: 14px; }
+#contagem b { color: var(--laranja); font-size: 16px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a class="logo" href="https://www.usp.br" target="_blank" rel="noopener"><img src="https://uspdigital.usp.br/comumwebdev/imagens/cabecalho/usp-logo.png" alt="USP"></a>
+  <div class="marca"><b>Universidade de São Paulo</b><span>Brasil</span></div>
+  <div class="info">Atualizado em 20/11/2026 15:28<br><small>arquivados não incluídos</small></div>
+</div></header>
+<div class="faixa"></div>
+<div class="wrap titulo"><h1>Repositórios · github.com/uspdev</h1></div>
+
+<main class="wrap">
+<div class="toolbar">
+  <input type="search" id="busca" placeholder="Buscar por nome, descrição, linguagem, pessoa, e-mail…">
+  <button class="chip" data-f="app" style="--c:#064169">Aplicação completa <b>40</b></button><button class="chip" data-f="ws" style="--c:#1094AB">Webservice / API <b>3</b></button><button class="chip" data-f="lib" style="--c:#FCB421">Biblioteca / Pacote <b>34</b></button><button class="chip" data-f="plugin" style="--c:#7A4FA0">Plugin / Módulo <b>6</b></button><button class="chip" data-f="infra" style="--c:#5B6770">Infra / DevOps <b>4</b></button><button class="chip" data-f="script" style="--c:#2E8B57">Script / Ferramenta <b>1</b></button><button class="chip" data-f="doc" style="--c:#C0504D">Documentação / Treinamento <b>3</b></button>
+  <span id="contagem"></span>
+</div>
+<div class="tbl-wrap"><table id="tabela">
+<thead><tr>
+<th>#</th><th data-col="1">Repositório</th><th data-col="2">Tipo</th><th>O que faz</th><th data-col="4">Linguagens</th>
+<th>Top 3 contribuidores</th><th data-col="6">Commits</th><th data-col="7" class="sorted">Último commit</th>
+</tr></thead>
+<tbody>
+<tr data-cat="app" data-busca="defesas gerencia o agendamento de defesas de mestrado e doutorado, com bancas, documentos em pdf, envio de e-mails e publicação de teses, para a secretaria e biblioteca. aplicação completa php laravel 12 replicado senha única docker victor de oliveira marinho vitor.oliveira.marinho@gmail.com ricardo fontoura ricardfo@usp.br thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="defesas"><a class="repo" href="https://github.com/uspdev/defesas" target="_blank" rel="noopener">defesas</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia o agendamento de defesas de mestrado e doutorado, com bancas, documentos em PDF, envio de e-mails e publicação de teses, para a secretaria e biblioteca.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>68%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>32%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Victor de Oliveira Marinho</span> <span class="cnt">102</span><br><a href="mailto:vitor.oliveira.marinho@gmail.com">vitor.oliveira.marinho@gmail.com</a></li><li><span class="who">Ricardo Fontoura</span> <span class="cnt">71</span><br><a href="mailto:ricardfo@usp.br">ricardfo@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">44</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="285">285<br><small>10 pessoas</small></td>
+<td class="n" data-v="1795180606">20/11/2026<br><small class="idade" data-ts="1795180606">hoje</small></td>
+</tr>
+<tr data-cat="plugin" data-busca="moodle-block_extensao permite que docentes criem ambientes moodle para turmas de extensão do apolo e sincroniza automaticamente as matrículas dos alunos. plugin / módulo php  potalej oapotalej@gmail.com thiago gomes verissimo thiago.verissimo@usp.br talitaventura16 talitaventura16@outlook.com">
+<td class="pos"></td>
+<td data-v="moodle-block_extensao"><a class="repo" href="https://github.com/uspdev/moodle-block_extensao" target="_blank" rel="noopener">moodle-block_extensao</a>
+<div class="tags"></div></td>
+<td data-v="plugin"><span class="cat" style="--c:#7A4FA0">Plugin / Módulo</span></td>
+<td class="desc">Permite que docentes criem ambientes Moodle para turmas de extensão do Apolo e sincroniza automaticamente as matrículas dos alunos.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>81%</small></span> <span class="lang"><i style="background:#1094AB"></i>Mustache <small>13%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>6%</small></span></td>
+<td><ol class="top"><li><span class="who">Potalej</span> <span class="cnt">73</span><br><a href="mailto:oapotalej@gmail.com">oapotalej@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">46</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Talitaventura16</span> <span class="cnt">29</span><br><a href="mailto:talitaventura16@outlook.com">talitaventura16@outlook.com</a></li></ol></td>
+<td class="n" data-v="156">156<br><small>5 pessoas</small></td>
+<td class="n" data-v="1795175140">20/11/2026<br><small class="idade" data-ts="1795175140">hoje</small></td>
+</tr>
+<tr data-cat="infra" data-busca="dockerfiles fornece dockerfiles e composes para imagens php/apache, alpine com sybase/mssql e postgresql, usadas no desenvolvimento laravel dos sistemas do grupo. infra / devops dockerfile docker leandro ramos leandroramos@usp.br thiago gomes verissimo thiago.verissimo@usp.br ricardo fontoura ricardfo@usp.br">
+<td class="pos"></td>
+<td data-v="dockerfiles"><a class="repo" href="https://github.com/uspdev/dockerfiles" target="_blank" rel="noopener">dockerfiles</a>
+<div class="tags"><span class="tag">Docker</span></div></td>
+<td data-v="infra"><span class="cat" style="--c:#5B6770">Infra / DevOps</span></td>
+<td class="desc">Fornece Dockerfiles e composes para imagens PHP/Apache, Alpine com Sybase/MSSQL e PostgreSQL, usadas no desenvolvimento Laravel dos sistemas do grupo.</td>
+<td data-v="dockerfile"><span class="lang"><i style="background:#384d54"></i>Dockerfile <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Leandro Ramos</span> <span class="cnt">22</span><br><a href="mailto:leandroramos@usp.br">leandroramos@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">8</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Ricardo Fontoura</span> <span class="cnt">4</span><br><a href="mailto:ricardfo@usp.br">ricardfo@usp.br</a></li></ol></td>
+<td class="n" data-v="34">34<br><small>3 pessoas</small></td>
+<td class="n" data-v="1795043915">18/11/2026<br><small class="idade" data-ts="1795043915">há 1 dia</small></td>
+</tr>
+<tr data-cat="lib" data-busca="workflow gerencia fluxos de trabalho em aplicações laravel, com definições versionadas, estados, transições, papéis, histórico e diagrama visual via symfony workflow. biblioteca / pacote php laravel (pacote) vinireiwz vinireisg@usp.br vinireiwz greisvini@gmail.com antonio campos campos.antonio@usp.br">
+<td class="pos"></td>
+<td data-v="workflow"><a class="repo" href="https://github.com/uspdev/workflow" target="_blank" rel="noopener">workflow</a>
+<div class="tags"><span class="tag">Laravel (pacote)</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Gerencia fluxos de trabalho em aplicações Laravel, com definições versionadas, estados, transições, papéis, histórico e diagrama visual via Symfony Workflow.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>82%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>18%</small></span></td>
+<td><ol class="top"><li><span class="who">ViniReiwz</span> <span class="cnt">107</span><br><a href="mailto:vinireisg@usp.br">vinireisg@usp.br</a></li><li><span class="who">ViniReiwz</span> <span class="cnt">61</span><br><a href="mailto:greisvini@gmail.com">greisvini@gmail.com</a></li><li><span class="who">Antonio Campos</span> <span class="cnt">30</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li></ol></td>
+<td class="n" data-v="223">223<br><small>5 pessoas</small></td>
+<td class="n" data-v="1795025902">18/11/2026<br><small class="idade" data-ts="1795025902">há 2 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="senhaunica-socialite integra aplicações laravel à autenticação senha única da usp, com login, permissões, troca de identidade e gestão de usuários. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br will gnann@linux.ime.usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica-socialite"><a class="repo" href="https://github.com/uspdev/senhaunica-socialite" target="_blank" rel="noopener">senhaunica-socialite</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Integra aplicações Laravel à autenticação senha única da USP, com login, permissões, troca de identidade e gestão de usuários.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>66%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>34%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">106</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">96</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Will</span> <span class="cnt">8</span><br><a href="mailto:gnann@linux.ime.usp.br">gnann@linux.ime.usp.br</a></li></ol></td>
+<td class="n" data-v="234">234<br><small>12 pessoas</small></td>
+<td class="n" data-v="1795023255">18/11/2026<br><small class="idade" data-ts="1795023255">há 2 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="web-ldap-admin gerencia usuários da unidade usp em um domain controller (samba ad/active directory), sincronizando pessoas do replicado e permitindo trocar senha via senha única. aplicação completa php laravel 12 senha única vue docker thiago gomes verissimo thiago.verissimo@usp.br alessandro costa de oliveira alecosta.web@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="web-ldap-admin"><a class="repo" href="https://github.com/uspdev/web-ldap-admin" target="_blank" rel="noopener">web-ldap-admin</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span><span class="tag">Vue</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia usuários da unidade USP em um domain controller (Samba AD/Active Directory), sincronizando pessoas do replicado e permitindo trocar senha via senha única.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>84%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>15%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">112</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">89</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">68</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="318">318<br><small>9 pessoas</small></td>
+<td class="n" data-v="1795022828">18/11/2026<br><small class="idade" data-ts="1795022828">há 2 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="pessoas oferece interface web para consultar dados mínimos de alunos, servidores e docentes do replicado, com busca, listas de pós-graduação e afastados, para setores autorizados. aplicação completa php laravel 11 senha única vue docker masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br alessandro costa de oliveira alecosta.web@gmail.com">
+<td class="pos"></td>
+<td data-v="pessoas"><a class="repo" href="https://github.com/uspdev/pessoas" target="_blank" rel="noopener">pessoas</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span><span class="tag">Vue</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Oferece interface web para consultar dados mínimos de alunos, servidores e docentes do replicado, com busca, listas de pós-graduação e afastados, para setores autorizados.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>78%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>22%</small></span> <span class="lang"><i style="background:#41b883"></i>Vue <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">66</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">41</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">24</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li></ol></td>
+<td class="n" data-v="199">199<br><small>12 pessoas</small></td>
+<td class="n" data-v="1795004877">18/11/2026<br><small class="idade" data-ts="1795004877">há 2 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="gestao-projetos gerencia projetos, subprojetos, tarefas e reuniões das equipes da usp, com login por senha única, controle de acesso, notificações e api de leitura. aplicação completa php laravel 12 senha única docker eduardo ferraz dudiferraz@gmail.com lucas lopes lucaslops12@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="gestao-projetos"><a class="repo" href="https://github.com/uspdev/gestao-projetos" target="_blank" rel="noopener">gestao-projetos</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia projetos, subprojetos, tarefas e reuniões das equipes da USP, com login por Senha Única, controle de acesso, notificações e API de leitura.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>76%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>20%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>4%</small></span></td>
+<td><ol class="top"><li><span class="who">Eduardo Ferraz</span> <span class="cnt">348</span><br><a href="mailto:dudiferraz@gmail.com">dudiferraz@gmail.com</a></li><li><span class="who">Lucas Lopes</span> <span class="cnt">292</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">184</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="834">834<br><small>7 pessoas</small></td>
+<td class="n" data-v="1794943501">17/11/2026<br><small class="idade" data-ts="1794943501">há 2 dias</small></td>
+</tr>
+<tr data-cat="ws" data-busca="nfe-ws valida xml de nf-e, consulta sua situação na sefaz, gera danfe e armazena notas fiscais via api autenticada por chave, para sistemas como o delos. webservice / api php  masaki kawabata neto kawabata@usp.br root root@set-dev-01.set.eesc.usp.br">
+<td class="pos"></td>
+<td data-v="nfe-ws"><a class="repo" href="https://github.com/uspdev/nfe-ws" target="_blank" rel="noopener">nfe-ws</a>
+<div class="tags"></div></td>
+<td data-v="ws"><span class="cat" style="--c:#1094AB">Webservice / API</span></td>
+<td class="desc">Valida XML de NF-e, consulta sua situação na SEFAZ, gera DANFE e armazena notas fiscais via API autenticada por chave, para sistemas como o DELOS.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>91%</small></span> <span class="lang"><i style="background:#1094AB"></i>Smarty <small>9%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">87</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">root</span> <span class="cnt">4</span><br><a href="mailto:root@set-dev-01.set.eesc.usp.br">root@set-dev-01.set.eesc.usp.br</a></li></ol></td>
+<td class="n" data-v="91">91<br><small>2 pessoas</small></td>
+<td class="n" data-v="1794824695">16/11/2026<br><small class="idade" data-ts="1794824695">há 4 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="cepe gerencia inscrições em turmas de atividades esportivas, frequência, atestados, carteiras e cobranças por boleto e pix para a comunidade usp e externa. aplicação completa php laravel 13 senha única docker fernando fernando.td.moraes@gmail.com thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="cepe"><a class="repo" href="https://github.com/uspdev/cepe" target="_blank" rel="noopener">cepe</a>
+<div class="tags"><span class="tag">Laravel 13</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia inscrições em turmas de atividades esportivas, frequência, atestados, carteiras e cobranças por boleto e Pix para a comunidade USP e externa.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>80%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>20%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Fernando</span> <span class="cnt">42</span><br><a href="mailto:fernando.td.moraes@gmail.com">fernando.td.moraes@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">12</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="54">54<br><small>2 pessoas</small></td>
+<td class="n" data-v="1794605589">13/11/2026<br><small class="idade" data-ts="1794605589">há 6 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="repositorio-nfe recebe nf-e por e-mail via imap, valida no sefaz e armazena xml e danfe para conferência contábil da usp, com acesso por senha única. aplicação completa php laravel 13 senha única masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="repositorio-nfe"><a class="repo" href="https://github.com/uspdev/repositorio-nfe" target="_blank" rel="noopener">repositorio-nfe</a>
+<div class="tags"><span class="tag">Laravel 13</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Recebe NF-e por e-mail via IMAP, valida no SEFAZ e armazena XML e DANFE para conferência contábil da USP, com acesso por Senha Única.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>86%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>14%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">53</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="53">53<br><small>1 pessoas</small></td>
+<td class="n" data-v="1794598963">13/11/2026<br><small class="idade" data-ts="1794598963">há 6 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="nfe-app fornece aplicação web de demonstração em php para testar o consumo do serviço de notas fiscais eletrônicas (nfe) via api, voltada a desenvolvedores. aplicação completa php  masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="nfe-app"><a class="repo" href="https://github.com/uspdev/nfe-app" target="_blank" rel="noopener">nfe-app</a>
+<div class="tags"></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Fornece aplicação web de demonstração em PHP para testar o consumo do serviço de notas fiscais eletrônicas (NFe) via API, voltada a desenvolvedores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">13</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="13">13<br><small>1 pessoas</small></td>
+<td class="n" data-v="1794598961">13/11/2026<br><small class="idade" data-ts="1794598961">há 6 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="nfe-ws-consumer consome o webservice nfe-ws em php para validar xmls de nf-e, consultar sua autorização na sefaz e obter a danfe. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="nfe-ws-consumer"><a class="repo" href="https://github.com/uspdev/nfe-ws-consumer" target="_blank" rel="noopener">nfe-ws-consumer</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Consome o webservice nfe-ws em PHP para validar XMLs de NF-e, consultar sua autorização na SEFAZ e obter a DANFE.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">12</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="12">12<br><small>1 pessoas</small></td>
+<td class="n" data-v="1794597242">13/11/2026<br><small class="idade" data-ts="1794597242">há 6 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="wspix gera cobranças pix, consulta sua situação e obtém o qr code e o copia e cola via api rest da usp, para uso em aplicações php. biblioteca / pacote php  marcelo-k-usp makf00@usp.br">
+<td class="pos"></td>
+<td data-v="wspix"><a class="repo" href="https://github.com/uspdev/wspix" target="_blank" rel="noopener">wspix</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Gera cobranças Pix, consulta sua situação e obtém o QR Code e o Copia e Cola via API REST da USP, para uso em aplicações PHP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo-k-USP</span> <span class="cnt">2</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li></ol></td>
+<td class="n" data-v="2">2<br><small>1 pessoas</small></td>
+<td class="n" data-v="1794589927">13/11/2026<br><small class="idade" data-ts="1794589927">há 7 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="laravel-usp-theme fornece template blade para laravel com layout, menus, login e skins das unidades da usp, para devs focarem no backend sem refazer o frontend. biblioteca / pacote blade  masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br alessandro costa de oliveira alecosta.web@gmail.com">
+<td class="pos"></td>
+<td data-v="laravel-usp-theme"><a class="repo" href="https://github.com/uspdev/laravel-usp-theme" target="_blank" rel="noopener">laravel-usp-theme</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece template Blade para Laravel com layout, menus, login e skins das unidades da USP, para devs focarem no backend sem refazer o frontend.</td>
+<td data-v="blade"><span class="lang"><i style="background:#f7523f"></i>Blade <small>71%</small></span> <span class="lang"><i style="background:#4F5D95"></i>PHP <small>15%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>13%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">104</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">45</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">24</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li></ol></td>
+<td class="n" data-v="221">221<br><small>22 pessoas</small></td>
+<td class="n" data-v="1794515996">12/11/2026<br><small class="idade" data-ts="1794515996">há 7 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="selecoes gerencia isenções de taxa, inscrições e solicitações de matrícula em processos seletivos de pós-graduação e pós-doutorado da usp, para candidatos e gerentes. aplicação completa php laravel 13 senha única marcelo-k-usp makf00@usp.br joão pedro de toledo jpedrotoledo@usp.br alessandro costa de oliveira alecosta.web@gmail.com">
+<td class="pos"></td>
+<td data-v="selecoes"><a class="repo" href="https://github.com/uspdev/selecoes" target="_blank" rel="noopener">selecoes</a>
+<div class="tags"><span class="tag">Laravel 13</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia isenções de taxa, inscrições e solicitações de matrícula em processos seletivos de pós-graduação e pós-doutorado da USP, para candidatos e gerentes.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>99%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>1%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo-k-USP</span> <span class="cnt">692</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li><li><span class="who">João Pedro de Toledo</span> <span class="cnt">39</span><br><a href="mailto:jpedrotoledo@usp.br">jpedrotoledo@usp.br</a></li><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">2</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li></ol></td>
+<td class="n" data-v="733">733<br><small>3 pessoas</small></td>
+<td class="n" data-v="1794509660">12/11/2026<br><small class="idade" data-ts="1794509660">há 7 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="copaco gerencia equipamentos e redes por mac address, atribui ips livres e gera configurações de dhcp (isc e kea) e freeradius para o parque computacional. aplicação completa php laravel 11 senha única vue docker thiago gomes verissimo thiago.verissimo@usp.br andré luiz girol andregirol@gmail.com ricardo fontoura ricardfo@usp.br">
+<td class="pos"></td>
+<td data-v="copaco"><a class="repo" href="https://github.com/uspdev/copaco" target="_blank" rel="noopener">copaco</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span><span class="tag">Vue</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia equipamentos e redes por MAC address, atribui IPs livres e gera configurações de DHCP (ISC e Kea) e FreeRADIUS para o parque computacional.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>85%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>15%</small></span> <span class="lang"><i style="background:#41b883"></i>Vue <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">184</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">André Luiz Girol</span> <span class="cnt">63</span><br><a href="mailto:andregirol@gmail.com">andregirol@gmail.com</a></li><li><span class="who">Ricardo Fontoura</span> <span class="cnt">29</span><br><a href="mailto:ricardfo@usp.br">ricardfo@usp.br</a></li></ol></td>
+<td class="n" data-v="393">393<br><small>18 pessoas</small></td>
+<td class="n" data-v="1794498273">12/11/2026<br><small class="idade" data-ts="1794498273">há 8 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="datagrad gera relatórios de grade curricular, carga didática, evasão e grade horária para revalidação de cursos de graduação da usp, e gerencia alterações de disciplinas. aplicação completa php laravel 12 senha única docker masaki kawabata neto kawabata@usp.br vinirafaelvale vinirafael07@gmail.com vinicios isael viisael97@usp.br">
+<td class="pos"></td>
+<td data-v="datagrad"><a class="repo" href="https://github.com/uspdev/datagrad" target="_blank" rel="noopener">datagrad</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gera relatórios de grade curricular, carga didática, evasão e grade horária para revalidação de cursos de graduação da USP, e gerencia alterações de disciplinas.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>52%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>36%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>11%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">190</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">ViniRafaelVale</span> <span class="cnt">23</span><br><a href="mailto:vinirafael07@gmail.com">vinirafael07@gmail.com</a></li><li><span class="who">Vinicios Isael</span> <span class="cnt">20</span><br><a href="mailto:viisael97@usp.br">viisael97@usp.br</a></li></ol></td>
+<td class="n" data-v="261">261<br><small>9 pessoas</small></td>
+<td class="n" data-v="1794419123">11/11/2026<br><small class="idade" data-ts="1794419123">há 9 dias</small></td>
+</tr>
+<tr data-cat="ws" data-busca="replicado-ws expõe em api rest json, com cache e documentação swagger, dados do replicado usp sobre pessoas, graduação, pós-graduação, lattes e patrimônio. webservice / api php replicado masaki kawabata neto kawabata@usp.br lucas lopes lucaslops12@gmail.com erickson zanon ezanon@gmail.com">
+<td class="pos"></td>
+<td data-v="replicado-ws"><a class="repo" href="https://github.com/uspdev/replicado-ws" target="_blank" rel="noopener">replicado-ws</a>
+<div class="tags"><span class="tag">replicado</span></div></td>
+<td data-v="ws"><span class="cat" style="--c:#1094AB">Webservice / API</span></td>
+<td class="desc">Expõe em API REST JSON, com cache e documentação Swagger, dados do Replicado USP sobre pessoas, graduação, pós-graduação, Lattes e patrimônio.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">31</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Lucas Lopes</span> <span class="cnt">16</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li><li><span class="who">Erickson Zanon</span> <span class="cnt">6</span><br><a href="mailto:ezanon@gmail.com">ezanon@gmail.com</a></li></ol></td>
+<td class="n" data-v="65">65<br><small>6 pessoas</small></td>
+<td class="n" data-v="1794338503">10/11/2026<br><small class="idade" data-ts="1794338503">há 9 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="cache armazena em memcached os resultados de métodos php, como consultas a banco de dados, para acelerar aplicações e evitar consultas repetidas. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br lucas lopes lucaslops12@gmail.com">
+<td class="pos"></td>
+<td data-v="cache"><a class="repo" href="https://github.com/uspdev/cache" target="_blank" rel="noopener">cache</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Armazena em memcached os resultados de métodos PHP, como consultas a banco de dados, para acelerar aplicações e evitar consultas repetidas.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">33</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">3</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Lucas Lopes</span> <span class="cnt">2</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li></ol></td>
+<td class="n" data-v="38">38<br><small>3 pessoas</small></td>
+<td class="n" data-v="1794334240">10/11/2026<br><small class="idade" data-ts="1794334240">há 10 dias</small></td>
+</tr>
+<tr data-cat="ws" data-busca="ai-services oferece interface web e api para serviços de ia via llm que formatam referências bibliográficas, revisam ementas e redigem textos institucionais na usp. webservice / api php laravel 13 senha única docker masaki kawabata neto kawabata@usp.br lucas lopes lucaslops12@gmail.com kawan santana kawansantana18@gmail.com">
+<td class="pos"></td>
+<td data-v="ai-services"><a class="repo" href="https://github.com/uspdev/ai-services" target="_blank" rel="noopener">ai-services</a>
+<div class="tags"><span class="tag">Laravel 13</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="ws"><span class="cat" style="--c:#1094AB">Webservice / API</span></td>
+<td class="desc">Oferece interface web e API para serviços de IA via LLM que formatam referências bibliográficas, revisam ementas e redigem textos institucionais na USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>80%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>20%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">54</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Lucas Lopes</span> <span class="cnt">16</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li><li><span class="who">Kawan Santana</span> <span class="cnt">5</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li></ol></td>
+<td class="n" data-v="82">82<br><small>7 pessoas</small></td>
+<td class="n" data-v="1794322706">10/11/2026<br><small class="idade" data-ts="1794322706">há 10 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="salas gerencia reservas de salas e horários de uma unidade da usp, com login por senha única, aprovação, restrições, calendário, e-mails e api. aplicação completa php laravel 12 replicado senha única docker kawan santana kawansantana18@gmail.com thiago gomes verissimo thiago.verissimo@usp.br saotome saotome@usp.br">
+<td class="pos"></td>
+<td data-v="salas"><a class="repo" href="https://github.com/uspdev/salas" target="_blank" rel="noopener">salas</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia reservas de salas e horários de uma unidade da USP, com login por senha única, aprovação, restrições, calendário, e-mails e API.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>74%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>26%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Kawan Santana</span> <span class="cnt">167</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">76</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Saotome</span> <span class="cnt">58</span><br><a href="mailto:saotome@usp.br">saotome@usp.br</a></li></ol></td>
+<td class="n" data-v="449">449<br><small>15 pessoas</small></td>
+<td class="n" data-v="1793905275">05/11/2026<br><small class="idade" data-ts="1793905275">há 14 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="replicado fornece classes php que abstraem consultas sql ao banco replicado da usp, permitindo a sistemas acessar dados de pessoas, graduação e pós. biblioteca / pacote php laravel (pacote) docker thiago gomes verissimo thiago.verissimo@usp.br masaki kawabata neto kawabata@usp.br gabriela reis gabrielareisg@hotmail.com">
+<td class="pos"></td>
+<td data-v="replicado"><a class="repo" href="https://github.com/uspdev/replicado" target="_blank" rel="noopener">replicado</a>
+<div class="tags"><span class="tag">Laravel (pacote)</span><span class="tag">Docker</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece classes PHP que abstraem consultas SQL ao banco replicado da USP, permitindo a sistemas acessar dados de pessoas, graduação e pós.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">222</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">176</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Gabriela Reis</span> <span class="cnt">116</span><br><a href="mailto:gabrielareisg@hotmail.com">gabrielareisg@hotmail.com</a></li></ol></td>
+<td class="n" data-v="895">895<br><small>28 pessoas</small></td>
+<td class="n" data-v="1793796211">04/11/2026<br><small class="idade" data-ts="1793796211">há 16 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="starter-ng gera projetos laravel no padrão uspdev, já com tema usp, login por senha única, docker e ferramentas de desenvolvimento configurados. aplicação completa php  thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="starter-ng"><a class="repo" href="https://github.com/uspdev/starter-ng" target="_blank" rel="noopener">starter-ng</a>
+<div class="tags"></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gera projetos Laravel no padrão USPdev, já com tema USP, login por Senha Única, Docker e ferramentas de desenvolvimento configurados.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">26</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="26">26<br><small>1 pessoas</small></td>
+<td class="n" data-v="1793665011">02/11/2026<br><small class="idade" data-ts="1793665011">há 17 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="votacao-rapida realiza votações eletrônicas anônimas em reuniões de colegiados, distribuindo tokens por qrcode ou e-mail para encontros presenciais ou online. aplicação completa php  masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="votacao-rapida"><a class="repo" href="https://github.com/uspdev/votacao-rapida" target="_blank" rel="noopener">votacao-rapida</a>
+<div class="tags"></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Realiza votações eletrônicas anônimas em reuniões de colegiados, distribuindo tokens por QRCode ou e-mail para encontros presenciais ou online.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>69%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>29%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>2%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">331</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">3</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="334">334<br><small>2 pessoas</small></td>
+<td class="n" data-v="1793107383">27/10/2026<br><small class="idade" data-ts="1793107383">há 24 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="rede gerencia o inventário da infraestrutura de rede da usp: prédios, salas, racks, patch panels, switches, portas e macs, com plantas e login via senha única. aplicação completa php laravel 12 replicado senha única docker thiago gomes verissimo thiago.verissimo@usp.br alan neves alan.n.ribeiro257@hotmail.com ricardo fontoura ricardfo@usp.br">
+<td class="pos"></td>
+<td data-v="rede"><a class="repo" href="https://github.com/uspdev/rede" target="_blank" rel="noopener">rede</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia o inventário da infraestrutura de rede da USP: prédios, salas, racks, patch panels, switches, portas e MACs, com plantas e login via senha única.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>57%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>43%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">58</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Alan Neves</span> <span class="cnt">26</span><br><a href="mailto:alan.n.ribeiro257@hotmail.com">alan.n.ribeiro257@hotmail.com</a></li><li><span class="who">Ricardo Fontoura</span> <span class="cnt">15</span><br><a href="mailto:ricardfo@usp.br">ricardfo@usp.br</a></li></ol></td>
+<td class="n" data-v="101">101<br><small>5 pessoas</small></td>
+<td class="n" data-v="1793104315">27/10/2026<br><small class="idade" data-ts="1793104315">há 24 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="webservice fornece estrutura base em php para criar webservices rest simples, com autenticação http basic, controle de acesso por rotas e restrição por ips. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="webservice"><a class="repo" href="https://github.com/uspdev/webservice" target="_blank" rel="noopener">webservice</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece estrutura base em PHP para criar webservices REST simples, com autenticação HTTP Basic, controle de acesso por rotas e restrição por IPs.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>92%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>8%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">43</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="43">43<br><small>1 pessoas</small></td>
+<td class="n" data-v="1792788503">23/10/2026<br><small class="idade" data-ts="1792788503">há 27 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="starter fornece esqueleto laravel com login por senha única usp, replicado, tema usp e docker pré-configurados para desenvolvedores iniciarem novas aplicações. aplicação completa php laravel 13 senha única docker masaki kawabata neto kawabata@usp.br kawan santana kawansantana18@gmail.com carolinemcarvalho carolinemcarvalho@usp.br">
+<td class="pos"></td>
+<td data-v="starter"><a class="repo" href="https://github.com/uspdev/starter" target="_blank" rel="noopener">starter</a>
+<div class="tags"><span class="tag">Laravel 13</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Fornece esqueleto Laravel com login por senha única USP, replicado, tema USP e Docker pré-configurados para desenvolvedores iniciarem novas aplicações.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>98%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>2%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">27</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Kawan Santana</span> <span class="cnt">5</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li><li><span class="who">carolinemcarvalho</span> <span class="cnt">3</span><br><a href="mailto:carolinemcarvalho@usp.br">carolinemcarvalho@usp.br</a></li></ol></td>
+<td class="n" data-v="42">42<br><small>7 pessoas</small></td>
+<td class="n" data-v="1792583873">21/10/2026<br><small class="idade" data-ts="1792583873">há 30 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="chamados gerencia chamados de atendimento organizados em filas por setor, com triagem, anexos e notificações, para suporte de informática e zeladoria na usp. aplicação completa php laravel 12 senha única docker masaki kawabata neto kawabata@usp.br fernando g moura fgm@sc.usp.br thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="chamados"><a class="repo" href="https://github.com/uspdev/chamados" target="_blank" rel="noopener">chamados</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia chamados de atendimento organizados em filas por setor, com triagem, anexos e notificações, para suporte de informática e zeladoria na USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>66%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>33%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">537</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Fernando G Moura</span> <span class="cnt">71</span><br><a href="mailto:fgm@sc.usp.br">fgm@sc.usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">53</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="783">783<br><small>15 pessoas</small></td>
+<td class="n" data-v="1792437131">19/10/2026<br><small class="idade" data-ts="1792437131">há 31 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="pre-reserva gerencia pré-reservas de salas informatizadas da scinfor-eesc, permitindo que docentes e servidores solicitem e gerentes aprovem e designem a sala. aplicação completa php laravel 12 senha única masaki kawabata neto kawabata@usp.br antonio campos campos.antonio@usp.br kawan santana kawansantana18@gmail.com">
+<td class="pos"></td>
+<td data-v="pre-reserva"><a class="repo" href="https://github.com/uspdev/pre-reserva" target="_blank" rel="noopener">pre-reserva</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia pré-reservas de salas informatizadas da SCINFOR-EESC, permitindo que docentes e servidores solicitem e gerentes aprovem e designem a sala.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>87%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>12%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">29</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Antonio Campos</span> <span class="cnt">24</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li><li><span class="who">Kawan Santana</span> <span class="cnt">5</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li></ol></td>
+<td class="n" data-v="63">63<br><small>6 pessoas</small></td>
+<td class="n" data-v="1791387533">07/10/2026<br><small class="idade" data-ts="1791387533">há 44 dias</small></td>
+</tr>
+<tr data-cat="lib" data-busca="django-oauth-usp permite que aplicações django autentiquem usuários via senha única usp (oauth), com modelo de usuário customizado e restrição de acesso por unidade. biblioteca / pacote python django marcelo schneider schneider.fei@gmail.com thiago gomes verissimo thiago.verissimo@usp.br andré de queiroz p andrepatrinicola@gmail.com">
+<td class="pos"></td>
+<td data-v="django-oauth-usp"><a class="repo" href="https://github.com/uspdev/django-oauth-usp" target="_blank" rel="noopener">django-oauth-usp</a>
+<div class="tags"><span class="tag">Django</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Permite que aplicações Django autentiquem usuários via Senha Única USP (OAuth), com modelo de usuário customizado e restrição de acesso por unidade.</td>
+<td data-v="python"><span class="lang"><i style="background:#3572A5"></i>Python <small>99%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>1%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo Schneider</span> <span class="cnt">47</span><br><a href="mailto:schneider.fei@gmail.com">schneider.fei@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">2</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">André de Queiroz P</span> <span class="cnt">1</span><br><a href="mailto:andrepatrinicola@gmail.com">andrepatrinicola@gmail.com</a></li></ol></td>
+<td class="n" data-v="50">50<br><small>3 pessoas</small></td>
+<td class="n" data-v="1791326761">06/10/2026<br><small class="idade" data-ts="1791326761">há 44 dias</small></td>
+</tr>
+<tr data-cat="app" data-busca="empresta gerencia o empréstimo e a devolução de materiais das unidades da usp, com controle por categoria, vínculo e setor, códigos de barras e relatórios. aplicação completa php laravel 12 replicado senha única docker kawan santana kawansantana18@gmail.com victor de oliveira marinho vitor.oliveira.marinho@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="empresta"><a class="repo" href="https://github.com/uspdev/empresta" target="_blank" rel="noopener">empresta</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia o empréstimo e a devolução de materiais das unidades da USP, com controle por categoria, vínculo e setor, códigos de barras e relatórios.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>73%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>27%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Kawan Santana</span> <span class="cnt">92</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li><li><span class="who">Victor de Oliveira Marinho</span> <span class="cnt">21</span><br><a href="mailto:vitor.oliveira.marinho@gmail.com">vitor.oliveira.marinho@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">16</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="170">170<br><small>11 pessoas</small></td>
+<td class="n" data-v="1791284680">06/10/2026<br><small class="idade" data-ts="1791284680">há 45 dias</small></td>
+</tr>
+<tr data-cat="plugin" data-busca="webform_pagamentos adiciona ao drupal webform a geração de boletos para cobrar pagamentos em formulários, com tela de configuração para administradores do site. plugin / módulo php drupal isaacrl isaac.rlmartins@usp.br thiago gomes verissimo thiago.verissimo@usp.br xcolacique monica.colacique@usp.br">
+<td class="pos"></td>
+<td data-v="webform_pagamentos"><a class="repo" href="https://github.com/uspdev/webform_pagamentos" target="_blank" rel="noopener">webform_pagamentos</a>
+<div class="tags"><span class="tag">Drupal</span></div></td>
+<td data-v="plugin"><span class="cat" style="--c:#7A4FA0">Plugin / Módulo</span></td>
+<td class="desc">Adiciona ao Drupal Webform a geração de boletos para cobrar pagamentos em formulários, com tela de configuração para administradores do site.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">IsaacRL</span> <span class="cnt">4</span><br><a href="mailto:isaac.rlmartins@usp.br">isaac.rlmartins@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">2</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">xcolacique</span> <span class="cnt">1</span><br><a href="mailto:monica.colacique@usp.br">monica.colacique@usp.br</a></li></ol></td>
+<td class="n" data-v="7">7<br><small>3 pessoas</small></td>
+<td class="n" data-v="1789583615">16/09/2026<br><small class="idade" data-ts="1789583615">há 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="solicitacoes-documentos permite que usuários usp solicitem documentos aos setores via login senha única, com envio de arquivos, e-mails de aviso e gestão por administradores. aplicação completa php laravel 12 senha única marcelo-k-usp makf00@usp.br">
+<td class="pos"></td>
+<td data-v="solicitacoes-documentos"><a class="repo" href="https://github.com/uspdev/solicitacoes-documentos" target="_blank" rel="noopener">solicitacoes-documentos</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Permite que usuários USP solicitem documentos aos setores via login senha única, com envio de arquivos, e-mails de aviso e gestão por administradores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>95%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>3%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>2%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo-k-USP</span> <span class="cnt">22</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li></ol></td>
+<td class="n" data-v="22">22<br><small>1 pessoas</small></td>
+<td class="n" data-v="1789557087">16/09/2026<br><small class="idade" data-ts="1789557087">há 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="toolkit permite testar e demonstrar bibliotecas uspdev (replicado, tema, senha única, wsfoto), explorando métodos e gerenciando api keys, para desenvolvedores. aplicação completa php laravel 12 replicado senha única masaki kawabata neto kawabata@usp.br lucas lopes lucaslops12@gmail.com thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="toolkit"><a class="repo" href="https://github.com/uspdev/toolkit" target="_blank" rel="noopener">toolkit</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Permite testar e demonstrar bibliotecas USPDev (replicado, tema, senha única, WSFoto), explorando métodos e gerenciando API Keys, para desenvolvedores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>81%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>18%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>1%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">94</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Lucas Lopes</span> <span class="cnt">20</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">4</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="121">121<br><small>5 pessoas</small></td>
+<td class="n" data-v="1788545690">04/09/2026<br><small class="idade" data-ts="1788545690">há 2 meses</small></td>
+</tr>
+<tr data-cat="plugin" data-busca="webform_senhaunica restringe o acesso a formulários webform do drupal a usuários autenticados via senha única usp, configurável por formulário. plugin / módulo php drupal andisandis-lima anderson.ls1998@gmail.com thiago gomes verissimo thiago.verissimo@usp.br anna valim annacarolinavalim@gmail.com">
+<td class="pos"></td>
+<td data-v="webform_senhaunica"><a class="repo" href="https://github.com/uspdev/webform_senhaunica" target="_blank" rel="noopener">webform_senhaunica</a>
+<div class="tags"><span class="tag">Drupal</span></div></td>
+<td data-v="plugin"><span class="cat" style="--c:#7A4FA0">Plugin / Módulo</span></td>
+<td class="desc">Restringe o acesso a formulários Webform do Drupal a usuários autenticados via Senha Única USP, configurável por formulário.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">andisandis-lima</span> <span class="cnt">15</span><br><a href="mailto:anderson.ls1998@gmail.com">anderson.ls1998@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">7</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Anna Valim</span> <span class="cnt">3</span><br><a href="mailto:annacarolinavalim@gmail.com">annacarolinavalim@gmail.com</a></li></ol></td>
+<td class="n" data-v="27">27<br><small>5 pessoas</small></td>
+<td class="n" data-v="1788372776">02/09/2026<br><small class="idade" data-ts="1788372776">há 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="impressoras permite que usuários da usp enviem pdfs para impressão via cups, com controle de cotas, regras e autorização por monitores. aplicação completa php laravel 12 replicado senha única docker thiago gomes verissimo thiago.verissimo@usp.br will gnann@linux.ime.usp.br saotome saotome@usp.br">
+<td class="pos"></td>
+<td data-v="impressoras"><a class="repo" href="https://github.com/uspdev/impressoras" target="_blank" rel="noopener">impressoras</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Permite que usuários da USP enviem PDFs para impressão via CUPS, com controle de cotas, regras e autorização por monitores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>76%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>22%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>1%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">146</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Will</span> <span class="cnt">61</span><br><a href="mailto:gnann@linux.ime.usp.br">gnann@linux.ime.usp.br</a></li><li><span class="who">Saotome</span> <span class="cnt">40</span><br><a href="mailto:saotome@usp.br">saotome@usp.br</a></li></ol></td>
+<td class="n" data-v="304">304<br><small>11 pessoas</small></td>
+<td class="n" data-v="1788266075">01/09/2026<br><small class="idade" data-ts="1788266075">há 2 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="cadastros-auxiliares-client consome a api do serviço de cadastros auxiliares para obter mensagens, programas de pós e cursos de graduação da usp em sistemas laravel, sem quebrar a interface. biblioteca / pacote php laravel (pacote) alessandro costa de oliveira alecosta.web@gmail.com thiago gomes verissimo thiago.verissimo@usp.br marcelo-k-usp makf00@usp.br">
+<td class="pos"></td>
+<td data-v="cadastros-auxiliares-client"><a class="repo" href="https://github.com/uspdev/cadastros-auxiliares-client" target="_blank" rel="noopener">cadastros-auxiliares-client</a>
+<div class="tags"><span class="tag">Laravel (pacote)</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Consome a API do serviço de cadastros auxiliares para obter mensagens, programas de pós e cursos de graduação da USP em sistemas Laravel, sem quebrar a interface.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">4</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">1</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Marcelo-k-USP</span> <span class="cnt">1</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li></ol></td>
+<td class="n" data-v="6">6<br><small>3 pessoas</small></td>
+<td class="n" data-v="1788200401">31/08/2026<br><small class="idade" data-ts="1788200401">há 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="cadastros-auxiliares centraliza cadastros complementares ao replicado (programas de pós, cursos de graduação, mensagens) e os expõe via api json para os sistemas locais da usp. aplicação completa php laravel 12 senha única alessandro costa de oliveira alecosta.web@gmail.com thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="cadastros-auxiliares"><a class="repo" href="https://github.com/uspdev/cadastros-auxiliares" target="_blank" rel="noopener">cadastros-auxiliares</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Centraliza cadastros complementares ao replicado (programas de pós, cursos de graduação, mensagens) e os expõe via API JSON para os sistemas locais da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>89%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>10%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">38</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">2</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="40">40<br><small>2 pessoas</small></td>
+<td class="n" data-v="1788199066">31/08/2026<br><small class="idade" data-ts="1788199066">há 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="estagios gerencia o fluxo de estágios da fflch: cadastro de vagas e empresas, pareceres, termos em pdf e aditivos, para estudantes, empresas e setor de graduação. aplicação completa php laravel 12 replicado senha única docker thiago gomes verissimo thiago.verissimo@usp.br gabriel de martin truzzi gabriel.truzzi@gmail.com ricardo fontoura ricardfo@usp.br">
+<td class="pos"></td>
+<td data-v="estagios"><a class="repo" href="https://github.com/uspdev/estagios" target="_blank" rel="noopener">estagios</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia o fluxo de estágios da FFLCH: cadastro de vagas e empresas, pareceres, termos em PDF e aditivos, para estudantes, empresas e setor de graduação.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>65%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>35%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">196</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Gabriel de Martin Truzzi</span> <span class="cnt">164</span><br><a href="mailto:gabriel.truzzi@gmail.com">gabriel.truzzi@gmail.com</a></li><li><span class="who">Ricardo Fontoura</span> <span class="cnt">37</span><br><a href="mailto:ricardfo@usp.br">ricardfo@usp.br</a></li></ol></td>
+<td class="n" data-v="531">531<br><small>16 pessoas</small></td>
+<td class="n" data-v="1787928362">28/08/2026<br><small class="idade" data-ts="1787928362">há 2 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="api-keys gerencia chaves de api com hash para modelos laravel, com interface blade, permissões por papel e middleware para integrações e consumo por ia. biblioteca / pacote php laravel 12 lucas lopes lucaslops12@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="api-keys"><a class="repo" href="https://github.com/uspdev/api-keys" target="_blank" rel="noopener">api-keys</a>
+<div class="tags"><span class="tag">Laravel 12</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Gerencia chaves de API com hash para modelos Laravel, com interface Blade, permissões por papel e middleware para integrações e consumo por IA.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>77%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>23%</small></span></td>
+<td><ol class="top"><li><span class="who">Lucas Lopes</span> <span class="cnt">37</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">1</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="38">38<br><small>2 pessoas</small></td>
+<td class="n" data-v="1787855531">27/08/2026<br><small class="idade" data-ts="1787855531">há 2 meses</small></td>
+</tr>
+<tr data-cat="plugin" data-busca="webform_replicado adiciona ao drupal webform campos que consultam a base replicada da usp para validar e preencher dados como número usp, departamentos, graduação e pós-graduação. plugin / módulo php drupal camila moraes camila07moraes.01@gmail.com thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="webform_replicado"><a class="repo" href="https://github.com/uspdev/webform_replicado" target="_blank" rel="noopener">webform_replicado</a>
+<div class="tags"><span class="tag">Drupal</span></div></td>
+<td data-v="plugin"><span class="cat" style="--c:#7A4FA0">Plugin / Módulo</span></td>
+<td class="desc">Adiciona ao Drupal Webform campos que consultam a base replicada da USP para validar e preencher dados como número USP, departamentos, graduação e pós-graduação.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Camila Moraes</span> <span class="cnt">11</span><br><a href="mailto:camila07moraes.01@gmail.com">camila07moraes.01@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">3</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="14">14<br><small>2 pessoas</small></td>
+<td class="n" data-v="1787771687">26/08/2026<br><small class="idade" data-ts="1787771687">há 2 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="replicado2mongodb sincroniza dados do replicado usp para coleções mongodb, a partir de queries sql, facilitando consultas e análises por desenvolvedores da universidade. biblioteca / pacote php replicado docker thiago gomes verissimo thiago.verissimo@usp.br xcolacique monica.colacique@usp.br">
+<td class="pos"></td>
+<td data-v="replicado2mongodb"><a class="repo" href="https://github.com/uspdev/replicado2mongodb" target="_blank" rel="noopener">replicado2mongodb</a>
+<div class="tags"><span class="tag">replicado</span><span class="tag">Docker</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Sincroniza dados do Replicado USP para coleções MongoDB, a partir de queries SQL, facilitando consultas e análises por desenvolvedores da universidade.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>82%</small></span> <span class="lang"><i style="background:#384d54"></i>Dockerfile <small>18%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">7</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">xcolacique</span> <span class="cnt">1</span><br><a href="mailto:monica.colacique@usp.br">monica.colacique@usp.br</a></li></ol></td>
+<td class="n" data-v="8">8<br><small>2 pessoas</small></td>
+<td class="n" data-v="1787235748">20/08/2026<br><small class="idade" data-ts="1787235748">há 3 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="forms gera formulários dinâmicos versionados a partir de definições no banco, validando e salvando submissões e arquivos em aplicações laravel da usp. biblioteca / pacote php laravel (pacote) replicado antonio campos campos.antonio@usp.br eduardo ferraz dudiferraz@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="forms"><a class="repo" href="https://github.com/uspdev/forms" target="_blank" rel="noopener">forms</a>
+<div class="tags"><span class="tag">Laravel (pacote)</span><span class="tag">replicado</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Gera formulários dinâmicos versionados a partir de definições no banco, validando e salvando submissões e arquivos em aplicações Laravel da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>79%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>21%</small></span></td>
+<td><ol class="top"><li><span class="who">Antonio Campos</span> <span class="cnt">65</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li><li><span class="who">Eduardo Ferraz</span> <span class="cnt">39</span><br><a href="mailto:dudiferraz@gmail.com">dudiferraz@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">37</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="181">181<br><small>6 pessoas</small></td>
+<td class="n" data-v="1787075891">18/08/2026<br><small class="idade" data-ts="1787075891">há 3 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="laravel-tools fornece a administradores de apps laravel da usp um painel com visualizador de logs, backup/restore do banco mysql, info das bibliotecas uspdev e helpers. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br antonio campos campos.antonio@usp.br marcelo-k-usp makf00@usp.br">
+<td class="pos"></td>
+<td data-v="laravel-tools"><a class="repo" href="https://github.com/uspdev/laravel-tools" target="_blank" rel="noopener">laravel-tools</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece a administradores de apps Laravel da USP um painel com visualizador de logs, backup/restore do banco MySQL, info das bibliotecas USPdev e helpers.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>56%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>44%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">24</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Antonio Campos</span> <span class="cnt">16</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li><li><span class="who">Marcelo-k-USP</span> <span class="cnt">5</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li></ol></td>
+<td class="n" data-v="49">49<br><small>5 pessoas</small></td>
+<td class="n" data-v="1787074873">18/08/2026<br><small class="idade" data-ts="1787074873">há 3 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="simple-crud-generator gera via comando artisan a estrutura crud completa (model, migration, controller, views com tema usp, rotas e testes dusk) em apps laravel da usp. biblioteca / pacote php laravel (pacote) senha única thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="simple-crud-generator"><a class="repo" href="https://github.com/uspdev/simple-crud-generator" target="_blank" rel="noopener">simple-crud-generator</a>
+<div class="tags"><span class="tag">Laravel (pacote)</span><span class="tag">senha única</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Gera via comando Artisan a estrutura CRUD completa (model, migration, controller, views com tema USP, rotas e testes Dusk) em apps Laravel da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">12</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="12">12<br><small>1 pessoas</small></td>
+<td class="n" data-v="1786740964">14/08/2026<br><small class="idade" data-ts="1786740964">há 3 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="equivalencia gerencia requerimentos de aproveitamento de estudos e equivalência de disciplinas, com fluxo de aprovação e login via senha única usp. aplicação completa php laravel 11 senha única lucas lopes lucaslops12@gmail.com vinireiwz vinireisg@usp.br masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="equivalencia"><a class="repo" href="https://github.com/uspdev/equivalencia" target="_blank" rel="noopener">equivalencia</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia requerimentos de aproveitamento de estudos e equivalência de disciplinas, com fluxo de aprovação e login via senha única USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>76%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>24%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Lucas Lopes</span> <span class="cnt">152</span><br><a href="mailto:lucaslops12@gmail.com">lucaslops12@gmail.com</a></li><li><span class="who">ViniReiwz</span> <span class="cnt">52</span><br><a href="mailto:vinireisg@usp.br">vinireisg@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">34</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="284">284<br><small>9 pessoas</small></td>
+<td class="n" data-v="1783962474">13/07/2026<br><small class="idade" data-ts="1783962474">há 4 meses</small></td>
+</tr>
+<tr data-cat="doc" data-busca="data-analysis levanta, via api do github, membros, repositórios e contribuidores da organização uspdev para identificar quem contribui sem ser membro. documentação / treinamento   thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="data-analysis"><a class="repo" href="https://github.com/uspdev/data-analysis" target="_blank" rel="noopener">data-analysis</a>
+<div class="tags"></div></td>
+<td data-v="doc"><span class="cat" style="--c:#C0504D">Documentação / Treinamento</span></td>
+<td class="desc">Levanta, via API do GitHub, membros, repositórios e contribuidores da organização uspdev para identificar quem contribui sem ser membro.</td>
+<td data-v="">—</td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">1</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="1">1<br><small>1 pessoas</small></td>
+<td class="n" data-v="1781663428">16/06/2026<br><small class="idade" data-ts="1781663428">há 5 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="senhaunica-faker simula o servidor oauth1 da senha única usp para que desenvolvedores testem localmente a autenticação sem acessar o serviço real. aplicação completa php laravel 13 docker will gnann@linux.ime.usp.br masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica-faker"><a class="repo" href="https://github.com/uspdev/senhaunica-faker" target="_blank" rel="noopener">senhaunica-faker</a>
+<div class="tags"><span class="tag">Laravel 13</span><span class="tag">Docker</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Simula o servidor OAuth1 da Senha Única USP para que desenvolvedores testem localmente a autenticação sem acessar o serviço real.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>94%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>3%</small></span> <span class="lang"><i style="background:#3572A5"></i>Python <small>2%</small></span></td>
+<td><ol class="top"><li><span class="who">Will</span> <span class="cnt">25</span><br><a href="mailto:gnann@linux.ime.usp.br">gnann@linux.ime.usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">12</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">10</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="53">53<br><small>6 pessoas</small></td>
+<td class="n" data-v="1780358900">01/06/2026<br><small class="idade" data-ts="1780358900">há 5 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="senhaunica permite autenticar usuários da usp em aplicações php via oauth com senha única, obtendo dados do usuário e validando seus vínculos. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br fernando g moura fgm@sc.usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica"><a class="repo" href="https://github.com/uspdev/senhaunica" target="_blank" rel="noopener">senhaunica</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Permite autenticar usuários da USP em aplicações PHP via OAuth com senha única, obtendo dados do usuário e validando seus vínculos.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">25</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">5</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Fernando G Moura</span> <span class="cnt">1</span><br><a href="mailto:fgm@sc.usp.br">fgm@sc.usp.br</a></li></ol></td>
+<td class="n" data-v="31">31<br><small>3 pessoas</small></td>
+<td class="n" data-v="1779996184">28/05/2026<br><small class="idade" data-ts="1779996184">há 5 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="senhaunicapixelfed permite autenticar usuários do pixelfed com a senha única usp, oferecendo a rota /loginusp para login via oauth na instância da universidade. biblioteca / pacote php  thiago gomes verissimo thiago.verissimo@usp.br guilherme frias guilherme.frias.o.t3@gmail.com">
+<td class="pos"></td>
+<td data-v="senhaunicapixelfed"><a class="repo" href="https://github.com/uspdev/senhaunicapixelfed" target="_blank" rel="noopener">senhaunicapixelfed</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Permite autenticar usuários do Pixelfed com a Senha Única USP, oferecendo a rota /loginusp para login via OAuth na instância da universidade.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>90%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>10%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">11</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Guilherme Frias</span> <span class="cnt">8</span><br><a href="mailto:guilherme.frias.o.t3@gmail.com">guilherme.frias.o.t3@gmail.com</a></li></ol></td>
+<td class="n" data-v="19">19<br><small>2 pessoas</small></td>
+<td class="n" data-v="1779213036">19/05/2026<br><small class="idade" data-ts="1779213036">há 6 meses</small></td>
+</tr>
+<tr data-cat="plugin" data-busca="webform_boleto_usp gera boletos de pagamento da usp a partir de submissões de formulários webform do drupal, integrando-se à api da usp. plugin / módulo php drupal thiago gomes verissimo thiago.verissimo@usp.br augusto césar freire santiago acesarfs@usp.br xcolacique monica.colacique@usp.br">
+<td class="pos"></td>
+<td data-v="webform_boleto_usp"><a class="repo" href="https://github.com/uspdev/webform_boleto_usp" target="_blank" rel="noopener">webform_boleto_usp</a>
+<div class="tags"><span class="tag">Drupal</span></div></td>
+<td data-v="plugin"><span class="cat" style="--c:#7A4FA0">Plugin / Módulo</span></td>
+<td class="desc">Gera boletos de pagamento da USP a partir de submissões de formulários Webform do Drupal, integrando-se à API da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">45</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Augusto César Freire Santiago</span> <span class="cnt">6</span><br><a href="mailto:acesarfs@usp.br">acesarfs@usp.br</a></li><li><span class="who">xcolacique</span> <span class="cnt">2</span><br><a href="mailto:monica.colacique@usp.br">monica.colacique@usp.br</a></li></ol></td>
+<td class="n" data-v="57">57<br><small>5 pessoas</small></td>
+<td class="n" data-v="1775482031">06/04/2026<br><small class="idade" data-ts="1775482031">há 7 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="patrimonio-complementar permite conferir bens patrimoniais da usp por número ou sala, anotando divergências de local e responsável para atualizar o sistema corporativo. aplicação completa php laravel 11 senha única masaki kawabata neto kawabata@usp.br marcelo-k-usp makf00@usp.br antonio campos campos.antonio@usp.br">
+<td class="pos"></td>
+<td data-v="patrimonio-complementar"><a class="repo" href="https://github.com/uspdev/patrimonio-complementar" target="_blank" rel="noopener">patrimonio-complementar</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Permite conferir bens patrimoniais da USP por número ou sala, anotando divergências de local e responsável para atualizar o sistema corporativo.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>87%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>13%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">137</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Marcelo-k-USP</span> <span class="cnt">2</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li><li><span class="who">Antonio Campos</span> <span class="cnt">1</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li></ol></td>
+<td class="n" data-v="140">140<br><small>3 pessoas</small></td>
+<td class="n" data-v="1774463874">25/03/2026<br><small class="idade" data-ts="1774463874">há 7 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="laravel-replicado integra a biblioteca replicado ao laravel via service provider e configuração por .env, facilitando o acesso aos dados replicados da usp. biblioteca / pacote php replicado masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="laravel-replicado"><a class="repo" href="https://github.com/uspdev/laravel-replicado" target="_blank" rel="noopener">laravel-replicado</a>
+<div class="tags"><span class="tag">replicado</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Integra a biblioteca replicado ao Laravel via service provider e configuração por .env, facilitando o acesso aos dados replicados da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">14</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="14">14<br><small>1 pessoas</small></td>
+<td class="n" data-v="1774349504">24/03/2026<br><small class="idade" data-ts="1774349504">há 8 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="idmail consulta emails pessoais e listas de um usuário usp e gerencia membros de listas via id-admin, sem navegador, em php ou cli. biblioteca / pacote php  will gnann@linux.ime.usp.br">
+<td class="pos"></td>
+<td data-v="idmail"><a class="repo" href="https://github.com/uspdev/idmail" target="_blank" rel="noopener">idmail</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Consulta emails pessoais e listas de um usuário USP e gerencia membros de listas via ID-admin, sem navegador, em PHP ou CLI.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Will</span> <span class="cnt">40</span><br><a href="mailto:gnann@linux.ime.usp.br">gnann@linux.ime.usp.br</a></li></ol></td>
+<td class="n" data-v="40">40<br><small>1 pessoas</small></td>
+<td class="n" data-v="1774041775">20/03/2026<br><small class="idade" data-ts="1774041775">há 8 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="portal-sistemas permite criar um portal de links organizados em grupos e colunas, com login por senha única e edição restrita a gerentes, para unidades da usp. aplicação completa php laravel 12 senha única masaki kawabata neto kawabata@usp.br eduardo ferraz dudiferraz@gmail.com kawan santana kawansantana18@gmail.com">
+<td class="pos"></td>
+<td data-v="portal-sistemas"><a class="repo" href="https://github.com/uspdev/portal-sistemas" target="_blank" rel="noopener">portal-sistemas</a>
+<div class="tags"><span class="tag">Laravel 12</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Permite criar um portal de links organizados em grupos e colunas, com login por senha única e edição restrita a gerentes, para unidades da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>91%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>9%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">71</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Eduardo Ferraz</span> <span class="cnt">5</span><br><a href="mailto:dudiferraz@gmail.com">dudiferraz@gmail.com</a></li><li><span class="who">Kawan Santana</span> <span class="cnt">5</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li></ol></td>
+<td class="n" data-v="86">86<br><small>5 pessoas</small></td>
+<td class="n" data-v="1773745462">17/03/2026<br><small class="idade" data-ts="1773745462">há 8 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="senhaunica-shield integra o login com senha única usp ao codeigniter shield via oauth1, criando usuários com nome e vínculos usp em aplicações php. biblioteca / pacote php codeigniter 4 daniel picon dpicon@sc.usp.br masaki kawabata neto kawabata@usp.br fernando g moura fgm@sc.usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica-shield"><a class="repo" href="https://github.com/uspdev/senhaunica-shield" target="_blank" rel="noopener">senhaunica-shield</a>
+<div class="tags"><span class="tag">CodeIgniter 4</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Integra o login com senha única USP ao CodeIgniter Shield via OAuth1, criando usuários com nome e vínculos USP em aplicações PHP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Daniel Picon</span> <span class="cnt">58</span><br><a href="mailto:dpicon@sc.usp.br">dpicon@sc.usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">25</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Fernando G Moura</span> <span class="cnt">1</span><br><a href="mailto:fgm@sc.usp.br">fgm@sc.usp.br</a></li></ol></td>
+<td class="n" data-v="85">85<br><small>4 pessoas</small></td>
+<td class="n" data-v="1769606086">28/01/2026<br><small class="idade" data-ts="1769606086">há 9 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="ponto controla o registro de ponto com foto de monitores das salas pró-aluno, com carga horária, feriados e acompanhamento por supervisores. aplicação completa php laravel 11 replicado senha única alessandro costa de oliveira alecosta.web@gmail.com thiago gomes verissimo thiago.verissimo@usp.br flavia lima flavialima2002@usp.br">
+<td class="pos"></td>
+<td data-v="ponto"><a class="repo" href="https://github.com/uspdev/ponto" target="_blank" rel="noopener">ponto</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">replicado</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Controla o registro de ponto com foto de monitores das salas Pró-Aluno, com carga horária, feriados e acompanhamento por supervisores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>78%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>21%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">87</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">18</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Flavia Lima</span> <span class="cnt">16</span><br><a href="mailto:flavialima2002@usp.br">flavialima2002@usp.br</a></li></ol></td>
+<td class="n" data-v="149">149<br><small>7 pessoas</small></td>
+<td class="n" data-v="1765898360">16/12/2025<br><small class="idade" data-ts="1765898360">há 11 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="wsfoto obtém a foto de pessoas da usp pelo número usp via soap do serviço wsfoto, com imagem padrão de fallback, para aplicações php e laravel. biblioteca / pacote php  thiago gomes verissimo thiago.verissimo@usp.br leonardo henrique da silva ruiz leonardo.ruiz@usp.br masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="wsfoto"><a class="repo" href="https://github.com/uspdev/wsfoto" target="_blank" rel="noopener">wsfoto</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Obtém a foto de pessoas da USP pelo número USP via SOAP do serviço wsfoto, com imagem padrão de fallback, para aplicações PHP e Laravel.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">13</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Leonardo Henrique da Silva Ruiz</span> <span class="cnt">3</span><br><a href="mailto:leonardo.ruiz@usp.br">leonardo.ruiz@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">3</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="19">19<br><small>3 pessoas</small></td>
+<td class="n" data-v="1761863678">30/10/2025<br><small class="idade" data-ts="1761863678">há 1 ano</small></td>
+</tr>
+<tr data-cat="infra" data-busca="playbooks-sandbox-proaluno provisiona com vagrant e ansible um ambiente de testes com samba dc, clientes debian, servidor cups e o sistema impressoras para a gestão de impressão. infra / devops  docker thiago gomes verissimo thiago.verissimo@usp.br will gnann@linux.ime.usp.br potalej oapotalej@gmail.com">
+<td class="pos"></td>
+<td data-v="playbooks-sandbox-proaluno"><a class="repo" href="https://github.com/uspdev/playbooks-sandbox-proaluno" target="_blank" rel="noopener">playbooks-sandbox-proaluno</a>
+<div class="tags"><span class="tag">Docker</span></div></td>
+<td data-v="infra"><span class="cat" style="--c:#5B6770">Infra / DevOps</span></td>
+<td class="desc">Provisiona com Vagrant e Ansible um ambiente de testes com Samba DC, clientes Debian, servidor CUPS e o sistema Impressoras para a gestão de impressão.</td>
+<td data-v="">—</td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">9</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Will</span> <span class="cnt">4</span><br><a href="mailto:gnann@linux.ime.usp.br">gnann@linux.ime.usp.br</a></li><li><span class="who">Potalej</span> <span class="cnt">3</span><br><a href="mailto:oapotalej@gmail.com">oapotalej@gmail.com</a></li></ol></td>
+<td class="n" data-v="19">19<br><small>5 pessoas</small></td>
+<td class="n" data-v="1758743686">24/09/2025<br><small class="idade" data-ts="1758743686">há 1 ano e 2 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="laravel-printing permite imprimir diretamente de aplicações laravel via drivers cups e printnode, com suporte a impressoras, jobs, recibos e opção de frente e verso. biblioteca / pacote php laravel (pacote) randall wilk wilk.randall@gmail.com thiago gomes verissimo thiago.verissimo@usp.br rawilk wiilk.randall@gmail.com">
+<td class="pos"></td>
+<td data-v="laravel-printing"><a class="repo" href="https://github.com/uspdev/laravel-printing" target="_blank" rel="noopener">laravel-printing</a>
+<div class="tags"><span class="tag">Laravel (pacote)</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Permite imprimir diretamente de aplicações Laravel via drivers CUPS e PrintNode, com suporte a impressoras, jobs, recibos e opção de frente e verso.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Randall Wilk</span> <span class="cnt">66</span><br><a href="mailto:wilk.randall@gmail.com">wilk.randall@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">6</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">rawilk</span> <span class="cnt">4</span><br><a href="mailto:wiilk.randall@gmail.com">wiilk.randall@gmail.com</a></li></ol></td>
+<td class="n" data-v="78">78<br><small>5 pessoas</small></td>
+<td class="n" data-v="1758625157">23/09/2025<br><small class="idade" data-ts="1758625157">há 1 ano e 2 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="pywspix fornece um wrapper python para a api wspix da usp, permitindo gerar, consultar e listar cobranças pix, obter qr code/pdf e configurar webhook. biblioteca / pacote python  marcelo schneider schneider.fei@gmail.com">
+<td class="pos"></td>
+<td data-v="pywspix"><a class="repo" href="https://github.com/uspdev/pywspix" target="_blank" rel="noopener">pywspix</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece um wrapper Python para a API WSPix da USP, permitindo gerar, consultar e listar cobranças Pix, obter QR Code/PDF e configurar webhook.</td>
+<td data-v="python"><span class="lang"><i style="background:#3572A5"></i>Python <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo Schneider</span> <span class="cnt">43</span><br><a href="mailto:schneider.fei@gmail.com">schneider.fei@gmail.com</a></li></ol></td>
+<td class="n" data-v="43">43<br><small>1 pessoas</small></td>
+<td class="n" data-v="1757512450">10/09/2025<br><small class="idade" data-ts="1757512450">há 1 ano e 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="ci gerencia documentos de comunicação interna da universidade, organizados em grupos e categorias, com templates, finalização imutável e exportação em pdf. aplicação completa php laravel 11 senha única antonio campos campos.antonio@usp.br masaki kawabata neto kawabata@usp.br kawan santana kawansantana18@gmail.com">
+<td class="pos"></td>
+<td data-v="ci"><a class="repo" href="https://github.com/uspdev/ci" target="_blank" rel="noopener">ci</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia documentos de comunicação interna da universidade, organizados em grupos e categorias, com templates, finalização imutável e exportação em PDF.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>78%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>22%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Antonio Campos</span> <span class="cnt">79</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">24</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Kawan Santana</span> <span class="cnt">5</span><br><a href="mailto:kawansantana18@gmail.com">kawansantana18@gmail.com</a></li></ol></td>
+<td class="n" data-v="113">113<br><small>6 pessoas</small></td>
+<td class="n" data-v="1757006351">04/09/2025<br><small class="idade" data-ts="1757006351">há 1 ano e 2 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="utils fornece uma coleção de métodos estáticos php utilitários de uso geral, instalável via composer, para reaproveitar em projetos de desenvolvedores da usp. biblioteca / pacote php  thiago gomes verissimo thiago.verissimo@usp.br masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="utils"><a class="repo" href="https://github.com/uspdev/utils" target="_blank" rel="noopener">utils</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece uma coleção de métodos estáticos PHP utilitários de uso geral, instalável via Composer, para reaproveitar em projetos de desenvolvedores da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">37</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">2</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="39">39<br><small>2 pessoas</small></td>
+<td class="n" data-v="1748959244">03/06/2025<br><small class="idade" data-ts="1748959244">há 1 ano e 5 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="boleto integra php ao webservice soap de boletos da usp para gerar, consultar a situação e obter o pdf de boletos de cobrança em sistemas das unidades. biblioteca / pacote php  thiago gomes verissimo thiago.verissimo@usp.br leonardo henrique da silva ruiz leonardo.ruiz@usp.br marcelo-k-usp makf00@usp.br">
+<td class="pos"></td>
+<td data-v="boleto"><a class="repo" href="https://github.com/uspdev/boleto" target="_blank" rel="noopener">boleto</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Integra PHP ao webservice SOAP de boletos da USP para gerar, consultar a situação e obter o PDF de boletos de cobrança em sistemas das unidades.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">42</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Leonardo Henrique da Silva Ruiz</span> <span class="cnt">7</span><br><a href="mailto:leonardo.ruiz@usp.br">leonardo.ruiz@usp.br</a></li><li><span class="who">Marcelo-k-USP</span> <span class="cnt">1</span><br><a href="mailto:makf00@usp.br">makf00@usp.br</a></li></ol></td>
+<td class="n" data-v="51">51<br><small>4 pessoas</small></td>
+<td class="n" data-v="1734112461">13/12/2024<br><small class="idade" data-ts="1734112461">há 1 ano e 11 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="firewall libera regras de nat reverso no firewall pfsense via ssh para usuários autenticados com senha única usp, registrando atividades. aplicação completa php laravel 11 senha única masaki kawabata neto kawabata@usp.br antonio campos campos.antonio@usp.br">
+<td class="pos"></td>
+<td data-v="firewall"><a class="repo" href="https://github.com/uspdev/firewall" target="_blank" rel="noopener">firewall</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Libera regras de NAT reverso no firewall pfSense via SSH para usuários autenticados com senha única USP, registrando atividades.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>90%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>7%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>2%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">45</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Antonio Campos</span> <span class="cnt">27</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li></ol></td>
+<td class="n" data-v="72">72<br><small>2 pessoas</small></td>
+<td class="n" data-v="1732821752">28/11/2024<br><small class="idade" data-ts="1732821752">há 2 anos</small></td>
+</tr>
+<tr data-cat="app" data-busca="evasao exibe estatísticas e tabelas consolidadas de evasão e reingresso de alunos de graduação da usp, usando dados do replicado, para análise institucional. aplicação completa php laravel 11 senha única masaki kawabata neto kawabata@usp.br joão pedro volante joaopedrovolante@gmail.com antonio campos campos.antonio@usp.br">
+<td class="pos"></td>
+<td data-v="evasao"><a class="repo" href="https://github.com/uspdev/evasao" target="_blank" rel="noopener">evasao</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Exibe estatísticas e tabelas consolidadas de evasão e reingresso de alunos de graduação da USP, usando dados do Replicado, para análise institucional.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>96%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>4%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">21</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">João Pedro Volante</span> <span class="cnt">6</span><br><a href="mailto:joaopedrovolante@gmail.com">joaopedrovolante@gmail.com</a></li><li><span class="who">Antonio Campos</span> <span class="cnt">4</span><br><a href="mailto:campos.antonio@usp.br">campos.antonio@usp.br</a></li></ol></td>
+<td class="n" data-v="31">31<br><small>3 pessoas</small></td>
+<td class="n" data-v="1732618813">26/11/2024<br><small class="idade" data-ts="1732618813">há 2 anos</small></td>
+</tr>
+<tr data-cat="lib" data-busca="senhaunica-ci4 permite autenticar usuários usp via senha única oauth em aplicações codeigniter 4, guardando os dados do login na sessão do framework. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br daniel picon dpicon@sc.usp.br fernando g moura fgm@sc.usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica-ci4"><a class="repo" href="https://github.com/uspdev/senhaunica-ci4" target="_blank" rel="noopener">senhaunica-ci4</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Permite autenticar usuários USP via senha única OAuth em aplicações CodeIgniter 4, guardando os dados do login na sessão do framework.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">25</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Daniel Picon</span> <span class="cnt">3</span><br><a href="mailto:dpicon@sc.usp.br">dpicon@sc.usp.br</a></li><li><span class="who">Fernando G Moura</span> <span class="cnt">1</span><br><a href="mailto:fgm@sc.usp.br">fgm@sc.usp.br</a></li></ol></td>
+<td class="n" data-v="30">30<br><small>4 pessoas</small></td>
+<td class="n" data-v="1730228130">29/10/2024<br><small class="idade" data-ts="1730228130">há 2 anos e 1 mês</small></td>
+</tr>
+<tr data-cat="lib" data-busca="laravel-usp-validators fornece regras de validação laravel que consultam a base replicado para checar número usp, vínculo de graduação e patrimônio em formulários. biblioteca / pacote php replicado thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="laravel-usp-validators"><a class="repo" href="https://github.com/uspdev/laravel-usp-validators" target="_blank" rel="noopener">laravel-usp-validators</a>
+<div class="tags"><span class="tag">replicado</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece regras de validação Laravel que consultam a base Replicado para checar número USP, vínculo de graduação e patrimônio em formulários.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">15</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="15">15<br><small>1 pessoas</small></td>
+<td class="n" data-v="1728581246">10/10/2024<br><small class="idade" data-ts="1728581246">há 2 anos e 1 mês</small></td>
+</tr>
+<tr data-cat="lib" data-busca="assinatura fornece pacote laravel para assinatura eletrônica de documentos pdf por pessoas da usp e externas, com e-mails de aviso, validação e consulta pública. biblioteca / pacote php replicado seção tec inf fcf stifcf@usp.br thiago gomes verissimo thiago.verissimo@usp.br pcalvesusp 42939800+pcalvesusp@users.noreply.github.com">
+<td class="pos"></td>
+<td data-v="assinatura"><a class="repo" href="https://github.com/uspdev/assinatura" target="_blank" rel="noopener">assinatura</a>
+<div class="tags"><span class="tag">replicado</span></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece pacote Laravel para assinatura eletrônica de documentos PDF por pessoas da USP e externas, com e-mails de aviso, validação e consulta pública.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>91%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>9%</small></span></td>
+<td><ol class="top"><li><span class="who">Seção Tec Inf FCF</span> <span class="cnt">12</span><br><a href="mailto:stifcf@usp.br">stifcf@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">5</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">pcalvesUSP</span> <span class="cnt">3</span><br><a href="mailto:42939800+pcalvesusp@users.noreply.github.com">42939800+pcalvesusp@users.noreply.github.com</a></li></ol></td>
+<td class="n" data-v="20">20<br><small>3 pessoas</small></td>
+<td class="n" data-v="1727889073">02/10/2024<br><small class="idade" data-ts="1727889073">há 2 anos e 1 mês</small></td>
+</tr>
+<tr data-cat="app" data-busca="grafica gerencia pedidos de serviços gráficos e editoriais da fflch/usp, com orçamento, autorização, acompanhamento de status e chat entre solicitantes e setores. aplicação completa php laravel 11 replicado senha única victor de oliveira marinho vitor.oliveira.marinho@gmail.com thiago gomes verissimo thiago.verissimo@usp.br mathieu sauvé msauve@physiotec.org">
+<td class="pos"></td>
+<td data-v="grafica"><a class="repo" href="https://github.com/uspdev/grafica" target="_blank" rel="noopener">grafica</a>
+<div class="tags"><span class="tag">Laravel 11</span><span class="tag">replicado</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia pedidos de serviços gráficos e editoriais da FFLCH/USP, com orçamento, autorização, acompanhamento de status e chat entre solicitantes e setores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>72%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>28%</small></span></td>
+<td><ol class="top"><li><span class="who">Victor de Oliveira Marinho</span> <span class="cnt">79</span><br><a href="mailto:vitor.oliveira.marinho@gmail.com">vitor.oliveira.marinho@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">18</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Mathieu Sauvé</span> <span class="cnt">2</span><br><a href="mailto:msauve@physiotec.org">msauve@physiotec.org</a></li></ol></td>
+<td class="n" data-v="105">105<br><small>9 pessoas</small></td>
+<td class="n" data-v="1726161978">12/09/2024<br><small class="idade" data-ts="1726161978">há 2 anos e 2 meses</small></td>
+</tr>
+<tr data-cat="infra" data-busca="ansible-role-sssd-ldap configura servidores linux via ansible para autenticar usuários em diretório ldap com kerberos usando sssd, instalando e gerando sssd.conf e krb5.conf. infra / devops jinja ansible thiago gomes verissimo thiago.verissimo@usp.br sybele groff syb@usp.br">
+<td class="pos"></td>
+<td data-v="ansible-role-sssd-ldap"><a class="repo" href="https://github.com/uspdev/ansible-role-sssd-ldap" target="_blank" rel="noopener">ansible-role-sssd-ldap</a>
+<div class="tags"><span class="tag">Ansible</span></div></td>
+<td data-v="infra"><span class="cat" style="--c:#5B6770">Infra / DevOps</span></td>
+<td class="desc">Configura servidores Linux via Ansible para autenticar usuários em diretório LDAP com Kerberos usando SSSD, instalando e gerando sssd.conf e krb5.conf.</td>
+<td data-v="jinja"><span class="lang"><i style="background:#a52a22"></i>Jinja <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">7</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Sybele Groff</span> <span class="cnt">3</span><br><a href="mailto:syb@usp.br">syb@usp.br</a></li></ol></td>
+<td class="n" data-v="10">10<br><small>2 pessoas</small></td>
+<td class="n" data-v="1725041544">30/08/2024<br><small class="idade" data-ts="1725041544">há 2 anos e 3 meses</small></td>
+</tr>
+<tr data-cat="script" data-busca="xml-lattes baixa em lote os currículos em xml da plataforma lattes a partir de um json com os ids dos pesquisadores, facilitando a coleta de dados acadêmicos. script / ferramenta   tadeumesquita tadeumesquita@usp.br">
+<td class="pos"></td>
+<td data-v="xml-lattes"><a class="repo" href="https://github.com/uspdev/xml-lattes" target="_blank" rel="noopener">xml-lattes</a>
+<div class="tags"></div></td>
+<td data-v="script"><span class="cat" style="--c:#2E8B57">Script / Ferramenta</span></td>
+<td class="desc">Baixa em lote os currículos em XML da plataforma Lattes a partir de um JSON com os IDs dos pesquisadores, facilitando a coleta de dados acadêmicos.</td>
+<td data-v="">—</td>
+<td><ol class="top"><li><span class="who">tadeumesquita</span> <span class="cnt">1</span><br><a href="mailto:tadeumesquita@usp.br">tadeumesquita@usp.br</a></li></ol></td>
+<td class="n" data-v="1">1<br><small>1 pessoas</small></td>
+<td class="n" data-v="1701894915">06/12/2023<br><small class="idade" data-ts="1701894915">há 2 anos e 11 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="percepcao-institucional aplica questionários semestrais a alunos de graduação para avaliar disciplinas e docentes, com login por senha única e relatórios para a gestão. aplicação completa php laravel 8 replicado senha única gustavo medeiros gustavome@usp.br masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="percepcao-institucional"><a class="repo" href="https://github.com/uspdev/percepcao-institucional" target="_blank" rel="noopener">percepcao-institucional</a>
+<div class="tags"><span class="tag">Laravel 8</span><span class="tag">replicado</span><span class="tag">senha única</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Aplica questionários semestrais a alunos de graduação para avaliar disciplinas e docentes, com login por senha única e relatórios para a gestão.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>72%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>28%</small></span></td>
+<td><ol class="top"><li><span class="who">Gustavo Medeiros</span> <span class="cnt">167</span><br><a href="mailto:gustavome@usp.br">gustavome@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">88</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="255">255<br><small>2 pessoas</small></td>
+<td class="n" data-v="1683919485">12/05/2023<br><small class="idade" data-ts="1683919485">há 3 anos e 6 meses</small></td>
+</tr>
+<tr data-cat="plugin" data-busca="senhaunica-wordpress permite autenticar usuários do wordpress via senha única usp (oauth1), com callback rest e shortcode de demonstração para obter os dados do usuário. plugin / módulo php  thiago gomes verissimo thiago.verissimo@usp.br masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica-wordpress"><a class="repo" href="https://github.com/uspdev/senhaunica-wordpress" target="_blank" rel="noopener">senhaunica-wordpress</a>
+<div class="tags"></div></td>
+<td data-v="plugin"><span class="cat" style="--c:#7A4FA0">Plugin / Módulo</span></td>
+<td class="desc">Permite autenticar usuários do WordPress via Senha Única USP (OAuth1), com callback REST e shortcode de demonstração para obter os dados do usuário.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">7</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">5</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="12">12<br><small>2 pessoas</small></td>
+<td class="n" data-v="1683644628">09/05/2023<br><small class="idade" data-ts="1683644628">há 3 anos e 7 meses</small></td>
+</tr>
+<tr data-cat="doc" data-busca="uspdev.github.io publica o site da comunidade de desenvolvedores da usp com tutoriais, guias, glossário, treinamentos e catálogo de projetos, feito em jekyll. documentação / treinamento html ruby thiago gomes verissimo thiago.verissimo@usp.br andré luiz girol andregirol@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="uspdev.github.io"><a class="repo" href="https://github.com/uspdev/uspdev.github.io" target="_blank" rel="noopener">uspdev.github.io</a>
+<div class="tags"><span class="tag">Ruby</span></div></td>
+<td data-v="doc"><span class="cat" style="--c:#C0504D">Documentação / Treinamento</span></td>
+<td class="desc">Publica o site da comunidade de desenvolvedores da USP com tutoriais, guias, glossário, treinamentos e catálogo de projetos, feito em Jekyll.</td>
+<td data-v="html"><span class="lang"><i style="background:#e34c26"></i>HTML <small>75%</small></span> <span class="lang"><i style="background:#701516"></i>Ruby <small>13%</small></span> <span class="lang"><i style="background:#d4b500"></i>JavaScript <small>9%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">130</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">André Luiz Girol</span> <span class="cnt">10</span><br><a href="mailto:andregirol@gmail.com">andregirol@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">9</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="168">168<br><small>9 pessoas</small></td>
+<td class="n" data-v="1658541887">22/07/2022<br><small class="idade" data-ts="1658541887">há 4 anos e 4 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="oportunidades permite cadastrar e divulgar vagas de estágio e emprego, organizadas por curso, para alunos e ex-alunos da universidade. aplicação completa php laravel 8 marcelo modesto costa marcelom@usp.br">
+<td class="pos"></td>
+<td data-v="oportunidades"><a class="repo" href="https://github.com/uspdev/oportunidades" target="_blank" rel="noopener">oportunidades</a>
+<div class="tags"><span class="tag">Laravel 8</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Permite cadastrar e divulgar vagas de estágio e emprego, organizadas por curso, para alunos e ex-alunos da universidade.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>82%</small></span> <span class="lang"><i style="background:#f7523f"></i>Blade <small>18%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>1%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo Modesto Costa</span> <span class="cnt">5</span><br><a href="mailto:marcelom@usp.br">marcelom@usp.br</a></li></ol></td>
+<td class="n" data-v="5">5<br><small>1 pessoas</small></td>
+<td class="n" data-v="1618194464">11/04/2021<br><small class="idade" data-ts="1618194464">há 5 anos e 8 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="ganimedes controla e acompanha os estágios de alunos do ime-usp e divulga anúncios de oportunidades, com convênios, empresas, documentos e relatórios. aplicação completa java  marcelo modesto costa marcelom@usp.br">
+<td class="pos"></td>
+<td data-v="ganimedes"><a class="repo" href="https://github.com/uspdev/ganimedes" target="_blank" rel="noopener">ganimedes</a>
+<div class="tags"></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Controla e acompanha os estágios de alunos do IME-USP e divulga anúncios de oportunidades, com convênios, empresas, documentos e relatórios.</td>
+<td data-v="java"><span class="lang"><i style="background:#b07219"></i>Java <small>62%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>36%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>2%</small></span></td>
+<td><ol class="top"><li><span class="who">Marcelo Modesto Costa</span> <span class="cnt">34</span><br><a href="mailto:marcelom@usp.br">marcelom@usp.br</a></li></ol></td>
+<td class="n" data-v="34">34<br><small>1 pessoas</small></td>
+<td class="n" data-v="1614903871">04/03/2021<br><small class="idade" data-ts="1614903871">há 5 anos e 9 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="ccg compara o histórico escolar do júpiter com currículos cadastrados para apontar pendências de créditos dos alunos de graduação, auxiliando o serviço de graduação. aplicação completa php laravel 6 replicado senha única vue alessandro costa de oliveira alecosta.web@gmail.com andré luiz girol andregirol@gmail.com thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="ccg"><a class="repo" href="https://github.com/uspdev/ccg" target="_blank" rel="noopener">ccg</a>
+<div class="tags"><span class="tag">Laravel 6</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Vue</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Compara o histórico escolar do Júpiter com currículos cadastrados para apontar pendências de créditos dos alunos de graduação, auxiliando o Serviço de Graduação.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>51%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>49%</small></span> <span class="lang"><i style="background:#41b883"></i>Vue <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">186</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li><li><span class="who">André Luiz Girol</span> <span class="cnt">15</span><br><a href="mailto:andregirol@gmail.com">andregirol@gmail.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">12</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="221">221<br><small>6 pessoas</small></td>
+<td class="n" data-v="1589471939">14/05/2020<br><small class="idade" data-ts="1589471939">há 6 anos e 7 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="ip-control restringe o acesso a rotas de aplicações php por ip de origem, usando uma lista de ips e máscaras, ideal para sistemas internos. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="ip-control"><a class="repo" href="https://github.com/uspdev/ip-control" target="_blank" rel="noopener">ip-control</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Restringe o acesso a rotas de aplicações PHP por IP de origem, usando uma lista de IPs e máscaras, ideal para sistemas internos.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">9</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="9">9<br><small>1 pessoas</small></td>
+<td class="n" data-v="1585572090">30/03/2020<br><small class="idade" data-ts="1585572090">há 6 anos e 8 meses</small></td>
+</tr>
+<tr data-cat="infra" data-busca="tv-tools configura um pc linux ligado a uma tv como painel de sinalização digital em modo kiosk, com acesso remoto via vnc e ligar/desligar automático. infra / devops python  henrique1792 freitash1792@gmail.com andré luiz girol andregirol@gmail.com masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="tv-tools"><a class="repo" href="https://github.com/uspdev/tv-tools" target="_blank" rel="noopener">tv-tools</a>
+<div class="tags"></div></td>
+<td data-v="infra"><span class="cat" style="--c:#5B6770">Infra / DevOps</span></td>
+<td class="desc">Configura um PC Linux ligado a uma TV como painel de sinalização digital em modo kiosk, com acesso remoto via VNC e ligar/desligar automático.</td>
+<td data-v="python"><span class="lang"><i style="background:#3572A5"></i>Python <small>49%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>45%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>5%</small></span></td>
+<td><ol class="top"><li><span class="who">Henrique1792</span> <span class="cnt">17</span><br><a href="mailto:freitash1792@gmail.com">freitash1792@gmail.com</a></li><li><span class="who">André Luiz Girol</span> <span class="cnt">16</span><br><a href="mailto:andregirol@gmail.com">andregirol@gmail.com</a></li><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">12</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="47">47<br><small>4 pessoas</small></td>
+<td class="n" data-v="1571187331">15/10/2019<br><small class="idade" data-ts="1571187331">há 7 anos e 2 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="inscricoes gerencia vagas e programas de inscrição da usp, com login por senha única e dados do replicado, para uso de docentes e candidatos. aplicação completa php laravel 5 replicado senha única vue alessandro costa de oliveira alecosta.web@gmail.com">
+<td class="pos"></td>
+<td data-v="inscricoes"><a class="repo" href="https://github.com/uspdev/inscricoes" target="_blank" rel="noopener">inscricoes</a>
+<div class="tags"><span class="tag">Laravel 5</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Vue</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia vagas e programas de inscrição da USP, com login por senha única e dados do replicado, para uso de docentes e candidatos.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>75%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>25%</small></span> <span class="lang"><i style="background:#41b883"></i>Vue <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Alessandro Costa de Oliveira</span> <span class="cnt">66</span><br><a href="mailto:alecosta.web@gmail.com">alecosta.web@gmail.com</a></li></ol></td>
+<td class="n" data-v="66">66<br><small>1 pessoas</small></td>
+<td class="n" data-v="1567623325">04/09/2019<br><small class="idade" data-ts="1567623325">há 7 anos e 3 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="cutter calcula o código cutter de um autor ou string a partir da tabela de cutter, para catalogação de acervos em bibliotecas, sem dependências externas. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="cutter"><a class="repo" href="https://github.com/uspdev/cutter" target="_blank" rel="noopener">cutter</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Calcula o código Cutter de um autor ou string a partir da tabela de Cutter, para catalogação de acervos em bibliotecas, sem dependências externas.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">17</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="17">17<br><small>1 pessoas</small></td>
+<td class="n" data-v="1566842080">26/08/2019<br><small class="idade" data-ts="1566842080">há 7 anos e 4 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="pdfgen gera documentos pdf (ou html) em php mesclando dados a templates html, como atestados, ofícios e certificados para sistemas da usp. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br">
+<td class="pos"></td>
+<td data-v="pdfgen"><a class="repo" href="https://github.com/uspdev/pdfgen" target="_blank" rel="noopener">pdfgen</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Gera documentos PDF (ou HTML) em PHP mesclando dados a templates HTML, como atestados, ofícios e certificados para sistemas da USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>67%</small></span> <span class="lang"><i style="background:#1094AB"></i>Smarty <small>30%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>2%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">18</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li></ol></td>
+<td class="n" data-v="18">18<br><small>1 pessoas</small></td>
+<td class="n" data-v="1566226538">19/08/2019<br><small class="idade" data-ts="1566226538">há 7 anos e 4 meses</small></td>
+</tr>
+<tr data-cat="doc" data-busca="slides reúne slides de treinamentos para a comunidade usp sobre git, laravel e symfony, gerados a partir de markdown em html com o prez. documentação / treinamento javascript  thiago gomes verissimo thiago.verissimo@usp.br andré luiz girol andregirol@gmail.com leandro ramos leandroramos@usp.br">
+<td class="pos"></td>
+<td data-v="slides"><a class="repo" href="https://github.com/uspdev/slides" target="_blank" rel="noopener">slides</a>
+<div class="tags"></div></td>
+<td data-v="doc"><span class="cat" style="--c:#C0504D">Documentação / Treinamento</span></td>
+<td class="desc">Reúne slides de treinamentos para a comunidade USP sobre Git, Laravel e Symfony, gerados a partir de Markdown em HTML com o prez.</td>
+<td data-v="javascript"><span class="lang"><i style="background:#d4b500"></i>JavaScript <small>51%</small></span> <span class="lang"><i style="background:#89e051"></i>Shell <small>33%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>16%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">53</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">André Luiz Girol</span> <span class="cnt">14</span><br><a href="mailto:andregirol@gmail.com">andregirol@gmail.com</a></li><li><span class="who">Leandro Ramos</span> <span class="cnt">5</span><br><a href="mailto:leandroramos@usp.br">leandroramos@usp.br</a></li></ol></td>
+<td class="n" data-v="72">72<br><small>3 pessoas</small></td>
+<td class="n" data-v="1558722157">24/05/2019<br><small class="idade" data-ts="1558722157">há 7 anos e 7 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="senhaunica-rails demonstra a integração de aplicações rails com o login via senha única da usp, autenticando usuários e registrando seus vínculos institucionais. aplicação completa ruby rails thiago gomes verissimo thiago.verissimo@usp.br fabiana munhoz biamunhoz@gmail.com">
+<td class="pos"></td>
+<td data-v="senhaunica-rails"><a class="repo" href="https://github.com/uspdev/senhaunica-rails" target="_blank" rel="noopener">senhaunica-rails</a>
+<div class="tags"><span class="tag">Rails</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Demonstra a integração de aplicações Rails com o login via Senha Única da USP, autenticando usuários e registrando seus vínculos institucionais.</td>
+<td data-v="ruby"><span class="lang"><i style="background:#701516"></i>Ruby <small>72%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>21%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>4%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">4</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">Fabiana Munhoz</span> <span class="cnt">2</span><br><a href="mailto:biamunhoz@gmail.com">biamunhoz@gmail.com</a></li></ol></td>
+<td class="n" data-v="6">6<br><small>2 pessoas</small></td>
+<td class="n" data-v="1538146298">28/09/2018<br><small class="idade" data-ts="1538146298">há 8 anos e 3 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="rhconsultas gera consultas e relatórios de rh sobre servidores (títulos, chefias, colegiados, suplências, histórico), exibidos na tela ou exportados em excel. aplicação completa ruby rails fabiana munhoz biamunhoz@gmail.com">
+<td class="pos"></td>
+<td data-v="rhconsultas"><a class="repo" href="https://github.com/uspdev/rhconsultas" target="_blank" rel="noopener">rhconsultas</a>
+<div class="tags"><span class="tag">Rails</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gera consultas e relatórios de RH sobre servidores (títulos, chefias, colegiados, suplências, histórico), exibidos na tela ou exportados em Excel.</td>
+<td data-v="ruby"><span class="lang"><i style="background:#701516"></i>Ruby <small>53%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>40%</small></span> <span class="lang"><i style="background:#563d7c"></i>CSS <small>5%</small></span></td>
+<td><ol class="top"><li><span class="who">Fabiana Munhoz</span> <span class="cnt">2</span><br><a href="mailto:biamunhoz@gmail.com">biamunhoz@gmail.com</a></li></ol></td>
+<td class="n" data-v="2">2<br><small>1 pessoas</small></td>
+<td class="n" data-v="1537543349">21/09/2018<br><small class="idade" data-ts="1537543349">há 8 anos e 3 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="senhaunica-ruby permite autenticar usuários de aplicações ruby e rails via login com senha única usp, usando oauth para obter os dados do usuário. biblioteca / pacote ruby  thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="senhaunica-ruby"><a class="repo" href="https://github.com/uspdev/senhaunica-ruby" target="_blank" rel="noopener">senhaunica-ruby</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Permite autenticar usuários de aplicações Ruby e Rails via login com Senha Única USP, usando OAuth para obter os dados do usuário.</td>
+<td data-v="ruby"><span class="lang"><i style="background:#701516"></i>Ruby <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">3</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="3">3<br><small>1 pessoas</small></td>
+<td class="n" data-v="1537453028">20/09/2018<br><small class="idade" data-ts="1537453028">há 8 anos e 3 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="the_force fornece um comando artisan para laravel que exibe uma mensagem temática de star wars no terminal, como brincadeira (easter egg) para desenvolvedores. biblioteca / pacote php  thiago gomes verissimo thiago.verissimo@usp.br andré luiz girol andregirol@gmail.com">
+<td class="pos"></td>
+<td data-v="the_force"><a class="repo" href="https://github.com/uspdev/the_force" target="_blank" rel="noopener">the_force</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Fornece um comando Artisan para Laravel que exibe uma mensagem temática de Star Wars no terminal, como brincadeira (easter egg) para desenvolvedores.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">3</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li><li><span class="who">André Luiz Girol</span> <span class="cnt">3</span><br><a href="mailto:andregirol@gmail.com">andregirol@gmail.com</a></li></ol></td>
+<td class="n" data-v="6">6<br><small>2 pessoas</small></td>
+<td class="n" data-v="1536195503">05/09/2018<br><small class="idade" data-ts="1536195503">há 8 anos e 3 meses</small></td>
+</tr>
+<tr data-cat="app" data-busca="seta-graduacao gerencia inscrição, escolha de orientador e submissão de tccs da graduação, conectando alunos, docentes e editais com login via senha única usp. aplicação completa php laravel 5 replicado senha única vue fabio jose moretti fabioj.moretti@gmail.com fabiojm 33129461+fabiojm@users.noreply.github.com thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="seta-graduacao"><a class="repo" href="https://github.com/uspdev/seta-graduacao" target="_blank" rel="noopener">seta-graduacao</a>
+<div class="tags"><span class="tag">Laravel 5</span><span class="tag">replicado</span><span class="tag">senha única</span><span class="tag">Vue</span></div></td>
+<td data-v="app"><span class="cat" style="--c:#064169">Aplicação completa</span></td>
+<td class="desc">Gerencia inscrição, escolha de orientador e submissão de TCCs da graduação, conectando alunos, docentes e editais com login via Senha Única USP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>78%</small></span> <span class="lang"><i style="background:#e34c26"></i>HTML <small>22%</small></span> <span class="lang"><i style="background:#41b883"></i>Vue <small>0%</small></span></td>
+<td><ol class="top"><li><span class="who">Fabio Jose Moretti</span> <span class="cnt">56</span><br><a href="mailto:fabioj.moretti@gmail.com">fabioj.moretti@gmail.com</a></li><li><span class="who">fabiojm</span> <span class="cnt">3</span><br><a href="mailto:33129461+fabiojm@users.noreply.github.com">33129461+fabiojm@users.noreply.github.com</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">1</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="60">60<br><small>3 pessoas</small></td>
+<td class="n" data-v="1534867497">21/08/2018<br><small class="idade" data-ts="1534867497">há 8 anos e 4 meses</small></td>
+</tr>
+<tr data-cat="lib" data-busca="patrimonio consulta informações públicas de bens patrimoniais da usp pelo número de patrimônio e verifica se o bem está ativo, para sistemas php. biblioteca / pacote php  masaki kawabata neto kawabata@usp.br thiago gomes verissimo thiago.verissimo@usp.br">
+<td class="pos"></td>
+<td data-v="patrimonio"><a class="repo" href="https://github.com/uspdev/patrimonio" target="_blank" rel="noopener">patrimonio</a>
+<div class="tags"></div></td>
+<td data-v="lib"><span class="cat" style="--c:#FCB421">Biblioteca / Pacote</span></td>
+<td class="desc">Consulta informações públicas de bens patrimoniais da USP pelo número de patrimônio e verifica se o bem está ativo, para sistemas PHP.</td>
+<td data-v="php"><span class="lang"><i style="background:#4F5D95"></i>PHP <small>100%</small></span></td>
+<td><ol class="top"><li><span class="who">Masaki Kawabata Neto</span> <span class="cnt">12</span><br><a href="mailto:kawabata@usp.br">kawabata@usp.br</a></li><li><span class="who">Thiago Gomes Verissimo</span> <span class="cnt">5</span><br><a href="mailto:thiago.verissimo@usp.br">thiago.verissimo@usp.br</a></li></ol></td>
+<td class="n" data-v="17">17<br><small>2 pessoas</small></td>
+<td class="n" data-v="1526648672">18/05/2018<br><small class="idade" data-ts="1526648672">há 8 anos e 7 meses</small></td>
+</tr>
+</tbody></table></div>
+</main>
+
+<script>
+(() => {
+  const tbody = document.querySelector('#tabela tbody');
+  const rows = [...tbody.rows];
+  const busca = document.getElementById('busca');
+  const cont = document.getElementById('contagem');
+  const ativos = new Set();
+
+  // tempo desde o último commit, calculado na hora em que a página é aberta
+  const agora = Date.now() / 1000;
+  document.querySelectorAll('.idade').forEach(el => {
+    const ts = +el.dataset.ts; if (!ts) return;
+    const dias = Math.floor((agora - ts) / 86400);
+    let t;
+    if (dias < 1) t = 'hoje';
+    else if (dias < 60) t = 'há ' + dias + (dias > 1 ? ' dias' : ' dia');
+    else {
+      const meses = Math.floor(dias / 30);
+      if (meses < 12) t = 'há ' + meses + ' meses';
+      else {
+        const a = Math.floor(meses / 12), m = meses % 12;
+        t = 'há ' + a + (a > 1 ? ' anos' : ' ano') + (m ? ' e ' + m + (m > 1 ? ' meses' : ' mês') : '');
+      }
+    }
+    el.textContent = t;
+  });
+
+  function numerar() {
+    let i = 0;
+    [...tbody.rows].forEach(r => { if (!r.hidden) r.cells[0].textContent = ++i; });
+  }
+  function filtrar() {
+    const q = busca.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    let n = 0;
+    rows.forEach(r => {
+      const ok = q.every(t => r.dataset.busca.includes(t))
+        && (!ativos.size || ativos.has(r.dataset.cat));
+      r.hidden = !ok; if (ok) n++;
+    });
+    cont.innerHTML = '<b>' + n + '</b> de ' + rows.length + ' repositórios';
+    numerar();
+  }
+  busca.addEventListener('input', filtrar);
+  document.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.f; b.classList.toggle('on');
+    ativos.has(f) ? ativos.delete(f) : ativos.add(f); filtrar();
+  }));
+  document.querySelectorAll('#tabela th[data-col]').forEach(th => th.addEventListener('click', () => {
+    const col = +th.dataset.col;
+    const asc = th.classList.contains('sorted') ? !th.classList.contains('asc') : col <= 4;
+    document.querySelectorAll('#tabela th').forEach(x => x.classList.remove('sorted', 'asc'));
+    th.classList.add('sorted'); if (asc) th.classList.add('asc');
+    const val = r => r.cells[col].dataset.v ?? r.cells[col].textContent;
+    rows.sort((a, b) => {
+      const x = val(a), y = val(b), nx = parseFloat(x), ny = parseFloat(y);
+      const c = (!isNaN(nx) && !isNaN(ny)) ? nx - ny : x.localeCompare(y, 'pt');
+      return asc ? c : -c;
+    }).forEach(r => tbody.appendChild(r));
+    numerar();
+  }));
+  filtrar();
+})();
+</script>
+</body>
+</html>
